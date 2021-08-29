@@ -1,0 +1,903 @@
+DOS 1.00 and 1.10
+The maximum INT 21h function number is 2Dh in DOS 1.00, 2Eh in DOS 1.10
+There are two 256-byte internal stacks in DOS 1.00: DSKSTACK and IOSTACK
+There are two 128-byte internal stacks in DOS 1.10: DSKSTACK and IOSTACK
+IOSTACK is used for functions 00h-0Ch
+DSKSTACK is used for all other functions
+
+; INT 20
+00BF:0011 B400              MOV     AH,00
+00BF:0013 EB1E              JMP     0033
+
+; INT 21
+00BF:0015 80FC2E            CMP     AH,2E                       ;Valid function ?
+00BF:0018 7619              JBE     0033                        ;Yes
+00BF:001A B000              MOV     AL,00
+00BF:001C CF                IRET
+
+; CP/M call entry
+00BF:001D 58                POP     AX                          ;Pop far return offset
+00BF:001E 58                POP     AX                          ;Pop far return segment
+00BF:001F 2E8F069016        POP     WORD PTR CS:[1690]          ;Pop original return offset
+00BF:0024 9C                PUSHF                               ;Push flags
+00BF:0025 FA                CLI
+00BF:0026 50                PUSH    AX                          ;Push return segment
+00BF:0027 2EFF369016        PUSH    WORD PTR CS:[1690]          ;Push return offset
+00BF:002C 80F924            CMP     CL,24                       ;Valid CP/M function code ?
+00BF:002F 77E9              JA      001A                        ;No
+00BF:0031 8AE1              MOV     AH,CL                       ;Load AH with function code
+
+00BF:0033 06                PUSH    ES                          ;Save registers
+00BF:0034 1E                PUSH    DS
+00BF:0035 55                PUSH    BP
+00BF:0036 57                PUSH    DI
+00BF:0037 56                PUSH    SI
+00BF:0038 52                PUSH    DX
+00BF:0039 51                PUSH    CX
+00BF:003A 53                PUSH    BX
+00BF:003B 50                PUSH    AX
+00BF:003C 2E89269016        MOV     CS:[1690],SP                ;Save SP
+00BF:0041 2E8C169216        MOV     CS:[1692],SS                ;Save SS
+00BF:0046 8CCC              MOV     SP,CS                       ;Get CS
+00BF:0048 8ED4              MOV     SS,SP                       ;Set SS = CS
+00BF:004A BC3C17            MOV     SP,173C                     ;SP = IOSTACK
+00BF:004D FB                STI
+00BF:004E 8ADC              MOV     BL,AH                       ;Get function code
+00BF:0050 B700              MOV     BH,00
+00BF:0052 D1E3              SHL     BX,1                        ;Make this an index
+00BF:0054 FC                CLD
+00BF:0055 80FC0C            CMP     AH,0C                       ;Function <= 0C ?
+00BF:0058 7E03              JLE     005D                        ;Yes, use IOSTACK
+00BF:005A BCBC17            MOV     SP,17BC                     ;SP = DSKSTACK
+00BF:005D 2EFF977C00        CALL    WORD PTR CS:[BX+007C]       ;Call function via dispatch table
+00BF:0062 FA                CLI
+00BF:0063 2E8B269016        MOV     SP,CS:[1690]                ;Restore SP
+00BF:0068 2E8E169216        MOV     SS,CS:[1692]                ;Restore SS
+00BF:006D 8BEC              MOV     BP,SP
+00BF:006F 884600            MOV     [BP+00],AL                  ;Store AL on stack
+00BF:0072 58                POP     AX                          ;Restore registers
+00BF:0073 5B                POP     BX
+00BF:0074 59                POP     CX
+00BF:0075 5A                POP     DX
+00BF:0076 5E                POP     SI
+00BF:0077 5F                POP     DI
+00BF:0078 5D                POP     BP
+00BF:0079 1F                POP     DS
+00BF:007A 07                POP     ES
+00BF:007B CF                IRET
+---
+
+DOS 2.00, 2.10 and 2.11
+The maximum INT 21h function number is 57h in DOS 2.00 and 2.10, 58h in DOS 2.11
+There are three 160-byte internal stacks: AUXSTACK, DSKSTACK and IOSTACK
+AUXSTACK is used for functions 01h-0Ch, 50h and 51h during INT 24h error handling
+IOSTACK is used for functions 01h-0Ch, 50h and 51h
+DSKSTACK is used for all other functions
+The dispatcher allows for limited re-entrancy of character I/O functions (01h-0CH) during INT 24h error processing by using AUXSTACK
+The dispatcher maintains an INDOS flag to indicate when a DOS function is active and it does additional housekeeping like Ctrl-C checking
+
+; INT 20
+00DB:0BFB B400              MOV     AH,00
+00DB:0BFD EB20              JMP     0C1F
+
+; INT 21
+00DB:0BFF 80FC57            CMP     AH,57                       ;Valid function ?
+00DB:0C02 90                NOP
+00DB:0C03 761A              JBE     0C1F                        ;Yes
+00DB:0C05 B000              MOV     AL,00
+00DB:0C07 CF                IRET
+
+; CP/M call entry
+00DB:0C08 58                POP     AX                          ;Pop far return offset
+00DB:0C09 58                POP     AX                          ;Pop far return segment
+00DB:0C0A 2E8F06E502        POP     WORD PTR CS:[02E5]          ;Pop original return offset
+00DB:0C0F 9C                PUSHF                               ;Push flags
+00DB:0C10 FA                CLI
+00DB:0C11 50                PUSH    AX                          ;Push return segment
+00DB:0C12 2EFF36E502        PUSH    WORD PTR CS:[02E5]          ;Push return offset
+00DB:0C17 80F924            CMP     CL,24                       ;Valid CP/M function code ?
+00DB:0C1A 90                NOP
+00DB:0C1B 77E8              JA      0C05                        ;No
+00DB:0C1D 8AE1              MOV     AH,CL                       ;Load AH with function code
+
+00DB:0C1F E8DC00            CALL    0CFE                        ;Save registers
+00DB:0C22 2E8C1E4803        MOV     CS:[0348],DS                ;Save DS
+00DB:0C27 2E891E4603        MOV     CS:[0346],BX                ;Save BX
+00DB:0C2C 8CCB              MOV     BX,CS                       ;Get CS
+00DB:0C2E 8EDB              MOV     DS,BX                       ;Set DS = CS
+00DB:0C30 FE064101          INC     BYTE PTR [0141]             ;Increment INDOS flag
+00DB:0C34 A1E502            MOV     AX,[02E5]                   ;Get saved SP
+00DB:0C37 A3D20B            MOV     [0BD2],AX                   ;Save in case of re-entry
+00DB:0C3A A1E702            MOV     AX,[02E7]                   ;Get saved SS
+00DB:0C3D A3D00B            MOV     [0BD0],AX                   ;Save in case of re-entry
+00DB:0C40 58                POP     AX
+00DB:0C41 50                PUSH    AX
+00DB:0C42 8926E502          MOV     [02E5],SP                   ;Save SP
+00DB:0C46 8C16E702          MOV     [02E7],SS                   ;Save SS
+00DB:0C4A 8E1EA501          MOV     DS,[01A5]                   ;Get current PSP
+00DB:0C4E 89262E00          MOV     [002E],SP                   ;Store SS:SP in PSP
+00DB:0C52 8C163000          MOV     [0030],SS
+00DB:0C56 8CCB              MOV     BX,CS                       ;Get CS
+00DB:0C58 8ED3              MOV     SS,BX                       ;Set SS = CS
+00DB:0C5A BC900A            MOV     SP,0A90                     ;SP = AUXSTACK
+00DB:0C5D FB                STI
+00DB:0C5E 0E                PUSH    CS                          ;Get CS
+00DB:0C5F 1F                POP     DS                          ;Set DS = CS
+00DB:0C60 32FF              XOR     BH,BH
+00DB:0C62 883E4401          MOV     [0144],BH                   ;Clear CONSWAP flag
+00DB:0C66 C606450101        MOV     BYTE PTR [0145],01          ;Set IDLEINT flag to allow INT 28
+00DB:0C6B C606E90000        MOV     BYTE PTR [00E9],00          ;Clear NOSETDIR flag
+00DB:0C70 8ADC              MOV     BL,AH                       ;Get function code
+00DB:0C72 D1E3              SHL     BX,1                        ;Make this an index
+00DB:0C74 FC                CLD
+00DB:0C75 0AE4              OR      AH,AH                       ;Function 00 ?
+00DB:0C77 741B              JZ      0C94                        ;Yes
+00DB:0C79 80FC0C            CMP     AH,0C                       ;Function 01-0C ?
+00DB:0C7C 760A              JBE     0C88                        ;Yes
+00DB:0C7E 80FC51            CMP     AH,51                       ;Function 51 ?
+00DB:0C81 7405              JZ      0C88                        ;Yes
+00DB:0C83 80FC50            CMP     AH,50                       ;Function 50 ?
+00DB:0C86 750C              JNZ     0C94                        ;No
+00DB:0C88 803E420100        CMP     BYTE PTR [0142],00          ;Error mode ?
+00DB:0C8D 751E              JNZ     0CAD                        ;Yes, use AUXSTACK
+00DB:0C8F BCD00B            MOV     SP,0BD0                     ;SP = IOSTACK
+00DB:0C92 EB19              JMP     0CAD
+00DB:0C94 C606420100        MOV     BYTE PTR [0142],00          ;Clear error mode
+00DB:0C99 C6064301FF        MOV     BYTE PTR [0143],FF          ;Reset write protect error drive code
+00DB:0C9E BC300B            MOV     SP,0B30                     ;SP = DSKSTACK
+00DB:0CA1 F6064601FF        TEST    BYTE PTR [0146],FF          ;Break on ?
+00DB:0CA6 7405              JZ      0CAD                        ;No, skip Ctrl-C check
+00DB:0CA8 50                PUSH    AX
+00DB:0CA9 E86323            CALL    300F                        ;Call DSKSTATCHK to check for Ctrl-C
+00DB:0CAC 58                POP     AX
+00DB:0CAD FF36A801          PUSH    WORD PTR [01A8]             ;Push return address
+00DB:0CB1 2EFFB7140D        PUSH    WORD PTR CS:[BX+0D14]       ;Push function offset
+00DB:0CB6 8B1E4603          MOV     BX,[0346]                   ;Restore BX
+00DB:0CBA 8E1E4803          MOV     DS,[0348]                   ;Restore DS
+00DB:0CBE C3                RET                                 ;Jump to function
+00DB:0CBF FA                CLI
+00DB:0CC0 2EFE0E4101        DEC     BYTE PTR CS:[0141]          ;Decrement INDOS flag
+00DB:0CC5 2E8B26E502        MOV     SP,CS:[02E5]                ;Restore SP
+00DB:0CCA 2E8E16E702        MOV     SS,CS:[02E7]                ;Restore SS
+00DB:0CCF 8BEC              MOV     BP,SP
+00DB:0CD1 884600            MOV     [BP+00],AL                  ;Store AL on stack
+00DB:0CD4 2EA1D20B          MOV     AX,CS:[0BD2]                ;Get saved SP
+00DB:0CD8 2EA3E502          MOV     CS:[02E5],AX                ;Restore previous value
+00DB:0CDC 2EA1D00B          MOV     AX,CS:[0BD0]                ;Get saved SS
+00DB:0CE0 2EA3E702          MOV     CS:[02E7],AX                ;Restore previous value
+00DB:0CE4 E80300            CALL    0CEA                        ;Restore registers
+00DB:0CE7 CF                IRET
+
+00DB:0CE8 0000
+
+00DB:0CEA 2E8F06E80C        POP     WORD PTR CS:[0CE8]          ;Pop and save return address
+00DB:0CEF 58                POP     AX                          ;Restore registers
+00DB:0CF0 5B                POP     BX
+00DB:0CF1 59                POP     CX
+00DB:0CF2 5A                POP     DX
+00DB:0CF3 5E                POP     SI
+00DB:0CF4 5F                POP     DI
+00DB:0CF5 5D                POP     BP
+00DB:0CF6 1F                POP     DS
+00DB:0CF7 07                POP     ES
+00DB:0CF8 2EFF36E80C        PUSH    WORD PTR CS:[0CE8]          ;Push saved return address
+00DB:0CFD C3                RET                                 ;Return
+
+00DB:0CFE 2E8F06E80C        POP     WORD PTR CS:[0CE8]          ;Pop and save return address
+00DB:0D03 06                PUSH    ES                          ;Save registers
+00DB:0D04 1E                PUSH    DS
+00DB:0D05 55                PUSH    BP
+00DB:0D06 57                PUSH    DI
+00DB:0D07 56                PUSH    SI
+00DB:0D08 52                PUSH    DX
+00DB:0D09 51                PUSH    CX
+00DB:0D0A 53                PUSH    BX
+00DB:0D0B 50                PUSH    AX
+00DB:0D0C EBEA              JMP     0CF8
+---
+
+DOS 3.00
+The maximum INT 21h function number is 63h
+There are three 384-byte internal stacks: AUXSTACK, DSKSTACK and IOSTACK
+AUXSTACK is used for functions 01h-0Ch and 59h during INT 24h error handling
+IOSTACK is used for functions 01h-0Ch and 59h
+DSKSTACK is used for all other functions
+Functions 50h, 51h, and 62h do not use an internal stack
+The dispatcher does additional housekeeping for critical error handling and networking
+
+; INT 21 function 50
+011F:144F 2E891E8801        MOV     CS:[0188],BX                ;Set current PSP
+011F:1454 CF                IRET
+
+; INT 21 function 51/62
+011F:1455 2E8B1E8801        MOV     BX,CS:[0188]                ;Get current PSP
+011F:145A CF                IRET
+
+; INT 20
+011F:145B B400              MOV     AH,00
+011F:145D EB20              JMP     147F
+
+; invalid function
+011F:145F B000              MOV     AL,00
+011F:1461 CF                IRET
+
+; CP/M call entry
+011F:1462 58                POP     AX                          ;Pop far return offset
+011F:1463 58                POP     AX                          ;Pop far return segment
+011F:1464 2E8F063208        POP     WORD PTR CS:[0832]          ;Pop original return offset
+011F:1469 9C                PUSHF                               ;Push flags
+011F:146A FA                CLI
+011F:146B 50                PUSH    AX                          ;Push return segment
+011F:146C 2EFF363208        PUSH    WORD PTR CS:[0832]          ;Push return offset
+011F:1471 80F924            CMP     CL,24                       ;Valid CP/M function code ?
+011F:1474 77E9              JA      145F                        ;No
+011F:1476 8AE1              MOV     AH,CL                       ;Load AH with function code
+011F:1478 EB05              JMP     147F
+
+; INT 21
+011F:147A 80FC63            CMP     AH,63                       ;Valid function ?
+011F:147D 77E0              JA      145F                        ;No
+011F:147F 80FC51            CMP     AH,51                       ;Function 51 ?
+011F:1482 74D1              JZ      1455                        ;Yes
+011F:1484 80FC62            CMP     AH,62                       ;Function 62 ?
+011F:1487 74CC              JZ      1455                        ;Yes
+011F:1489 80FC50            CMP     AH,50                       ;Function 50 ?
+011F:148C 74C1              JZ      144F                        ;Yes
+011F:148E E8F800            CALL    1589                        ;Save registers
+011F:1491 2E8C1E9A08        MOV     CS:[089A],DS                ;Save DS
+011F:1496 2E891E9808        MOV     CS:[0898],BX                ;Save BX
+011F:149B 8CCB              MOV     BX,CS                       ;Get CS
+011F:149D 8EDB              MOV     DS,BX                       ;Set DS = CS
+011F:149F FE061103          INC     BYTE PTR [0311]             ;Increment INDOS flag
+011F:14A3 33C0              XOR     AX,AX
+011F:14A5 A31403            MOV     [0314],AX                   ;Zero user ID
+011F:14A8 A18801            MOV     AX,[0188]                   ;Get current PSP
+011F:14AB A31203            MOV     [0312],AX                   ;Save process ID
+011F:14AE A13208            MOV     AX,[0832]                   ;Get saved SP
+011F:14B1 A3A608            MOV     [08A6],AX                   ;Save in case of re-entry
+011F:14B4 A13408            MOV     AX,[0834]                   ;Get saved SS
+011F:14B7 A3A408            MOV     [08A4],AX                   ;Save in case of re-entry
+011F:14BA 58                POP     AX
+011F:14BB 50                PUSH    AX
+011F:14BC 89263208          MOV     [0832],SP                   ;Save SP
+011F:14C0 8C163408          MOV     [0834],SS                   ;Save SS
+011F:14C4 8E1E8801          MOV     DS,[0188]                   ;Get current PSP
+011F:14C8 89262E00          MOV     [002E],SP                   ;Store SS:SP in PSP
+011F:14CC 8C163000          MOV     [0030],SS
+011F:14D0 2EC606310800      MOV     BYTE PTR CS:[0831],00       ;Clear drive redirection flag
+011F:14D6 8CCB              MOV     BX,CS                       ;Get CS
+011F:14D8 8ED3              MOV     SS,BX                       ;Set SS = CS
+011F:14DA BC280A            MOV     SP,0A28                     ;SP = AUXSTACK
+011F:14DD FB                STI
+011F:14DE 8CCB              MOV     BX,CS                       ;Get CS
+011F:14E0 8EDB              MOV     DS,BX                       ;Set DS = CS
+011F:14E2 32FF              XOR     BH,BH
+011F:14E4 883E2F03          MOV     [032F],BH                   ;Clear CONSWAP flag
+011F:14E8 C606300301        MOV     BYTE PTR [0330],01          ;Set IDLEINT flag to allow INT 28
+011F:14ED 883E2303          MOV     [0323],BH                   ;Clear NOSETDIR flag
+011F:14F1 883E0F03          MOV     [030F],BH                   ;Clear FAILERR flag
+011F:14F5 8ADC              MOV     BL,AH                       ;Get function code
+011F:14F7 D1E3              SHL     BX,1                        ;Make this an index
+011F:14F9 FC                CLD
+011F:14FA 0AE4              OR      AH,AH                       ;Function 00 ?
+011F:14FC 7416              JZ      1514                        ;Yes
+011F:14FE 80FC59            CMP     AH,59                       ;Function 59 ?
+011F:1501 7405              JZ      1508                        ;Yes
+011F:1503 80FC0C            CMP     AH,0C                       ;Function 01-0C ?
+011F:1506 770C              JA      1514                        ;Yes
+011F:1508 803E670100        CMP     BYTE PTR [0167],00          ;Error mode ?
+011F:150D 752C              JNZ     153B                        ;Yes, use AUXSTACK
+011F:150F BC280D            MOV     SP,0D28                     ;SP = IOSTACK
+011F:1512 EB27              JMP     153B
+011F:1514 A33B03            MOV     [033B],AX                   ;Save AX
+011F:1517 C606360301        MOV     BYTE PTR [0336],01          ;Set default error locus
+011F:151C C606670100        MOV     BYTE PTR [0167],00          ;Clear error mode
+011F:1521 C6066801FF        MOV     BYTE PTR [0168],FF          ;Reset write protect error drive code
+011F:1526 50                PUSH    AX
+011F:1527 B482              MOV     AH,82                       ;End all critical sections
+011F:1529 CD2A              INT     2A                          ;Call network code
+011F:152B 58                POP     AX
+011F:152C BCA80B            MOV     SP,0BA8                     ;SP = DSKSTACK
+011F:152F F6066901FF        TEST    BYTE PTR [0169],FF          ;Break on ?
+011F:1534 7405              JZ      153B                        ;No, skip Ctrl-C check
+011F:1536 50                PUSH    AX
+011F:1537 E8C539            CALL    4EFF                        ;Call DSKSTATCHK to check for Ctrl-C
+011F:153A 58                POP     AX
+011F:153B 2E8B9F5E11        MOV     BX,CS:[BX+115E]             ;Get function offset
+011F:1540 871E9808          XCHG    BX,[0898]                   ;Restore BX
+011F:1544 8E1E9A08          MOV     DS,[089A]                   ;Restore DS
+011F:1548 36FF169808        CALL    WORD PTR SS:[0898]          ;Call function
+011F:154D FA                CLI
+011F:154E 2EFE0E1103        DEC     BYTE PTR CS:[0311]          ;Decrement INDOS flag
+011F:1553 2E8E163408        MOV     SS,CS:[0834]                ;Restore SS
+011F:1558 2E8B263208        MOV     SP,CS:[0832]                ;Restore SP
+011F:155D 8BEC              MOV     BP,SP
+011F:155F 884600            MOV     [BP+00],AL                  ;Store AL on stack
+011F:1562 2EA1A608          MOV     AX,CS:[08A6]                ;Get saved SP
+011F:1566 2EA33208          MOV     CS:[0832],AX                ;Restore previous value
+011F:156A 2EA1A408          MOV     AX,CS:[08A4]                ;Get saved SS
+011F:156E 2EA33408          MOV     CS:[0834],AX                ;Restore previous value
+011F:1572 E80100            CALL    1576                        ;Restore registers
+011F:1575 CF                IRET
+
+011F:1576 2E8F06A108        POP     WORD PTR CS:[08A1]          ;Pop and save return address
+011F:157B 58                POP     AX                          ;Restore registers
+011F:157C 5B                POP     BX
+011F:157D 59                POP     CX
+011F:157E 5A                POP     DX
+011F:157F 5E                POP     SI
+011F:1580 5F                POP     DI
+011F:1581 5D                POP     BP
+011F:1582 1F                POP     DS
+011F:1583 07                POP     ES
+011F:1584 2EFF26A108        JMP     WORD PTR CS:[08A1]          ;Return
+
+011F:1589 2E8F06A108        POP     WORD PTR CS:[08A1]          ;Pop and save return address
+011F:158E 06                PUSH    ES                          ;Save registers
+011F:158F 1E                PUSH    DS
+011F:1590 55                PUSH    BP
+011F:1591 57                PUSH    DI
+011F:1592 56                PUSH    SI
+011F:1593 52                PUSH    DX
+011F:1594 51                PUSH    CX
+011F:1595 53                PUSH    BX
+011F:1596 50                PUSH    AX
+011F:1597 2EFF26A108        JMP     WORD PTR CS:[08A1]          ;Return
+---
+
+DOS 3.10 to 3.31
+The maximum INT 21h function number is 63h in DOS 3.10, 64h in DOS 3.20, 68h in DOS 3.30 and 3.31
+There are three 384-byte internal stacks: AUXSTACK, DSKSTACK and IOSTACK
+AUXSTACK is used for functions 01h-0Ch during INT 24h error handling and function 59h
+IOSTACK is used for functions 01h-0Ch
+DSKSTACK is used for all other functions
+Functions 33h, 50h, 51h, 62h and 64h do not use an internal stack
+The dispatcher is essentially the same as in DOS 3.00 except that function 59h always uses AUXSTACK
+
+; INT 21 function 50
+028C:1334 2E891EDE02        MOV     CS:[02DE],BX                ;Set current PSP
+028C:1339 CF                IRET
+
+; INT 21 function 51/62
+028C:133A 2E8B1EDE02        MOV     BX,CS:[02DE]                ;Get current PSP
+028C:133F CF                IRET
+
+; INT 21 function 33
+028C:1340 0AC0              OR      AL,AL                       ;Subfunction 0 ?
+028C:1342 7506              JNZ     134A                        ;No
+028C:1344 2E8A16E502        MOV     DL,CS:[02E5]                ;Get break flag
+028C:1349 CF                IRET
+028C:134A 3C02              CMP     AL,02                       ;Subfunction 1 or 2 ?
+028C:134C 7716              JA      1364                        ;No
+028C:134E 740B              JZ      135B                        ;Yes
+028C:1350 52                PUSH    DX
+028C:1351 80E201            AND     DL,01                       ;Mask value
+028C:1354 2E8816E502        MOV     CS:[02E5],DL                ;Set break flag
+028C:1359 5A                POP     DX
+028C:135A CF                IRET
+028C:135B 80E201            AND     DL,01                       ;Mask value
+028C:135E 2E8616E502        XCHG    DL,CS:[02E5]                ;Swap break flag
+028C:1363 CF                IRET
+028C:1364 B0FF              MOV     AL,FF                       ;Indicate error
+028C:1366 CF                IRET
+
+; INT 21 function 64
+028C:1367 2EA2060A          MOV     CS:[0A06],AL                ;Set wait for external event printer flag
+028C:136B CF                IRET
+
+; INT 20
+028C:136C B400              MOV     AH,00
+028C:136E EB24              JMP     1394
+
+; invalid function
+028C:1370 B000              MOV     AL,00
+028C:1372 CF                IRET
+
+; CP/M call entry
+028C:1373 58                POP     AX                          ;Pop far return offset
+028C:1374 58                POP     AX                          ;Pop far return segment
+028C:1375 2E8F061E05        POP     WORD PTR CS:[051E]          ;Pop original return offset
+028C:137A 9C                PUSHF                               ;Push flags
+028C:137B FA                CLI
+028C:137C 50                PUSH    AX                          ;Push return segment
+028C:137D 2EFF361E05        PUSH    WORD PTR CS:[051E]          ;Push return offset
+028C:1382 2E3A0EED0D        CMP     CL,CS:[0DED]                ;Valid CP/M function code ?
+028C:1387 77E7              JA      1370                        ;No
+028C:1389 8AE1              MOV     AH,CL                       ;Load AH with function code
+028C:138B EB07              JMP     1394
+
+; INT 21
+028C:138D 2E3A26EE0D        CMP     AH,CS:[0DEE]                ;Valid function ?
+028C:1392 77DC              JA      1370                        ;No
+028C:1394 80FC51            CMP     AH,51                       ;Function 51 ?
+028C:1397 74A1              JZ      133A                        ;Yes
+028C:1399 80FC62            CMP     AH,62                       ;Function 62 ?
+028C:139C 749C              JZ      133A                        ;Yes
+028C:139E 80FC50            CMP     AH,50                       ;Function 50 ?
+028C:13A1 7491              JZ      1334                        ;Yes
+028C:13A3 80FC33            CMP     AH,33                       ;Function 33 ?
+028C:13A6 7498              JZ      1340                        ;Yes
+028C:13A8 80FC64            CMP     AH,64                       ;Function 64 ?
+028C:13AB 74BA              JZ      1367                        ;Yes
+028C:13AD E8FD00            CALL    14AD                        ;Save registers
+028C:13B0 2E8C1E7E05        MOV     CS:[057E],DS                ;Save DS
+028C:13B5 2E891E7C05        MOV     CS:[057C],BX                ;Save BX
+028C:13BA 8CCB              MOV     BX,CS                       ;Get CS
+028C:13BC 8EDB              MOV     DS,BX                       ;Set DS = CS
+028C:13BE FE06CF02          INC     BYTE PTR [02CF]             ;Increment INDOS flag
+028C:13C2 33C0              XOR     AX,AX
+028C:13C4 A3EA02            MOV     [02EA],AX                   ;Zero user ID
+028C:13C7 A1DE02            MOV     AX,[02DE]                   ;Get current PSP
+028C:13CA A3E802            MOV     [02E8],AX                   ;Save process ID
+028C:13CD A11E05            MOV     AX,[051E]                   ;Get saved SP
+028C:13D0 A38405            MOV     [0584],AX                   ;Save in case of re-entry
+028C:13D3 A12005            MOV     AX,[0520]                   ;Get saved SS
+028C:13D6 A38205            MOV     [0582],AX                   ;Save in case of re-entry
+028C:13D9 58                POP     AX
+028C:13DA 50                PUSH    AX
+028C:13DB 89261E05          MOV     [051E],SP                   ;Save SP
+028C:13DF 8C162005          MOV     [0520],SS                   ;Save SS
+028C:13E3 8E1EDE02          MOV     DS,[02DE]                   ;Get current PSP
+028C:13E7 89262E00          MOV     [002E],SP                   ;Store SS:SP in PSP
+028C:13EB 8C163000          MOV     [0030],SS
+028C:13EF 2EC6060D0500      MOV     BYTE PTR CS:[050D],00       ;Clear drive redirection flag
+028C:13F5 8CCB              MOV     BX,CS                       ;Get CS
+028C:13F7 8ED3              MOV     SS,BX                       ;Set SS = CS
+028C:13F9 BC0607            MOV     SP,0706                     ;SP = AUXSTACK
+028C:13FC FB                STI
+028C:13FD 8CCB              MOV     BX,CS                       ;Get CS
+028C:13FF 8EDB              MOV     DS,BX                       ;Set DS = CS
+028C:1401 32FF              XOR     BH,BH
+028C:1403 883E0303          MOV     [0303],BH                   ;Clear CONSWAP flag
+028C:1407 C606040301        MOV     BYTE PTR [0304],01          ;Set IDLEINT flag to allow INT 28
+028C:140C 883EF802          MOV     [02F8],BH                   ;Clear NOSETDIR flag
+028C:1410 883EF602          MOV     [02F6],BH                   ;Clear FAILERR flag
+028C:1414 8ADC              MOV     BL,AH                       ;Get function code
+028C:1416 D1E3              SHL     BX,1                        ;Make this an index
+028C:1418 FC                CLD
+028C:1419 0AE4              OR      AH,AH                       ;Function 00 ?
+028C:141B 7416              JZ      1433                        ;Yes
+028C:141D 80FC59            CMP     AH,59                       ;Function 59 ?
+028C:1420 743D              JZ      145F                        ;Yes, use AUXSTACK
+028C:1422 80FC0C            CMP     AH,0C                       ;Function 01-0C ?
+028C:1425 770C              JA      1433                        ;Yes
+028C:1427 803ECE0200        CMP     BYTE PTR [02CE],00          ;Error mode ?
+028C:142C 7531              JNZ     145F                        ;Yes, use AUXSTACK
+028C:142E BC060A            MOV     SP,0A06                     ;SP = IOSTACK
+028C:1431 EB2C              JMP     145F
+028C:1433 A3E602            MOV     [02E6],AX                   ;Save AX
+028C:1436 C606D10201        MOV     BYTE PTR [02D1],01          ;Set default error locus
+028C:143B C606CE0200        MOV     BYTE PTR [02CE],00          ;Clear error mode
+028C:1440 C606D002FF        MOV     BYTE PTR [02D0],FF          ;Reset write protect error drive code
+028C:1445 50                PUSH    AX
+028C:1446 B482              MOV     AH,82                       ;End all critical sections
+028C:1448 CD2A              INT     2A                          ;Call network code
+028C:144A 58                POP     AX
+028C:144B C606040300        MOV     BYTE PTR [0304],00          ;Clear IDLEINT flag
+028C:1450 BC8608            MOV     SP,0886                     ;SP = DSKSTACK
+028C:1453 F606E502FF        TEST    BYTE PTR [02E5],FF          ;Break on ?
+028C:1458 7405              JZ      145F                        ;No, skip Ctrl-C check
+028C:145A 50                PUSH    AX
+028C:145B E8AC3B            CALL    500A                        ;Call DSKSTATCHK to check for Ctrl-C
+028C:145E 58                POP     AX
+028C:145F 2E8B9FEF0D        MOV     BX,CS:[BX+0DEF]             ;Get function offset
+028C:1464 871E7C05          XCHG    BX,[057C]                   ;Restore BX
+028C:1468 8E1E7E05          MOV     DS,[057E]                   ;Restore DS
+028C:146C 36FF167C05        CALL    WORD PTR SS:[057C]          ;Call function
+028C:1471 FA                CLI
+028C:1472 2EFE0ECF02        DEC     BYTE PTR CS:[02CF]          ;Decrement INDOS flag
+028C:1477 2E8E162005        MOV     SS,CS:[0520]                ;Restore SS
+028C:147C 2E8B261E05        MOV     SP,CS:[051E]                ;Restore SP
+028C:1481 8BEC              MOV     BP,SP
+028C:1483 884600            MOV     [BP+00],AL                  ;Store AL on stack
+028C:1486 2EA18405          MOV     AX,CS:[0584]                ;Get saved SP
+028C:148A 2EA31E05          MOV     CS:[051E],AX                ;Restore previous value
+028C:148E 2EA18205          MOV     AX,CS:[0582]                ;Get saved SS
+028C:1492 2EA32005          MOV     CS:[0520],AX                ;Restore previous value
+028C:1496 E80100            CALL    149A                        ;Restore registers
+028C:1499 CF                IRET
+
+028C:149A 2E8F068005        POP     WORD PTR CS:[0580]          ;Pop and save return address
+028C:149F 58                POP     AX                          ;Restore registers
+028C:14A0 5B                POP     BX
+028C:14A1 59                POP     CX
+028C:14A2 5A                POP     DX
+028C:14A3 5E                POP     SI
+028C:14A4 5F                POP     DI
+028C:14A5 5D                POP     BP
+028C:14A6 1F                POP     DS
+028C:14A7 07                POP     ES
+028C:14A8 2EFF268005        JMP     WORD PTR CS:[0580]          ;Return
+
+028C:14AD 2E8F068005        POP     WORD PTR CS:[0580]          ;Pop and save return address
+028C:14B2 06                PUSH    ES                          ;Save registers
+028C:14B3 1E                PUSH    DS
+028C:14B4 55                PUSH    BP
+028C:14B5 57                PUSH    DI
+028C:14B6 56                PUSH    SI
+028C:14B7 52                PUSH    DX
+028C:14B8 51                PUSH    CX
+028C:14B9 53                PUSH    BX
+028C:14BA 50                PUSH    AX
+028C:14BB 2EFF268005        JMP     WORD PTR CS:[0580]          ;Return
+---
+
+DOS 4.00 and 4.01
+The maximum INT 21h function number is 6Ch
+There are three 384-byte internal stacks: AUXSTACK, DSKSTACK and IOSTACK
+AUXSTACK is used for functions 01h-0Ch during INT 24h error handling and function 59h
+IOSTACK is used for functions 01h-0Ch
+DSKSTACK is used for all other functions
+Functions 33h, 50h, 51h, 62h and 64h do not use an internal stack
+The dispatcher is essentially the same as in DOS 3.30
+
+; INT 21 function 33
+026D:169E 0AC0              OR      AL,AL                       ;Subfunction 0 ?
+026D:16A0 7506              JNZ     16A8                        ;No
+026D:16A2 2E8A163703        MOV     DL,CS:[0337]                ;Get break flag
+026D:16A7 CF                IRET
+026D:16A8 3C02              CMP     AL,02                       ;Subfunction 1 or 2 ?
+026D:16AA 7719              JA      16C5                        ;No
+026D:16AC 740B              JZ      16B9                        ;Yes
+026D:16AE 52                PUSH    DX
+026D:16AF 80E201            AND     DL,01                       ;Mask value
+026D:16B2 2E88163703        MOV     CS:[0337],DL                ;Set break flag
+026D:16B7 5A                POP     DX
+026D:16B8 CF                IRET
+026D:16B9 80E201            AND     DL,01                       ;Mask value
+026D:16BC 2E86163703        XCHG    DL,CS:[0337]                ;Swap break flag
+026D:16C1 CF                IRET
+026D:16C2 B0FF              MOV     AL,FF                       ;Indicate error
+026D:16C4 CF                IRET
+026D:16C5 3C03              CMP     AL,03                       ;Subfunction 3 ?
+026D:16C7 7501              JNZ     16CA                        ;No
+026D:16C9 CF                IRET
+026D:16CA 3C04              CMP     AL,04                       ;Subfunction 4 ?
+026D:16CC 7701              JA      16CF                        ;No
+026D:16CE CF                IRET
+026D:16CF 3C05              CMP     AL,05                       ;Subfunction 5 ?
+026D:16D1 77EF              JA      16C2                        ;No
+026D:16D3 2E8A166900        MOV     DL,CS:[0069]                ;Get boot drive
+026D:16D8 CF                IRET
+
+; INT 21 function 50
+026D:16D9 2E891E3003        MOV     CS:[0330],BX                ;Set current PSP
+026D:16DE CF                IRET
+
+; INT 21 function 51/62
+026D:16DF 2E8B1E3003        MOV     BX,CS:[0330]                ;Get current PSP
+026D:16E4 CF                IRET
+
+; INT 21 function 64
+026D:16E5 2EA2A00A          MOV     CS:[0AA0],AL                ;Set wait for external event printer flag
+026D:16E9 CF                IRET
+
+; INT 20
+026D:16EA B400              MOV     AH,00
+026D:16EC EB24              JMP     1712
+
+; invalid function
+026D:16EE B000              MOV     AL,00
+026D:16F0 CF                IRET
+
+; CP/M call entry
+026D:16F1 58                POP     AX                          ;Pop far return offset
+026D:16F2 58                POP     AX                          ;Pop far return segment
+026D:16F3 2E8F068405        POP     WORD PTR CS:[0584]          ;Pop original return offset
+026D:16F8 9C                PUSHF                               ;Push flags
+026D:16F9 FA                CLI
+026D:16FA 50                PUSH    AX                          ;Push return segment
+026D:16FB 2EFF368405        PUSH    WORD PTR CS:[0584]          ;Push return offset
+026D:1700 2E3A0EBB0E        CMP     CL,CS:[0EBB]                ;Valid CP/M function code ?
+026D:1705 77E7              JA      16EE                        ;No
+026D:1707 8AE1              MOV     AH,CL                       ;Load AH with function code
+026D:1709 EB07              JMP     1712
+
+; INT 21
+026D:170B 2E3A26BC0E        CMP     AH,CS:[0EBC]                ;Valid function ?
+026D:1710 77DC              JA      16EE                        ;No
+026D:1712 80FC51            CMP     AH,51                       ;Function 51 ?
+026D:1715 74C8              JZ      16DF                        ;Yes
+026D:1717 80FC62            CMP     AH,62                       ;Function 62 ?
+026D:171A 74C3              JZ      16DF                        ;Yes
+026D:171C 80FC50            CMP     AH,50                       ;Function 50 ?
+026D:171F 74B8              JZ      16D9                        ;Yes
+026D:1721 80FC33            CMP     AH,33                       ;Function 33 ?
+026D:1724 7503              JNZ     1729                        ;Yes
+026D:1726 E975FF            JMP     169E
+026D:1729 80FC64            CMP     AH,64                       ;Function 64 ?
+026D:172C 74B7              JZ      16E5                        ;Yes
+026D:172E E80D01            CALL    183E                        ;Save registers
+026D:1731 2E8C1EEC05        MOV     CS:[05EC],DS                ;Save DS
+026D:1736 2E891EEA05        MOV     CS:[05EA],BX                ;Save BX
+026D:173B 8CCB              MOV     BX,CS                       ;Get CS
+026D:173D 8EDB              MOV     DS,BX                       ;Set DS = CS
+026D:173F FE062103          INC     BYTE PTR [0321]             ;Increment INDOS flag
+026D:1743 33C0              XOR     AX,AX
+026D:1745 A33E03            MOV     [033E],AX                   ;Zero user ID
+026D:1748 A13003            MOV     AX,[0330]                   ;Get current PSP
+026D:174B A33C03            MOV     [033C],AX                   ;Save process ID
+026D:174E A18405            MOV     AX,[0584]                   ;Get saved SP
+026D:1751 A3F205            MOV     [05F2],AX                   ;Save in case of re-entry
+026D:1754 A18605            MOV     AX,[0586]                   ;Get saved SS
+026D:1757 A3F005            MOV     [05F0],AX                   ;Save in case of re-entry
+026D:175A 58                POP     AX
+026D:175B 50                PUSH    AX
+026D:175C 89268405          MOV     [0584],SP                   ;Save SP
+026D:1760 8C168605          MOV     [0586],SS                   ;Save SS
+026D:1764 8E1E3003          MOV     DS,[0330]                   ;Get current PSP
+026D:1768 89262E00          MOV     [002E],SP                   ;Store SS:SP in PSP
+026D:176C 8C163000          MOV     [0030],SS
+026D:1770 2EC606720500      MOV     BYTE PTR CS:[0572],00       ;Clear drive redirection flag
+026D:1776 8CCB              MOV     BX,CS                       ;Get CS
+026D:1778 8ED3              MOV     SS,BX                       ;Set SS = CS
+026D:177A BCA007            MOV     SP,07A0                     ;SP = AUXSTACK
+026D:177D FB                STI
+026D:177E 8CCB              MOV     BX,CS                       ;Get CS
+026D:1780 8EDB              MOV     DS,BX                       ;Set DS = CS
+026D:1782 C6060B0600        MOV     BYTE PTR [060B],00          ;Clear disk full flag
+026D:1787 C606F60500        MOV     BYTE PTR [05F6],00          ;Clear extended open flags
+026D:178C C70611060000      MOV     WORD PTR [0611],0000
+026D:1792 32FF              XOR     BH,BH
+026D:1794 883E5703          MOV     [0357],BH                   ;Clear CONSWAP flag
+026D:1798 C606580301        MOV     BYTE PTR [0358],01          ;Set IDLEINT flag to allow INT 28
+026D:179D 883E4C03          MOV     [034C],BH                   ;Clear NOSETDIR flag
+026D:17A1 883E4A03          MOV     [034A],BH                   ;Clear FAILERR flag
+026D:17A5 8ADC              MOV     BL,AH                       ;Get function code
+026D:17A7 D1E3              SHL     BX,1                        ;Make this an index
+026D:17A9 FC                CLD
+026D:17AA 0AE4              OR      AH,AH                       ;Function 00 ?
+026D:17AC 7416              JZ      17C4                        ;Yes
+026D:17AE 80FC59            CMP     AH,59                       ;Function 59 ?
+026D:17B1 743D              JZ      17F0                        ;Yes, use AUXSTACK
+026D:17B3 80FC0C            CMP     AH,0C                       ;Function 01-0C ?
+026D:17B6 770C              JA      17C4                        ;Yes
+026D:17B8 803E200300        CMP     BYTE PTR [0320],00          ;Error mode ?
+026D:17BD 7531              JNZ     17F0                        ;Yes, use AUXSTACK
+026D:17BF BCA00A            MOV     SP,0AA0                     ;SP = IOSTACK
+026D:17C2 EB2C              JMP     17F0
+026D:17C4 A33A03            MOV     [033A],AX                   ;Save AX
+026D:17C7 C606230301        MOV     BYTE PTR [0323],01          ;Set default error locus
+026D:17CC C606200300        MOV     BYTE PTR [0320],00          ;Clear error mode
+026D:17D1 C6062203FF        MOV     BYTE PTR [0322],FF          ;Reset write protect error drive code
+026D:17D6 50                PUSH    AX
+026D:17D7 B482              MOV     AH,82                       ;End all critical sections
+026D:17D9 CD2A              INT     2A                          ;Call network code
+026D:17DB 58                POP     AX
+026D:17DC C606580300        MOV     BYTE PTR [0358],00          ;Clear IDLEINT flag
+026D:17E1 BC2009            MOV     SP,0920                     ;SP = DSKSTACK
+026D:17E4 F6063703FF        TEST    BYTE PTR [0337],FF          ;Break on ?
+026D:17E9 7405              JZ      17F0                        ;No, skip Ctrl-C check
+026D:17EB 50                PUSH    AX
+026D:17EC E8CF4C            CALL    64BE                        ;Call DSKSTATCHK to check for Ctrl-C
+026D:17EF 58                POP     AX
+026D:17F0 2E8B9FBD0E        MOV     BX,CS:[BX+0EBD]             ;Get function offset
+026D:17F5 871EEA05          XCHG    BX,[05EA]                   ;Restore BX
+026D:17F9 8E1EEC05          MOV     DS,[05EC]                   ;Restore DS
+026D:17FD 36FF16EA05        CALL    WORD PTR SS:[05EA]          ;Call function
+026D:1802 FA                CLI
+026D:1803 2EFE0E2103        DEC     BYTE PTR CS:[0321]          ;Decrement INDOS flag
+026D:1808 2E8E168605        MOV     SS,CS:[0586]                ;Restore SS
+026D:180D 2E8B268405        MOV     SP,CS:[0584]                ;Restore SP
+026D:1812 8BEC              MOV     BP,SP
+026D:1814 884600            MOV     [BP+00],AL                  ;Store AL on stack
+026D:1817 2EA1F205          MOV     AX,CS:[05F2]                ;Get saved SP
+026D:181B 2EA38405          MOV     CS:[0584],AX                ;Restore previous value
+026D:181F 2EA1F005          MOV     AX,CS:[05F0]                ;Get saved SS
+026D:1823 2EA38605          MOV     CS:[0586],AX                ;Restore previous value
+026D:1827 E80100            CALL    182B                        ;Restore registers
+026D:182A CF                IRET
+
+026D:182B 2E8F06EE05        POP     WORD PTR CS:[05EE]          ;Pop and save return address
+026D:1830 58                POP     AX                          ;Restore registers
+026D:1831 5B                POP     BX
+026D:1832 59                POP     CX
+026D:1833 5A                POP     DX
+026D:1834 5E                POP     SI
+026D:1835 5F                POP     DI
+026D:1836 5D                POP     BP
+026D:1837 1F                POP     DS
+026D:1838 07                POP     ES
+026D:1839 2EFF26EE05        JMP     WORD PTR CS:[05EE]          ;Return
+
+026D:183E 2E8F06EE05        POP     WORD PTR CS:[05EE]          ;Pop and save return address
+026D:1843 06                PUSH    ES                          ;Save registers
+026D:1844 1E                PUSH    DS
+026D:1845 55                PUSH    BP
+026D:1846 57                PUSH    DI
+026D:1847 56                PUSH    SI
+026D:1848 52                PUSH    DX
+026D:1849 51                PUSH    CX
+026D:184A 53                PUSH    BX
+026D:184B 50                PUSH    AX
+026D:184C 2EFF26EE05        JMP     WORD PTR CS:[05EE]          ;Return
+---
+
+DOS 5.00+
+The maximum INT 21h function number is 6Ch
+There are three 384-byte internal stacks: AUXSTACK, DSKSTACK and IOSTACK
+AUXSTACK is used for functions 01h-0Ch during INT 24h error handling and function 59h
+IOSTACK is used for functions 01h-0Ch
+DSKSTACK is used for all other functions
+Functions 33h, 50h, 51h, 62h and 64h do not use an internal stack
+The dispatcher was modified to support DOS running in the HMA
+PC DOS 6.10 and above have minor optimizations but is basically the same
+
+; INT 21 function 33
+FDC8:408F EBA9              JMP     403A
+
+; INT 21 function 50
+FDC8:4091 1E                PUSH    DS                          ;Save DS
+FDC8:4092 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:4097 891E3003          MOV     [0330],BX                   ;Set current PSP
+FDC8:409B 1F                POP     DS                          ;Restore DS
+FDC8:409C CF                IRET
+
+; INT 21 function 51/62
+FDC8:409D 1E                PUSH    DS                          ;Save DS
+FDC8:409E 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:40A3 8B1E3003          MOV     BX,[0330]                   ;Get current PSP
+FDC8:40A7 1F                POP     DS                          ;Restore DS
+FDC8:40A8 CF                IRET
+
+; INT 21 function 64
+FDC8:40A9 1E                PUSH    DS                          ;Save DS
+FDC8:40AA 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:40AF A2A00A            MOV     [0AA0],AL                   ;Set wait for external event printer flag
+FDC8:40B2 1F                POP     DS                          ;Restore DS
+FDC8:40B3 CF                IRET
+
+; INT 20
+FDC8:40B4 32E4              XOR     AH,AH
+FDC8:40B6 EB2E              JMP     40E6
+
+; invalid function
+FDC8:40B8 32C0              XOR     AL,AL
+FDC8:40BA CF                IRET
+
+; CP/M call entry
+FDC8:40BB 1E                PUSH    DS                          ;Get DS
+FDC8:40BC 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:40C1 8F06EC05          POP     WORD PTR [05EC]             ;Save DS
+FDC8:40C5 58                POP     AX                          ;Pop far return offset
+FDC8:40C6 58                POP     AX                          ;Pop far return segment
+FDC8:40C7 8F068405          POP     WORD PTR [0584]             ;Pop original return offset
+FDC8:40CB 9C                PUSHF                               ;Push flags
+FDC8:40CC FA                CLI
+FDC8:40CD 50                PUSH    AX                          ;Push return segment
+FDC8:40CE FF368405          PUSH    WORD PTR [0584]             ;Push return offset
+FDC8:40D2 FF36EC05          PUSH    WORD PTR [05EC]             ;Get saved DS
+FDC8:40D6 1F                POP     DS                          ;Restore DS
+FDC8:40D7 80F924            CMP     CL,24                       ;Valid CP/M function code ?
+FDC8:40DA 77DC              JA      40B8                        ;No
+FDC8:40DC 8AE1              MOV     AH,CL                       ;Load AH with function code
+FDC8:40DE EB06              JMP     40E6
+
+; INT 21
+FDC8:40E0 FA                CLI
+FDC8:40E1 80FC6C            CMP     AH,6C                       ;Valid function ?
+FDC8:40E4 77D2              JA      40B8                        ;No
+FDC8:40E6 80FC33            CMP     AH,33                       ;Function 33 ?
+FDC8:40E9 7218              JB      4103                        ;No
+FDC8:40EB 74A2              JZ      408F                        ;Yes
+FDC8:40ED 80FC64            CMP     AH,64                       ;Function 64 ?
+FDC8:40F0 7711              JA      4103                        ;No
+FDC8:40F2 74B5              JZ      40A9                        ;Yes
+FDC8:40F4 80FC51            CMP     AH,51                       ;Function 51 ?
+FDC8:40F7 74A4              JZ      409D                        ;Yes
+FDC8:40F9 80FC62            CMP     AH,62                       ;Function 62 ?
+FDC8:40FC 749F              JZ      409D                        ;Yes
+FDC8:40FE 80FC50            CMP     AH,50                       ;Function 50 ?
+FDC8:4101 748E              JZ      4091                        ;Yes
+FDC8:4103 06                PUSH    ES                          ;Save registers
+FDC8:4104 1E                PUSH    DS
+FDC8:4105 55                PUSH    BP
+FDC8:4106 57                PUSH    DI
+FDC8:4107 56                PUSH    SI
+FDC8:4108 52                PUSH    DX
+FDC8:4109 51                PUSH    CX
+FDC8:410A 53                PUSH    BX
+FDC8:410B 50                PUSH    AX
+FDC8:410C 8CD8              MOV     AX,DS                       ;Get DS
+FDC8:410E 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:4113 A3EC05            MOV     [05EC],AX                   ;Save DS
+FDC8:4116 891EEA05          MOV     [05EA],BX                   ;Save BX
+FDC8:411A A18405            MOV     AX,[0584]                   ;Get saved SP
+FDC8:411D A3F205            MOV     [05F2],AX                   ;Save in case of re-entry
+FDC8:4120 A18605            MOV     AX,[0586]                   ;Get saved SS
+FDC8:4123 A3F005            MOV     [05F0],AX                   ;Save in case of re-entry
+FDC8:4126 33C0              XOR     AX,AX
+FDC8:4128 A27205            MOV     [0572],AL                   ;Clear drive redirection flag
+FDC8:412B F606301001        TEST    BYTE PTR [1030],01          ;Win 3.x active ?
+FDC8:4130 7503              JNZ     4135                        ;Yes
+FDC8:4132 A33E03            MOV     [033E],AX                   ;Zero user ID
+FDC8:4135 FE062103          INC     BYTE PTR [0321]             ;Increment INDOS flag
+FDC8:4139 89268405          MOV     [0584],SP                   ;Save SP
+FDC8:413D 8C168605          MOV     [0586],SS                   ;Save SS
+FDC8:4141 A13003            MOV     AX,[0330]                   ;Get current PSP
+FDC8:4144 A33C03            MOV     [033C],AX                   ;Save process ID
+FDC8:4147 8ED8              MOV     DS,AX                       ;Set DS = current PSP
+FDC8:4149 58                POP     AX
+FDC8:414A 50                PUSH    AX
+FDC8:414B 89262E00          MOV     [002E],SP                   ;Store SS:SP in PSP
+FDC8:414F 8C163000          MOV     [0030],SS
+FDC8:4153 2E8E16D73D        MOV     SS,CS:[3DD7]                ;Get DOS data segment
+FDC8:4158 BCA007            MOV     SP,07A0                     ;SP = AUXSTACK
+FDC8:415B FB                STI
+FDC8:415C 8CD3              MOV     BX,SS                       ;Get SS
+FDC8:415E 8EDB              MOV     DS,BX                       ;Set DS = SS
+FDC8:4160 93                XCHG    AX,BX                       ;Save AX
+FDC8:4161 33C0              XOR     AX,AX
+FDC8:4163 36A2F605          MOV     SS:[05F6],AL                ;Clear extended open flags
+FDC8:4167 36812611060008    AND     WORD PTR SS:[0611],0800
+FDC8:416E 36A25703          MOV     SS:[0357],AL                ;Clear CONSWAP flag
+FDC8:4172 36A24C03          MOV     SS:[034C],AL                ;Clear NOSETDIR flag
+FDC8:4176 36A24A03          MOV     SS:[034A],AL                ;Clear FAILERR flag
+FDC8:417A 40                INC     AX
+FDC8:417B 36A25803          MOV     SS:[0358],AL                ;Set IDLEINT flag to allow INT 28
+FDC8:417F 93                XCHG    AX,BX                       ;Restore AX
+FDC8:4180 8ADC              MOV     BL,AH                       ;Get function code
+FDC8:4182 D1E3              SHL     BX,1                        ;Make this an index
+FDC8:4184 FC                CLD
+FDC8:4185 0AE4              OR      AH,AH                       ;Function 00 ?
+FDC8:4187 7417              JZ      41A0                        ;Yes
+FDC8:4189 80FC59            CMP     AH,59                       ;Function 59 ?
+FDC8:418C 7444              JZ      41D2                        ;Yes, use AUXSTACK
+FDC8:418E 80FC0C            CMP     AH,0C                       ;Function 01-0C ?
+FDC8:4191 770D              JA      41A0                        ;Yes
+FDC8:4193 36803E200300      CMP     BYTE PTR SS:[0320],00       ;Error mode ?
+FDC8:4199 7537              JNZ     41D2                        ;Yes, use AUXSTACK
+FDC8:419B BCA00A            MOV     SP,0AA0                     ;SP = IOSTACK
+FDC8:419E EB32              JMP     41D2
+FDC8:41A0 36A33A03          MOV     SS:[033A],AX                ;Save AX
+FDC8:41A4 36C606230301      MOV     BYTE PTR SS:[0323],01       ;Set default error locus
+FDC8:41AA 36C606200300      MOV     BYTE PTR SS:[0320],00       ;Clear error mode
+FDC8:41B0 36C6062203FF      MOV     BYTE PTR SS:[0322],FF       ;Reset write protect error drive code
+FDC8:41B6 50                PUSH    AX
+FDC8:41B7 B482              MOV     AH,82                       ;End all critical sections
+FDC8:41B9 CD2A              INT     2A                          ;Call network code
+FDC8:41BB 58                POP     AX
+FDC8:41BC 36C606580300      MOV     BYTE PTR SS:[0358],00       ;Clear IDLEINT flag
+FDC8:41C2 BC2009            MOV     SP,0920                     ;SP = DSKSTACK
+FDC8:41C5 36F6063703FF      TEST    BYTE PTR SS:[0337],FF       ;Break on ?
+FDC8:41CB 7405              JZ      41D2                        ;No, skip Ctrl-C check
+FDC8:41CD 50                PUSH    AX
+FDC8:41CE E8484E            CALL    9019                        ;Call DSKSTATCHK to check for Ctrl-C
+FDC8:41D1 58                POP     AX
+FDC8:41D2 2E8B9F8E3E        MOV     BX,CS:[BX+3E8E]             ;Get function offset
+FDC8:41D7 36871EEA05        XCHG    BX,SS:[05EA]                ;Restore BX
+FDC8:41DC 368E1EEC05        MOV     DS,SS:[05EC]                ;Restore DS
+FDC8:41E1 36FF16EA05        CALL    WORD PTR SS:[05EA]          ;Call function
+FDC8:41E6 3680268600FB      AND     BYTE PTR SS:[0086],FB
+FDC8:41EC FA                CLI
+FDC8:41ED 2E8E1ED73D        MOV     DS,CS:[3DD7]                ;Get DOS data segment
+FDC8:41F2 803E850000        CMP     BYTE PTR [0085],00          ;A20 off count 0 ?
+FDC8:41F7 7527              JNZ     4220                        ;No, check if A20 should be disabled
+FDC8:41F9 FE0E2103          DEC     BYTE PTR [0321]             ;Decrement INDOS flag
+FDC8:41FD 8E168605          MOV     SS,[0586]                   ;Restore SS
+FDC8:4201 8B268405          MOV     SP,[0584]                   ;Restore SP
+FDC8:4205 8BEC              MOV     BP,SP
+FDC8:4207 884600            MOV     [BP+00],AL                  ;Store AL on stack
+FDC8:420A A1F205            MOV     AX,[05F2]                   ;Get saved SP
+FDC8:420D A38405            MOV     [0584],AX                   ;Restore previous value
+FDC8:4210 A1F005            MOV     AX,[05F0]                   ;Get saved SS
+FDC8:4213 A38605            MOV     [0586],AX                   ;Restore previous value
+FDC8:4216 58                POP     AX                          ;Restore registers
+FDC8:4217 5B                POP     BX
+FDC8:4218 59                POP     CX
+FDC8:4219 5A                POP     DX
+FDC8:421A 5E                POP     SI
+FDC8:421B 5F                POP     DI
+FDC8:421C 5D                POP     BP
+FDC8:421D 1F                POP     DS
+FDC8:421E 07                POP     ES
+FDC8:421F CF                IRET
+
+FDC8:4220 8B1E6300          MOV     BX,[0063]                   ;Get A20 off PSP
+FDC8:4224 3B1E3003          CMP     BX,[0330]                   ;Same as current PSP ?
+FDC8:4228 75CF              JNZ     41F9                        ;No, leave A20 enabled
+FDC8:422A FE0E8500          DEC     BYTE PTR [0085]             ;Decrement A20 off count
+FDC8:422E 1E                PUSH    DS                          ;Push DOS data segment
+FDC8:422F BB2D11            MOV     BX,112D                     ;Load disable A20 return offset
+FDC8:4232 53                PUSH    BX                          ;Push offset
+FDC8:4233 CB                RETF                                ;Jump to code in DOS data area

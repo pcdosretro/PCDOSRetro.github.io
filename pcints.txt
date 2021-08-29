@@ -1,0 +1,93 @@
+00 Divide overflow
+01 Debug exception
+02 Non-maskable interrupt (NMI)
+03 Breakpoint
+04 Overflow
+05 Print screen
+06 Invalid opcode
+07 Coprocessor not available
+08 IRQ0 - timer interrupt
+09 IRQ1 - keyboard interrupt
+0A IRQ2
+0B IRQ3 - serial port 2 interrupt
+0C IRQ4 - serial port 1 interrupt
+0D IRQ5 - fixed disk interrupt (XT only)
+0E IRQ6 - floppy drive interrupt
+0F IRQ7 - parallel port interrupt
+10 Video
+11 Equipment check
+12 Conventional memory size
+13 Disk
+14 Serial port
+15 System services
+16 Keyboard
+17 Printer
+18 ROM BASIC
+19 Bootstrap
+1A Time of day, PCI
+1B Ctrl-Break
+1C Timer tick
+1D CRTC parameter table pointer
+1E Floppy drive parameter table pointer
+1F 8x8 video font pointer for characters 80h-FFh
+20 DOS - Terminate program
+21 DOS - Main API
+22 DOS - Terminate address
+23 DOS - Ctrl-Break address
+24 DOS - Critical error address
+25 DOS - Absolute disk read
+26 DOS - Absolute disk read
+27 DOS - Terminate and stay resident
+28 DOS - Idle
+29 DOS - Console output
+2A DOS - Networking and critical section
+2B DOS - unused
+2C DOS - unused
+2D DOS - unused
+2E DOS - Execute command
+2F DOS - Multiplex
+30 far jump to CP/M compatibility entry point
+31 DPMI (protected-mode only)
+32 unused
+33 Mouse
+34 Floating-point emulation (opcode D8)
+35 Floating-point emulation (opcode D9)
+36 Floating-point emulation (opcode DA)
+37 Floating-point emulation (opcode DB)
+38 Floating-point emulation (opcode DC)
+39 Floating-point emulation (opcode DD)
+3A Floating-point emulation (opcode DE)
+3B Floating-point emulation (opcode DF)
+3C Floating-point emulation (segment overrides)
+3D Floating-point emulation (FWAIT)
+3E unused
+3F LINK overlay manager
+40 Floppy disk (revectored by hard disk BIOS code)
+41 Hard disk 0 parameter table pointer
+42 MDA/CGA video (revectored by EGA and later BIOS code)
+43 Video font pointer (EGA and later)
+44 Video font pointer for characters 00h-7Fh (PCjr only)
+46 Hard disk 1 parameter table pointer
+48 Cordless keyboard scan code translation routine (PCjr only)
+49 Non-keyboard scan code translation table (PCjr only)
+4A Alarm
+4B Virtual DMA services (VDS)
+5C NETBIOS
+60 User interrupt
+61 User interrupt
+62 User interrupt
+63 User interrupt
+64 User interrupt
+65 User interrupt
+66 User interrupt
+67 EMS/VCPI
+6C System resume (PC Convertible only)
+6D Video (hooked by most VGA/SVGA BIOS code)
+70 IRQ8 - real-time clock interrupt
+71 IRQ9 - redirect to IRQ2
+72 IRQ10
+73 IRQ11
+74 IRQ12 - PS/2 mouse interrupt
+75 IRQ13 - floating-point error interrupt
+76 IRQ14 - primary IDE interrupt
+77 IRQ15 - secondary IDE interrupt

@@ -1,0 +1,428 @@
+QDOS 0.1 (August 1980)
+first version shipped by Seattle Computer Products (QDOS = Quick and Dirty Operating System)
+
+86-DOS 0.3 (December 1980)
+first version delivered to Microsoft
+
+86-DOS 1.0 (April 1981)
+first completed release
+
+86-DOS 1.14 (July 1981)
+bought by Microsoft from Seattle Computer Products on July 27, 1981 to become MS-DOS 1.0
+
+PC DOS 1.0 / MS-DOS 1.0 (August 1981)
+developed by Seattle Computer Products and Microsoft
+IBM developed COMP, DISKCOMP, DISKCOPY, MODE
+distributed on 1 160KB floppy disk
+initial release (equivalent to 86-DOS 1.14)
+released with the IBM PC
+PC DOS system files are IBMBIO.COM and IBMDOS.COM, command shell is COMMAND.COM
+executable file formats are .COM and .EXE
+single-sided 160KB floppy disk support (FAT12)
+directory entries only include the date last written
+file attributes read-only (01h), hidden (02h) and system (04h) supported
+batch files (.BAT) and AUTOEXEC.BAT
+internal commands: COPY, DIR, ERASE, PAUSE, REM, RENAME, TYPE
+external commands: CHKDSK, COMP, DATE, DEBUG, DISKCOMP, DISKCOPY, EDLIN, FORMAT, LINK, MODE, SYS, TIME
+external commands: BASIC and BASICA (PC DOS only)
+special device names: AUX, COM1, CON, LPT1, NUL, PRN
+program loading and execution implemented in COMMAND.COM
+PSP created for each executed program
+INT 22h and 23h vectors saved in PSP
+files are opened with FCBs
+DPB structures are used for internal drive info
+INT 20h terminate program
+INT 21h DOS API functions 00h-2Dh (18h, 1Ch-20h unused)
+INT 22h termination address
+INT 23h control break handler address
+INT 24h critical error handler address
+INT 25h absolute disk read (implemented in IBMBIO.COM)
+INT 26h absolute disk write (implemented in IBMBIO.COM)
+INT 27h terminate and stay resident (implemented in COMMAND.COM)
+CP/M CALL 0 interface (executes INT 20h)
+CP/M CALL 5 interface supporting INT 21h functions 00h-24h
+
+PC DOS 1.1 (May 1982)
+developed by Seattle Computer Products and Microsoft
+distributed on 1 160KB floppy disk
+double-sided 320KB floppy disk support added
+directory entries include the time last written in addition to the date
+INT 24h vector saved in PSP
+COPY supports concatenation of multiple files
+new internal commands: DATE, DEL, REN, TIME
+new external command: EXE2BIN
+INT 21h functions 1Ch, 1Fh, 2Eh added
+
+MS-DOS 1.25 (June 1982)
+developed by Seattle Computer Products and Microsoft
+first OEM version of MS-DOS (equivalent to PC DOS 1.1)
+MS-DOS system files are IO.SYS and MSDOS.SYS
+new external command: GWBASIC (MS-DOS only substitute for BASICA)
+
+PC DOS 2.0 / MS-DOS 2.0 (March 1983)
+developed by Microsoft
+IBM developed BACKUP, FDISK, GRAPHICS, RESTORE, TREE
+distributed on 2 180KB floppy disks
+released with the IBM PC XT
+major rewrite
+subdirectory support added
+volume label support added
+device driver support added (device driver command codes 00h-0Ch)
+file handle support added
+I/O redirection support added
+simple memory management and MCBs added
+environment variables added (COMMAND.COM uses COMSPEC, PATH and PROMPT)
+BIOS parameter block (BPB) support added
+180KB single-sided and 360KB double-sided floppy disk support added
+hard disk support up to 10MB (FAT12: partition type 01h)
+file attributes volume label (08h), subdirectory (10h) and archive (20h) added
+zero byte indicates end of directory to speed up searches
+print spooler added
+CONFIG.SYS (AVAILDEV, BREAK, BUFFERS, DEVICE, FILES, SHELL, SWITCHAR)
+new internal commands: BREAK, CD, CHDIR, CLS, CTTY, ECHO, EXIT, FOR, GOTO, IF, MD, MKDIR, PATH, PROMPT, RD, RMDIR, SET, SHIFT, VER, VERIFY, VOL
+new external commands: ASSIGN, BACKUP, FDISK, FIND, GRAPHICS, MORE, PRINT, RECOVER, RESTORE, SORT, TREE
+internal character devices: AUX, CLOCK$, COM1, COM2, CON, LPT1, LPT2, LPT3, NUL, PRN
+internal block device driver for disks
+new device driver: ANSI.SYS
+parent PSP segment, job file table and environment segment added to PSP
+current directories are appended to each DPB
+SYSVARS and SFT structures added
+disk buffering added
+INT 21h functions 2Fh-57h added
+INT 21h function 4Bh (execute or load program) implemented in COMMAND.COM
+INT 25h, INT 26h, INT 27h now implemented in the DOS kernel
+INT 28h idle call added
+INT 29h fast console output added
+INT 2Eh reload transient (COMMAND.COM) added
+INT 2Fh PRINT support added
+
+MS-DOS 2.01 (May 1983)
+developed by Microsoft
+enhanced country support added
+new external command: FC (MS-DOS)
+new CONFIG.SYS command: COUNTRY
+INT 21h function 38h set country info added
+
+PC DOS 2.1 (October 1983)
+developed by Microsoft
+distributed on 2 180KB floppy disks
+released with the IBM PCjr
+PCjr half-height floppy drive support added
+no enhanced country support
+
+MS-DOS 2.11 (December 1983)
+developed by Microsoft
+basically PC DOS 2.1 with MS-DOS 2.01 enhanced country support and minor updates
+INT 21h function 58h added
+
+PC DOS 3.0 / MS-DOS 3.0 (August 1984)
+developed by Microsoft
+IBM developed GRAFTABL, KEYBFR, KEYBGR, KEYBIT, KEYBSP, KEYBUK, LABEL, SELECT, VDISK.SYS
+distributed on 2 360KB floppy disks
+released with the IBM PC AT
+1.2MB floppy disk support added
+hard disk support up to 32MB (original FAT16: partition type 04h)
+redirector support added
+file sharing and locking support added
+date and time set from CMOS real-time clock
+new external commands: ATTRIB, GRAFTABL, KEYBFR, KEYBGR, KEYBIT, KEYBSP, KEYBUK, LABEL, SELECT, SHARE
+new CONFIG.SYS commands: FCBS, LASTDRIVE, STRING
+CONFIG.SYS commands AVAILDEV and SWITCHAR removed
+new device driver: VDISK.SYS and source listing VDISK.LST (PC DOS only)
+DOS swappable data area added
+CDS and FCB-SFT structures added
+job file table may be relocated via new PSP fields allowing more than 20 handles
+program loading and execution now implemented in the DOS kernel
+fully qualified program name added to environment block
+interrupt vectors 20h-3Fh are initialized by the DOS kernel
+INT 21h functions 4408h-440Bh, 59h-63h added
+INT 21h functions 3702h-3703h removed
+INT 2Ah networking and critical section functions added
+INT 2Fh multiplex functions 01h (PRINT), 05h (REDIR error text), 10h (SHARE), 11h (REDIR), 12h (IBMDOS) added
+device driver command codes 0Dh-10h added
+
+MS-DOS 3.05 (November 1984)
+developed by Microsoft
+OEM version of PC DOS 3.0
+
+PC DOS 3.1 / MS-DOS 3.1 (April 1985)
+developed by Microsoft
+distributed on 2 360KB floppy disks
+new external commands: JOIN, SUBST
+external command LABEL added to MS-DOS
+CONFIG.SYS command STRING removed
+SYSVARS table changed
+DOS swappable data area changed (first version recognized by redirectors)
+INT 21h functions 3302h, 5D07h-5D0Ah added
+INT 21h function 61h removed
+INT 2Fh multiplex functions 02h (REDIR print), 06h (ASSIGN) added
+
+PC DOS 3.2 / MS-DOS 3.2 (April 1986)
+developed by Microsoft
+IBM developed REPLACE, XCOPY
+Microsoft developed clone versions for most of the IBM developed utilities
+distributed on 2 360KB floppy disks
+released with the IBM PC AT model 339 and the IBM PC Convertible
+first "packaged product" version of MS-DOS which OEMs could include with new PCs
+720KB 3.5" floppy disk support added
+hardware interrupt stack switching support added
+master environment block size can be specified using COMMAND /E:size
+FORMAT supports /T and /N to specify number of tracks and number of sectors
+new external commands: APPEND (MS-DOS), REPLACE, XCOPY
+new CONFIG.SYS commands: DRIVPARM, STACK
+new device drivers: DRIVER.SYS, RAMDRIVE.SYS (MS-DOS)
+INT 21h functions 440Ch-440Fh, 64h added
+INT 2Fh multiplex functions 08h (IBMBIO/DRIVER.SYS), 13h (IBMBIO) added
+device driver command codes 13h, 17h, 18h added
+
+MS-DOS 3.21 (May 1987)
+developed by Microsoft
+distributed on 2 360KB floppy disks
+maintenance release
+
+PC DOS 3.3 / MS-DOS 3.3 (April 1987)
+developed by IBM
+distributed on 2 360KB floppy disks or 1 720KB floppy disk
+released with the initial IBM PS/2 line
+1.44MB 3.5" floppy disk support added
+extended partition support (partition type 05h)
+national language support added
+code page switching support added
+per-line batch file echo suppression added (@)
+hardware interrupt stack switching support can be disabled (STACKS=0,0)
+102-byte buffer reserved at 800h (70h:100h) for programs using 80286 LOADALL
+ATTRIB supports /S to recurse subdirectories
+new internal commands: CALL, CHCP
+new external commands: FASTOPEN, KEYB, NLSFUNC
+external command APPEND added to PC DOS
+external commands COMP and SELECT added to MS-DOS
+new internal devices: COM3, COM4
+CONFIG.SYS command STACK renamed to STACKS
+new device drivers: DISPLAY.SYS, PRINTER.SYS
+new support files: COUNTRY.SYS, EGA.CPI, KEYBOARD.SYS
+external commands KEYBFR, KEYBGR, KEYBIT, KEYBSP and KEYBUK removed (replaced by KEYB)
+INT 21h functions 65h-68h added
+INT 2Fh multiplex functions 14h (NLSFUNC), ADh (DISPLAY.SYS/KEYB), AEh (APPEND), B0h (GRAFTABL), B7h (APPEND) added
+PC DOS only: separate DOS Technical Reference disk includes EXE2BIN, LIB, LINK and VDISK.ASM (replacing VDISK.LST)
+
+MS-DOS 3.31 (November 1987)
+developed by Compaq (based upon MS-DOS 3.3 codebase)
+distributed on 2 720KB floppy disks
+hard disk support up to 2GB (enhanced FAT16: partition type 06h)
+BPB extended to support 32-bit sector count
+INT 25h and INT 26h extended to support greater than 32MB hard disks
+
+PC DOS 4.0 / MS-DOS 4.0 (July 1988)
+developed by IBM
+distributed on 2 720KB floppy disks
+FORMAT supports /F to specify disk size to format
+MEM command added to report memory usage
+SHARE loaded for FCB operations on hard disks greater than 32MB
+IFS driver support added
+new internal command: TRUENAME
+new external commands: FILESYS, IFSFUNC, MEM
+new CONFIG.SYS commands: COMMENT, CPSW, IFS, INSTALL, MULTITRACK, REM, SWITCHES
+new device drivers: SMARTDRV.SYS (MS-DOS), XMA2EMS.SYS, XMAEM.SYS
+new support file: GRAPHICS.PRO
+disk buffers could be allocated in expanded memory (BUFFERS /X)
+DPB, SFT and CDS structures extended
+new internal version table added
+DOS swappable data area changed
+program names added to MCBs
+system block sub-MCB headers added (used by MEM)
+most commands use new message retriever which allows message text to be separate from source code for translation purposes
+INT 21h functions 3305h, 5D0Bh, 5F05h-5F08h, 6507h, 6520h-6523h, 65A0h-65A3h, 69h-6Ch added
+INT 21h functions 3303h-3304h, 5702h-5704h reserved but unused
+INT 2Fh multiplex function 1Ah (ANSI.SYS) added
+PC DOS only: separate DOS Technical Reference disk includes EXE2BIN, LIB, LINK and VDISK.ASM (source does not match current VDISK.SYS)
+
+PC DOS 4.01 / MS-DOS 4.01 (August 1988)
+developed by IBM
+distributed on 2 720KB floppy disks
+maintenance release
+DOS version is reported as 4.00
+
+PC DOS 5.0 / MS-DOS 5.0 (June 1991)
+developed by Microsoft
+distributed on 5 360KB floppy disks or 3 720KB floppy disks or 2 1.2MB floppy disks
+first retail version of MS-DOS
+first version of DOS to use a setup program
+most differences between MS-DOS and PC DOS besides system filenames and copyright text are eliminated
+external command FC and device drivers RAMDRIVE.SYS and SMARTDRV.SYS added to PC DOS
+last version to share a common codebase, MS-DOS and PC DOS begin to diverge after 5.0
+HMA support added (DOS=HIGH)
+UMB support added (DOS=UMB)
+2.88MB 3.5" floppy disk support added
+syntax help for all commands (/?)
+DIR command greatly enhanced and default switches may be set with the DIRCMD environment variable
+DOSKEY command line editor added
+FIND supports case-insensitive searches (/I)
+FORMAT supports quick formatting allowing a disk to be unformatted
+IFS driver support removed
+SHARE no longer required for FCB operations on hard disks greater than 32MB
+internal version table implemented in SETVER device driver
+80286 LOADALL buffer removed
+BUFFERS /X removed
+COMMAND.COM uses the TEMP environment variable for temporary files (pipes)
+EDIT replaces EDLIN
+QBASIC replaces BASIC, BASICA, GWBASIC
+MIRROR, UNDELETE and UNFORMAT licensed from Central Point Software PC Tools
+new internal commands: LH, LOADHIGH
+new external commands: DOSKEY, EDIT, EMM386, HELP, LOADFIX, MIRROR, QBASIC, SETVER, UNDELETE, UNFORMAT
+new CONFIG.SYS commands: DEVICEHIGH, DOS
+new device drivers: EMM386.EXE, HIMEM.SYS, SETVER.EXE
+external commands FILESYS, GWBASIC, IFSFUNC, LINK and SELECT removed
+CONFIG.SYS commands CPSW and IFS removed
+device drivers VDISK.SYS (PC DOS), XMA2EMS.SYS and XMAEM.SYS removed
+INT 21h functions 3306h, 4410h-4411h, 4B05h, 5802h-5803h added
+INT 21h functions 3303h-3304h, 3701h, 5702h-5704h, 5D0Bh, 6Bh removed
+INT 21h functions 6Dh-6Fh added for ROM DOS support and are only present in ROM DOS builds
+INT 2Fh multiplex functions 43h (HIMEM.SYS), 48h (DOSKEY), 4Ah (IBMBIO), 55h (COMMAND), ACh (GRAPHICS) added
+INT 2Fh multiplex function 122Eh moved to COMMAND.COM
+INT 2Fh multiplex functions 1603h, 1605h, 1606h, 1607h, 4601h, 4602h hooked for Windows
+device driver command code 19h added
+
+MS-DOS 5.0a (November 1991)
+developed by Microsoft
+distributed on 5 360KB floppy disks or 3 720KB floppy disks or 2 1.2MB floppy disks
+maintenance release
+
+PC DOS 5.00.1 (February 1992)
+developed by IBM (based upon MS-DOS 5.0 codebase)
+distributed on 3 720KB floppy disks
+maintenance release
+PC DOS 5.0 revision 1
+
+PC DOS 5.02 (September 1992)
+developed by IBM (based upon MS-DOS 5.0 codebase)
+distributed on 3 720KB floppy disks
+new external commands: DRVLOCK, EJECT, INTERLNK, INTERSVR, MOUSE, POWER
+new device drivers: CMOSCLK.SYS, INTERLNK.EXE, POWER.EXE
+new support files: EGAX.CPI, ISO.CPI
+INT 2Fh multiplex functions 54h (POWER) and 56h (INTERLNK) added
+
+MS-DOS 6.0 (March 1993)
+developed by Microsoft
+distributed on 3 1.44MB floppy disks
+startup menu added
+DoubleSpace disk compression added
+INTERLNK, INTERSVR and POWER added from PC DOS 5.02
+SMARTDRV.EXE replaces SMARTDRV.SYS
+disk defragmenter added (licensed version of Speed Disk from Norton Utilities)
+MS backup added
+MS anti-virus added
+new external commands: CHOICE, DEFRAG, DELTREE, MOVE, MSCDEX, MSD, SMARTDRV
+new CONFIG.SYS commands: INCLUDE, INSTALLHIGH, MENUCOLOR, MENUDEFAULT, MENUITEM, NUMLOCK, SET, SUBMENU
+external command RECOVER removed
+INT 2Fh multiplex function 15h (MSCDEX) added
+
+PC DOS 6.1 (June 1993)
+developed by IBM (based upon MS-DOS 6.0 codebase)
+distributed on 4 1.44MB floppy disks
+many optimizations
+includes most new features of MS-DOS 6.0 except DoubleSpace, MS backup, MS anti-virus and MSD
+PCMCIA utilities added
+PenDOS utilities added
+Central Point backup added
+Central Point scheduler added
+IBM anti-virus added
+E editor replaces EDIT
+QCONFIG replaces MSD
+new external commands: DATAMON, E, QCONFIG
+external commands BASIC, BASICA and MIRROR removed
+DOS version is reported as 6.00
+
+MS-DOS 6.2 (September 1993)
+developed by Microsoft
+distributed on 3 1.44MB floppy disks
+CHKDSK, DIR, FORMAT and MEM display numbers with separators
+COPY, MOVE and XCOPY prompt before overwriting files unless /Y is used (may be set via the COPYCMD environment variable)
+DoubleSpace disk compression enhanced
+new external command: SCANDISK
+
+MS-DOS 6.21 (February 1994)
+developed by Microsoft
+distributed on 3 1.44MB floppy disks
+DoubleSpace removed due to injunction from Stac Electronics lawsuit
+DOS version is reported as 6.20
+
+MS-DOS 6.22 (May 1994)
+developed by Microsoft
+distributed on 3 1.44MB floppy disks
+DriveSpace disk compression added (replacing DoubleSpace)
+
+PC DOS 6.3 (April 1994)
+developed by IBM (based upon PC DOS 6.1 and MS-DOS 6.2 codebases)
+distributed on 5 1.44MB floppy disks
+last version of PC DOS to incorporate code from MS-DOS
+CHKDSK, DIR, FORMAT and MEM display numbers with separators unless the NO_SEP environment variable is set
+COPY, MOVE and XCOPY prompt before overwriting files unless /Y is used (may be set via the COPYCMD environment variable)
+SuperStor disk compression added
+
+PC DOS 7.0 (April 1995)
+developed by IBM
+distributed on 5 1.44MB floppy disks (disks 2-5 are in XDF format)
+many optimizations
+DOS tables can load into upper memory (DOSDATA=UMB)
+COMMAND.COM can load into upper memory (/H)
+DISKCOPY can use XMS for copying disks in systems with one floppy drive
+DOSKEY and SHARE can load part of their resident code into the HMA
+DYNALOAD command added to load device drivers from the command line
+FIND supports filenames with wildcards and /S to search subdirectories
+HIMEM.SYS supports fast A20 handler
+PROMPT $P$G set by default
+REXX interpreter added
+Stacker disk compression added (replacing SuperStor)
+new external commands: ACALC, DYNALOAD, REXX, REXXDUMP
+new CONFIG.SYS command: DOSDATA
+external commands COMP, EDLIN, EXE2BIN, FASTOPEN, GRAFTABL and GRAPHICS removed
+device driver PRINTER.SYS removed
+
+MS-DOS 7.0 [Windows 95] (August 1995)
+developed by Microsoft
+not standalone, part of Windows 95
+system files IO.SYS and MSDOS.SYS are merged into a single IO.SYS file
+new MSDOS.SYS configuration file
+COMMAND.COM now in EXE format
+new internal commands: LFNFOR, LOCK, UNLOCK
+new CONFIG.SYS commands: ACCDATE, BUFFERSHIGH, FCBSHIGH, FILESHIGH, LASTDRIVEHIGH, STACKSHIGH
+new device driver: OAKCDROM.SYS
+INT 21h functions 3307h, 5704h-5705h, 6500h, 70h, 7300h-7301h added
+INT 21h functions 5706h-5707h, 71h, 72h added (VDM only)
+
+MS-DOS 7.1 [Windows 95 OSR2] (August 1996)
+developed by Microsoft
+not standalone, part of Windows 95 OSR2, Windows 98 and Windows 98 SE
+greater than 2GB hard disk support (LBA and FAT32: partition types 0Bh, 0Ch, 0Eh, 0Fh)
+BPB and DPB extended for FAT32
+INT 21h functions 7302h-7305h added
+
+PC DOS 2000 (April 1998)
+developed by IBM
+distributed on 6 1.44MB floppy disks or 1 CD
+PC DOS 7.0 revision 1
+Y2K support for systems without proper century rollover handling
+support added for Euro currency symbol
+
+PC DOS 7.1 (1999)
+developed by IBM
+not released as a retail product, multiple revisions between 1999 and 2003
+original build: 1999
+build 1.10: August 2000
+build 1.11: January 2001
+build 1.19: July 2002
+build 1.26: March 2003
+build 1.28: July 2003
+build 1.29: September 2003
+build 1.32: December 2003
+based upon PC DOS 2000
+greater than 2GB hard disk support (LBA and FAT32: partition types 0Bh, 0Ch, 0Eh, 0Fh)
+BPB and DPB extended for FAT32
+INT 21h functions 3307h, 5704h-5707h, 6500h, 70h, 7300h-7305h added
+
+MS-DOS 8.0 [Windows ME] (September 2000)
+developed by Microsoft
+not standalone, part of Windows ME
+modified to restrict access to real mode DOS
+HIMEM functionality merged into IO.SYS
+IO.SYS is compressed

@@ -1,0 +1,59 @@
+Microsoft C compiler version history
+
+1.00  (1983)
+	repackaged version of Lattice C
+	two-pass compiler (MC1 and MC2)
+	includes LINK and LIB
+	includes object module disassembler (OMD)
+2.00  (1984)
+	repackaged version of Lattice C
+3.00  (1985)
+	first Microsoft developed version
+	K&R C compliant
+	compiler is CL.EXE, compatibility driver is MSC.EXE
+	small, medium and large memory models
+	186 and 286 code generation support
+	floating-point emulator support
+	standard C header files
+	added EXEMOD and EXEPACK
+	dropped OMD
+4.00  (1986)
+	added CodeView (CV)
+	added MAKE
+	added compact memory model
+	added C Run-Time startup source code
+5.00  (1987)
+	added CVPACK
+	MSC compatibility driver removed
+	added huge memory model
+	improved compiler optimizations
+	includes QuickC compiler
+5.10  (1988)
+	OS/2 support
+	added BIND, EXEHDR and IMPLIB
+	includes QuickC compiler for DOS
+	includes DOS (CV) and OS/2 (CVP) versions of CodeView
+6.00  (1990)
+	added tiny memory model
+	added NMAKE (replacing MAKE)
+	inline assembly support added
+	added QuickHelp (QH)
+	added Programmer's Workbench (PWB)
+	dropped EXEMOD and EXEPACK
+6.00A (1990)
+	minor bug fixes
+7.00  (1992)
+	Windows support
+	dropped OS/2 support, BIND and CVP
+	dropped QuickC
+	includes DOS (CV) and Windows (CVW) versions of CodeView
+	last version to have a pure DOS executable
+8.00  (1993)
+	included with Visual C 1.0
+	386 code generation support
+	16-bit version uses the DOSXNT DOS extender (DOS/Windows executable)
+	dropped QuickHelp
+	dropped Programmer's Workbench for DOS
+8.00c (1994)
+	included with Visual C 1.5
+	last 16-bit version of the Microsoft C compiler

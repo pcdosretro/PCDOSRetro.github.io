@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=US-ASCII">
+<title>PC DOS 7.0 modifications by Vernon C. Brooks</title>
+</head>
+<body>
+<div style="font-family:sans-serif">
+<h4>This is a detailed list of the changes I made in PC DOS 7.0</h4>
+</div>
+<div style="font-family:sans-serif;font-size:small">
+<b>IBMBIO.COM</b>
+<ul>
+<li>Decreased the number of resident floppy drive tables from 4 to 2 saving 200 bytes. Additional floppy drive tables will be added dynamically if 3 or 4 floppy drives are present.
+<li>Build A20 compare pointers inline instead of loading them from memory. Also building the pointers is faster than loading them.
+<li>Use indirect near call instead of direct far call in INT 6Ch power management handler so that far call check A20 entry can be deleted.
+<li>Deleted unreferenced disable A20 routine.
+<li>Added assume DS to clock device routine (daycnt_to_day) saving 27 bytes due to unneeded CS overrides.
+<li>Moved the clock device routines (daycnt_to_day and bin_to_bcd) from the resident portion to the relocatable portion which loads in the HMA and and combined them saving 193 bytes.
+<li>Deleted month_table and modified power management read date routine to use smaller month_tab saving 24 bytes.
+<li>Moved constants fat_12_id, fat_16_id, and vol_no_name from the resident portion to the relocatable portion which loads in the HMA saving 30 bytes.
+<li>Deleted duplicate null volser definition (NO NAME).
+<li>Deleted duplicate translations in disk error code table.
+<li>Defined BPB array table in tracktable area which is unused at init time saving 52 bytes.
+<li>Call EnsureA20on instead of separate IsA20off and EnableA20 routines.
+<li>Optimized INT 2Fh path by jumping directly to interrupt handler routine instead of using indirect jump.
+<li>Deleted pseudo disk parameter table (sm92) and loaded values inline.
+<li>Disabled interrupts while updating INT 13h and 19h vectors in INT 2Fh function 13h code.
+<li>Added CONFIG.SYS command DOSDATA=UMB to allow the DOS system tables (FILES,FCBS,BUFFERS,LASTDRIVE,STACKS) to be moved to upper memory. Windows verifies that at least 10 SFTs are available by opening CON 10 times and searching the first 512K twice for 5 occurrences of 'CON ' assuming that each occurrence is an SFT entry. Since Windows doesn't verify that each occurrence is actually in an SFT it can be fooled into loading when DOSDATA=UMB is in effect by storing 5 'CON ' strings in the DOS console input buffer during startup (INT 2Fh function 1605h).
+<li>Added ESC to selective startup prompt.
+<li>Added support for preloading DRVSPACE.BIN and STACKER.BIN.
+</ul>
+<b>IBMDOS.COM</b>
+<ul>
+<li>Removed 255-byte unused area FAKE_COUNT from the DOS data area and moved AuxSft into newly freed area saving 59 bytes.
+<li>Use REP MOVSD when copying data to and from the HMA transfer buffer when buffers are in the HMA by checking the 386 flag in the DOS data area.
+<li>Aligned DOS HMA interrupt vector jump table on a doubleword boundary for faster access.
+<li>Reverted to DOS 5.0 behavior of not flushing buffers immediately after releasing a FAT chain because of noticeable slowdown on DEL command.
+<li>Fixed bug which caused infinite loop when trying to create a temp file in a full root directory (INT 21h function 5Ah).
+<li>Fixed bug which caused INT 21h functions 65A0h-65A2h to not work.
+<li>Optimized code in EXEPATCH.ASM to decrease kernel code size.
+<li>Optimized INT 21h function 33h code to decrease kernel code size.
+<li>Correctly initialize disk volume change flag to -1 instead of 0.
+</ul>
+<b>COMMAND.COM</b>
+<ul>
+<li>Added /H option to load COMMAND.COM and its environment into upper memory.
+<li>Add /O option to COMMAND.COM to disable the overwrite prompt on COPY, XCOPY, and MOVE commands.
+<li>Moved init time message "Top level process aborted, cannot continue" out of resident portion saving 48 bytes.
+<li>Moved output redirection filename to the transient portion of COMMAND.COM saving 80 bytes (input redirection filename was already there).
+<li>Merge QueryA20 and EnableA20 routines inline into CheckA20 routine.
+<li>Documented TRUENAME command in online help.
+<li>Made commonly used PROMPT $P$G the default setting.
+<li>Reset extended error message sublist so transient isn't reloaded needlessly.
+<li>Deleted duplicated "Bad command or file name" message from resident portion.
+<li>Moved loadhigh UMB variables to common data area (MsgBuffer/SafePathBuffer) saving 48 bytes.
+<li>Combined common resident substitution list data.
+<li>Added support for REXX batch files.
+<li>Added ESC to selective startup prompt.
+<li>Reduced size of arg parse buffer from 256 bytes to correct size of 128 bytes.
+<li>Combined arg buffer and temp buffer saving 128 bytes.
+</ul>
+<b>ANSI.SYS</b>
+<ul>
+<li>Moved video mode initialization tables out of resident portion.
+<li>Optimized CON driver chaining code.
+<li>Get blink/intensity state by checking 3x8h register setting in BIOS data area instead of using functionality call (INT 10h function 1Bh).
+</ul>
+<b>ATTRIB.EXE</b>
+<ul>
+<li>Removed defunct extended attribute handling code.
+</ul>
+<b>DISKCOPY.COM</b>
+<ul>
+<li>Added code to use XMS when copying a disk in a single-drive system.
+</ul>
+<b>DOSKEY.COM</b>
+<ul>
+<li>Decreased resident size by using the PSP command line for data.
+<li>Move code to HMA if available.
+</ul>
+<b>DYNALOAD.COM</b>
+<ul>
+<li>Wrote new program to load a device driver after system startup.
+</ul>
+<b>EMM386.EXE</b>
+<ul>
+<li>Added MOVEXBDAHI option to move the XBDA to upper memory.
+<li>Fixed bug which caused hang on Ctrl-Alt-Del if stack is in upper memory.
+<li>Fixed V86 fault handler to correctly reflect exception 13 hits.
+<li>Added private API (INT 67h AX=FFA6h) to provide page mapping functions.
+<li>Changed internal driver version to 4.50.
+<li>Decreased resident size by deleting unnecessary hardware A20 code.
+<li>Added code to correctly emulate instructions with operand size and address size overrides.
+<li>Changed segment alignments from paragraph to doubleword.
+<li>Moved Windows EMM Global Import product info out of resident.
+<li>Moved error handler code and data from conventional to extended memory.
+<li>Removed debugging routines from production version.
+<li>Optimized driver request handler code.
+<li>Optimized INT 15h function 87h move block code.
+<li>Moved protected mode VCPI code from conventional to extended memory.
+<li>Fixed OUTS instruction handler to correctly update SI/ESI.
+</ul>
+<b>FC.EXE</b>
+<ul>
+<li>Fixed code to not process lines with %s as a printf format specifier.
+</ul>
+<b>FDISK.EXE</b>
+<ul>
+<li>Fixed code to not increment drive letter for non-DOS extended partitions.
+</ul>
+<b>FIND.EXE</b>
+<ul>
+<li>Added support for wildcards in filename specification(s).
+<li>Added /S option to search subdirectories.
+</ul>
+<b>HIMEM.SYS</b>
+<ul>
+<li>Decreased resident size by 64 bytes by deleting unused variables and providing only a minimum device header since HIMEM doesn't use device driver functionality.
+<li>Optimized 386+ move block handler code for better performance.
+<li>Changed internal driver version to 3.15.
+<li>Added fast A20 handler support via /FASTA20 option.
+<li>Optimized A20 checking code.
+<li>Moved VDISK check and INT 15h hook code out of resident portion.
+<li>Combined A20 routines error exit paths.
+<li>Fixed code to get extended memory size above 16M on MCA machines.
+<li>Moved Addmem routine out of resident relocatable code.
+<li>Correctly handle error return for XMS 3.0 super extended memory functions on 286 machines.
+</ul>
+<b>JOIN.EXE</b>
+<ul>
+<li>Fixed bug causing an extraneous parameter to be processed if non-zero data was at beginning of the data area.
+</ul>
+<b>LABEL.COM</b>
+<ul>
+<li>Correctly restore current directory when labeling a drive other than the current drive.
+</ul>
+<b>MEM.EXE</b>
+<ul>
+<li>Changed code which checks for EMM386 to look for id within EMM386 instead of issuing general EMM check and IOCTL function.
+<li>Corrected sizes displayed for first 3 entries on /D (Interrupt Vector, ROM Communication Area, and DOS Communication Area).
+<li>Corrected sizes displayed for IBMBIO and IBMDOS data area.
+<li>Display correct segment for device drivers on MEM /M.
+<li>Added XMS handle info to MEM output.
+<li>Removed undocumented /A option and always display HMA available space info.
+<li>Added EMS page frame info to MEM /D output.
+<li>Corrected sizes displayed for system blocks.
+<li>Reduced size by combining some assembly routines and providing dummy entries for unneeded C startup routines.
+<li>Changed output fields to handle values &gt;64M and use XMS 3.0 query function if available.
+<li>Removed EMM386 EMS/XMS pooled memory message.
+</ul>
+<b>MOVE.EXE</b>
+<ul>
+<li>Fixed uninitialized pointer bug which caused random data to be overwritten.
+</ul>
+<b>MSCDEX.EXE</b>
+<ul>
+<li>Optimized code and reduced the resident size of MSCDEX.
+</ul>
+<b>RAMDRIVE.SYS</b>
+<ul>
+<li>Decreased resident code size by modifying code to keep only required memory resident depending on driver type (XMS, EMS, or conventional memory).
+<li>Decrease size of boot sector signature data from 128 to 64 bytes.
+<li>Disallow sector size 1024 as a valid parameter.
+</ul>
+<b>REPLACE.EXE</b>
+<ul>
+<li>Fixed bug causing an extraneous parameter to be processed if non-zero data was at beginning of the data area.
+<li>Removed defunct extended attribute data.
+</ul>
+<b>SHARE.EXE</b>
+<ul>
+<li>Rebuilt due to changes to DOS data area.
+<li>Move code to HMA if available and added /NOHMA option force loading low.
+<li>Created STRIPSHR utility to strip excess data from SHARE to reduce EXE size.
+</ul>
+<b>SUBST.EXE</b>
+<ul>
+<li>Fixed bug causing an extraneous parameter to be processed if non-zero data was at beginning of the data area.
+</ul>
+<b>SYS.COM</b>
+<ul>
+<li>Fixed bug which caused SYS to fail if an allocated cluster ended with F7h.
+</ul>
+<b>XCOPY.EXE</b>
+<ul>
+<li>Exit with return code 4 if an invalid drive is specified.
+</ul>
+<b>Common code</b>
+<ul>
+<li>Removed exact version checking from most programs except for COMMAND.COM and SHARE.EXE. Programs instead check for DOS 5 or above.
+</ul>
+<b>REXX</b>
+<ul>
+<li>Made numerous optimizations and bug fixes to REXX.EXE.
+<li>Wrote REXXDUMP utility to dump all of the variables of an active REXX program.
+<li>Wrote most of the external REXX functions (*.RX).
+</ul>
+</div>
+</body>
+</html>

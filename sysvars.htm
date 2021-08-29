@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>Information about the DOS SYSVARS table</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div>
+<h3>SYSVARS</h3>
+
+<p>The SYSVARS table was introduced in DOS 2.0. SYSVARS contains pointers to several important <a href="dosblks.txt">DOS internal tables</a>. INT 21h function 52h returns a pointer to this table. This function was never officially documented but several core DOS utilities and other system software such as redirectors use this function to access DOS internal tables.</p>
+
+<h3>Tables referenced by SYSVARS</h3>
+
+<h4>Memory Control Block (MCB) anchor - DOS 2.0 and above</h4>
+The MCB anchor contains the paragraph address of the first MCB in the system.
+The MCB anchor is always the word immediately before SYSVARS (SYSVARS - 2)
+
+<h4>Disk Parameter Blocks (DPB) - DOS 2.0 and above</h4>
+The DPB contains info derived from the BIOS Parameter Block (BPB).
+In DOS 2.x the DPB also contained the current directory but this was moved to its own structure (CDS) for DOS 3.0 and above.
+There is a DPB for every block device in the system. INT 21h function 1Fh returns a pointer to the default DPB and INT 21h function 32h returns a pointer to the DPB for the specified drive. Both of these functions were undocumented prior to DOS 5.
+
+<h4>Buffers - DOS 2.0 and above</h4>
+In DOS 2.x and 3.x SYSVARS points to the last used buffer in the disk buffer chain.
+In DOS 4.0 and above SYSVARS points to a buffer descriptor structure.
+In DOS 4.0 buffers may be loaded in expanded memory using BUFFERS /X.
+In DOS 5.0 and above buffers may be loaded into the high memory area (HMA) if DOS=HIGH. If so then a HMA transfer buffer is present in conventional memory.
+Buffers are created via the CONFIG.SYS BUFFERS statement and there is always at least 1 buffer present.
+
+<h4>System File Tables (SFT) - DOS 2.0 and above</h4>
+The SFT contains info about each file opened via a file handle.
+SFTs are created via the CONFIG.SYS FILES statement and there are always at least 5 SFTs present.
+
+<h4>FCB System File Tables - DOS 3.0 and above</h4>
+The FCB SFT contains info about each file opened via a FCB.
+FCB SFTs are created via the CONFIG.SYS FCBS statement and there is always at least 1 FCB SFT present.
+
+<h4>Current Directory Structures (CDS) - DOS 3.0 and above</h4>
+The CDS contains the current directory for each drive and flags indicating whether a drive is local, network, JOINed or SUBSTed.
+There is a CDS for every block device in the system and more may be created via the CONFIG.SYS LASTDRIVE statement.
+
+<h4>String substitution buffer - DOS 3.0 only</h4>
+The string substitution buffer was used for network names, its size was specified by the CONFIG.SYS STRING statement. This buffer was moved to the redirector so it was removed from SYSVARS in DOS 3.1 and above.
+
+<h4>NUL device driver header - DOS 2.0 and above</h4>
+This is always the first device in the device driver chain.
+The NUL device driver header is the last item in the main SYSVARS table.
+
+<h3>SYSVARS structure</h3>
+
+<b>DOS 2.x</b>
+<p>This is the initial version of SYSVARS.</p>
+<pre>
+00h  dword     disk parameter block (DPB) chain pointer
+04h  dword     system file table (SFT) chain pointer
+08h  dword     CLOCK device header pointer
+0Ch  dword     CON device header pointer
+10h  byte      DPB count
+11h  word      buffer size
+13h  dword     buffer chain pointer
+17h  18 bytes  NUL device header
+</pre>
+<b>DOS 3.0</b>
+<p>SYSVARS was extended to include pointers to the current directory structures, FCB system file tables and the network string substitution buffer.</p>
+<pre>
+00h  dword     disk parameter block (DPB) chain pointer
+04h  dword     system file table (SFT) chain pointer
+08h  dword     CLOCK device header pointer
+0Ch  dword     CON device header pointer
+10h  byte      DPB count
+11h  word      buffer size
+13h  dword     buffer chain pointer
+17h  dword     current directory structure (CDS) list pointer
+1Bh  byte      CDS count
+1Ch  dword     STRING buffer pointer
+20h  word      STRING buffer size
+22h  dword     FCB system file table chain pointer
+26h  word      FCB keep count
+28h  18 bytes  NUL device header
+</pre>
+<b>DOS 3.1 to 3.31</b>
+<p>The network string substitution buffer was removed as this was moved to the redirector and SYSVARS was reorganized.
+This is the first version of SYSVARS recognized by redirectors like REDIR and MSCDEX.</p>
+<pre>
+00h  dword     disk parameter block (DPB) chain pointer
+04h  dword     system file table (SFT) chain pointer
+08h  dword     CLOCK device header pointer
+0Ch  dword     CON device header pointer
+10h  word      buffer size
+12h  dword     buffer chain pointer
+16h  dword     current directory structure (CDS) list pointer
+1Ah  dword     FCB system file table chain pointer
+1Eh  word      FCB keep count
+20h  byte      DPB count
+21h  byte      CDS count
+22h  18 bytes  NUL device header
+34h  byte      JOINed drive count
+</pre>
+<b>DOS 4.0</b>
+<p>The buffer chain pointer was changed to a buffer descriptor pointer and the table was extended.</p>
+<pre>
+00h  dword     disk parameter block (DPB) chain pointer
+04h  dword     system file table (SFT) chain pointer
+08h  dword     CLOCK device header pointer
+0Ch  dword     CON device header pointer
+10h  word      buffer size
+12h  dword     buffer descriptor pointer
+16h  dword     current directory structure (CDS) list pointer
+1Ah  dword     FCB system file table chain pointer
+1Eh  word      FCB keep count
+20h  byte      DPB count
+21h  byte      CDS count
+22h  18 bytes  NUL device header
+34h  byte      JOINed drive count
+35h  word      offset within the DOS data area to the version lie table
+37h  dword     IFS service routine entry
+3Bh  dword     IFS chain pointer
+3Fh  word      number of buffers
+41h  word      number of lookahead buffers
+43h  byte      boot drive (1=A)
+44h  byte      386 dword move flag
+45h  word      extended memory size
+</pre>
+<b>DOS 5.0+</b>
+<p>The IFS pointers were removed and the version lie table offset was replaced with a SETVER table pointer.
+No further changes were made to SYSVARS after this. </p>
+<pre>
+00h  dword     disk parameter block (DPB) chain pointer
+04h  dword     system file table (SFT) chain pointer
+08h  dword     CLOCK device header pointer
+0Ch  dword     CON device header pointer
+10h  word      buffer size
+12h  dword     buffer descriptor pointer
+16h  dword     current directory structure (CDS) list pointer
+1Ah  dword     FCB system file table chain pointer
+1Eh  word      FCB keep count
+20h  byte      DPB count
+21h  byte      CDS count
+22h  18 bytes  NUL device header
+34h  byte      JOINed drive count
+35h  word      unused
+37h  dword     SETVER table pointer
+3Bh  word
+3Dh  word
+3Fh  word      number of buffers
+41h  word      number of lookahead buffers
+43h  byte      boot drive (1=A)
+44h  byte      386 dword move flag
+45h  word      extended memory size
+</pre>
+<hr>
+<h3>DOSINFO</h3>
+
+<p>DOSINFO is a utility program which displays info about the SYSVARS tables, which standard DOS TSRs are loaded, memory usage and many CONFIG.SYS settings. DOSINFO runs on all versions of PC DOS and MS-DOS including NTVDM. Under DOS 1.x only basic memory info is displayed. Multitasking MS-DOS 4 and OS/2 VDM are not supported.</p>
+<p>Example:</p>
+<pre>
+PC DOS 7.00
+BIO data at 0070:0000 length 0800 bytes
+DOS data at 00F0:0000 length 12C0 bytes
+SYSVARS at 00F0:0026, SDA at 00F0:0320 length 078C bytes
+3 disk parameter blocks at 00F0:0F00 length 0063 bytes
+1 disk parameter blocks at CCF1:0000 length 0021 bytes
+5 system file tables at 00F0:00CC length 012D bytes
+15 system file tables at CED6:0000 length 037B bytes
+1 FCB system file tables at CF0F:0000 length 0041 bytes
+40 buffers at FFFF:93C0 length 5320 bytes
+HMA transfer buffer at CF15:0000 length 0200 bytes
+5 current directory structures at CF36:0000 length 01B8 bytes
+
+FILES=20  FCBS=1,0  BUFFERS=40,0  LASTDRIVE=E  STACKS=0,0  DOS=HIGH
+BREAK=ON  VERIFY=OFF  COUNTRY=001  CODEPAGE=437
+System booted on 11-28-2015 at 07:30:16 from drive C
+Master environment size 256 bytes (136 bytes free)
+646544 bytes free
+1648 bytes free in HMA
+ANSI loaded
+CD-ROM extensions loaded for drive E
+</pre>
+<p><a href="DOSINFO.ZIP">Download DOSINFO - (3KB)</a></p>
+</div>
+</body>

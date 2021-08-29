@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>Enhanced DEBUG for PC DOS and MS-DOS</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div>
+<b style="font-size:large">Enhanced DEBUG for PC DOS and MS-DOS</b>
+<b style="float:right">Version 1.32b</b>
+</div>
+<p>Enhanced DEBUG is a DOS debugger compatible with the utility found in PC DOS and MS-DOS but with many more features. Enhanced DEBUG was originally developed by Paul Vojta and was maintained by Andreas "Japheth" Grech until version 1.25.</p>
+<p>The enhanced DEBUG package includes DEBUG.COM which is a replacement for the standard DOS DEBUG and DEBUGX.COM which can debug DPMI client programs and has more features but uses more memory. The inclusion of some features are controlled by defines in the source code. DEBUG supports assembly and disassembly of all Intel x86 instructions up to the Pentium Pro (P6). Note EMS support is disabled by default because it is not useful to typical debugging. EMS support may be enabled by defining EMSCMD to 1 and rebuilding. Enabling EMS support will increase memory usage by 1.2KB. Enhanced DEBUG runs on DOS 2.0 and later.</p>
+<p>Despite having more features than the standard DOS DEBUG, the enhanced DEBUG.COM uses less memory (though DEBUGX.COM which has even more features uses more memory):</p>
+<pre>
+DEBUG 1.32b         20.5KB
+PC DOS 7.0 DEBUG    22.9KB
+MS-DOS 6.22 DEBUG   23.0KB
+DEBUGX 1.32b        25.5KB
+</pre>
+
+<p>The enhanced DEBUG source code may be built with JWasm, UASM, or MASM. The instruction set table builder program MKTABLES.C may be built with any ANSI C compiler such as the Microsoft C compiler or the Open Watcom C compiler.</p>
+<p><b>DEBUG syntax:</b></p>
+<pre style="background:lightcyan;width:48ch">
+DEBUG [/F] [[drive:][path]filename [arglist]]
+
+  /F        enable page flipping
+  filename  file to debug or examine
+  arglist   parameters given to program
+</pre>
+<p><b>DEBUG commands:</b></p>
+<pre style="background:lightcyan">
+assemble        A [address]                                     standard
+compare         C range address                                 standard
+dump            D[B|W|D] [range]                                standard
+dump interrupt  DI interrupt [count]                            DEBUGX
+dump LDT        DL selector [count]                             DEBUGX
+dump MCB chain  DM                                              standard
+dump ext memory DX [physical_address]                           DEBUGX   (define DXSUPP=1)
+enter           E address [list]                                standard
+fill            F range list                                    standard
+go              G [=address] [breakpoints]                      standard
+hex add/sub     H value1 value2                                 standard
+input           I[W|D] port                                     standard
+load file       L [address]                                     standard
+load sectors    L address drive sector count                    standard
+move            M range address                                 standard
+set CPU mode    M [x|N|T] (x=0..6, N=no FPU, T=386 with 287)    DEBUGX   (define MODESETCMD=1)
+name            N [[drive:][path]filename [arglist]]            standard
+output          O[W|D] port value                               standard
+proceed         P [=address] [count]                            standard
+proceed return  PR                                              standard
+quit            Q                                               standard
+register        R [register [value]]                            standard
+MMX register    RM                                              DEBUGX   (define MMXSUPP=1)
+FPU register    RN                                              standard (enhanced in DEBUGX with define FPTOSTR=1)
+toggle 386 regs RX                                              standard
+search          S range list                                    standard
+trace           T [=address] [count]                            standard
+trace mode      TM [0|1]                                        standard
+unassemble      U [range]                                       standard
+view flip       V                                               standard
+write file      W [address]                                     standard
+write sectors   W address drive sector count                    standard
+EMS allocate    XA count                                        special  (define EMSCMD=1)
+EMS deallocate  XD handle                                       special  (define EMSCMD=1)
+EMS map memory  XM logical_page physical_page handle            special  (define EMSCMD=1)
+EMS reallocate  XR handle count                                 special  (define EMSCMD=1)
+EMS show status XS                                              special  (define EMSCMD=1)
+</pre>
+<hr>
+<p>Enhancements for DEBUG 1.26:</p>
+<ul>
+<li>added DB, DW and DD commands.</li>
+<li>cleanup parsing of R command so spaces aren't needed.</li>
+<li>added RDTSC and RDPMC instructions.</li>
+<li>disassemble opcode 82h like opcode 80h.</li>
+<li>fixed typos in MKTABLES.C</li>
+<li>DEBUGX: removed extra dashes in MMX register dump.</li>
+<li>disassemble PUSH imm without [D]WORD as the size is apparent.</li>
+<li>if InDOS flag is set use BIOS instead of DOS for E command input.</li>
+<li>always use BIOS input for help syntax pause.</li>
+<li>DEBUGX: suppress characters &gt; 7Eh in DX command to be consistent with D command.</li>
+<li>merged lockdrive and unlockdrive routines to reduce size.</li>
+<li>fixed bug in U command which sometimes caused only one line to be output for autorepeat.</li>
+<li>autorepeat for P command added.</li>
+<li>allow readable floating-point registers to be included in DEBUG.COM using new FPTOSTR define.</li>
+<li>disassemble SAL and TEST duplicate opcodes.</li>
+<li>fixed EMS help syntax message in source code.</li>
+<li>removed EMS commands from default build.</li>
+<li>added syntax D[type] L length to display length bytes starting from the last address displayed.</li>
+<li>added PR (proceed return) command which proceeds past the next RET, RETF or IRET which is not nested without stopping.</li>
+<li>removed obsolete switch character processing.</li>
+<li>USESDA: verify PSP is at SDA+10h before using.</li>
+<li>allow MOV seg,r/m and MOV r/m,seg to be assembled without requiring WORD PTR.</li>
+<li>disassemble MOV seg,r/m and MOV r/m,seg without WORD PTR.</li>
+<li>disallow invalid operand combinations in assembler.</li>
+<li>updated XS command to work with EMS 3.2.</li>
+<li>fixed bug in XS command report of total number of handles.</li>
+<li>change line_out buffer size to 256 bytes.</li>
+<li>added missing value to exponent table in FPTOSTR.INC.</li>
+<li>minor size optimizations.</li>
+<li>count lines for pausing in help syntax text display.</li>
+</ul>
+<p>Enhancements for DEBUG 1.27:</p>
+<ul>
+<li>don't display MCB name if &lt; DOS 4.</li>
+<li>removed set mode commands (M x and MC x) from default build.</li>
+<li>minor size optimizations.</li>
+<li>merged EMS help into main help and remove X? command.</li>
+<li>don't display specified handle in XD command.</li>
+<li>fixed bug in XS command report of handles.</li>
+<li>added EMS Invalid function error message.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28:</p>
+<ul>
+<li>removed obsolete instruction check.</li>
+<li>added undocumented SALC and INT1 instructions.</li>
+<li>added SYSENTER and SYSEXIT instructions.</li>
+<li>removed unofficial FCMOVcc aliases.</li>
+<li>fixed MKTABLES.C to build properly using old DOS MS C compiler.</li>
+<li>fixed MKTABLES.C to properly handle machine specification with disassembly-only instruction variants.</li>
+<li>include set mode commands (M x and MC x) in DEBUGX.</li>
+<li>include show machine code only when MODESETCMD is defined.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28a:</p>
+<ul>
+<li>added REPZ and REPNZ aliases.</li>
+<li>removed incorrect FNLDCW and FNSETPM aliases.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28b:</p>
+<ul>
+<li>added FFREEP and undocumented floating-point aliases.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28c:</p>
+<ul>
+<li>allow DX command to be included in DEBUG.COM.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28d:</p>
+<ul>
+<li>fixed typo in INSTR.ORD.</li>
+<li>disallow MOV to/from CR1.</li>
+<li>indicate FSTSW AX is a 287+ instruction.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28e:</p>
+<ul>
+<li>cleanup MKTABLES.C to remove warnings and be ANSI C compliant.</li>
+<li>minor source code cleanup.</li>
+<li>disassemble 32-bit sign-extended PUSH imm.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28f:</p>
+<ul>
+<li>display MMX registers in standard register format.</li>
+<li>change _ITEXT segment class name so that LINK /TINY works.</li>
+</ul>
+<p>Enhancements for DEBUG 1.28g:</p>
+<ul>
+<li>ignore mod bits when disassembling MOV CRx/DRx/TRx instructions.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29:</p>
+<ul>
+<li>FPTOSTR: added RNR command to display raw floating-point registers.</li>
+<li>DEBUGX: trap INT 6 in real mode and protected mode.</li>
+<li>ensure that help syntax pause works properly on MDA/CGA systems.</li>
+<li>minor size optimizations.</li>
+<li>removed unnecessary FWAITs before floating-point instructions.</li>
+<li>removed last opcode from floating-point status display.</li>
+<li>indicate INT1 is a 386+ instruction.</li>
+<li>display FS and GS memory references.</li>
+<li>don't display memory reference if LEA.</li>
+<li>properly display LDS/LES/LFS/LGS/LSS memory references.</li>
+<li>display CALL/JMP FAR memory reference.</li>
+<li>fixed operand keys for SLDT and SMSW.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29a:</p>
+<ul>
+<li>device driver version: build DEBUG.SYS instead of EXE.</li>
+<li>allow INT 6, C or D to be trapped in DEBUG.COM.</li>
+<li>always trap INT 6 and C in protected mode.</li>
+<li>removed MAKEX.BAT; merged into MAKE.BAT.</li>
+<li>fixed bug in L and W commands error message display routine.</li>
+<li>properly initialize saved INT 23h and 24h values for interrupt display hack routines.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29b:</p>
+<ul>
+<li>fix case bug in D[type] L length syntax parsing.</li>
+<li>remove MCB define so DM command is always present.</li>
+<li>ensure DM command does not display an extraneous entry.</li>
+<li>check for multitasking MS-DOS 4.</li>
+<li>always exit using INT 21h function 4Ch.</li>
+<li>minor size optimizations.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29c:</p>
+<ul>
+<li>don't use LEAVE in FloatToStr to work on 8086/8088.</li>
+<li>removed non-standard SEG pseudo-op.</li>
+<li>minor size optimizations.</li>
+<li>cleanup device driver build.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29d:</p>
+<ul>
+<li>display same error for L and W commands if no filename given.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.29e:</p>
+<ul>
+<li>minor size optimizations.</li>
+<li>EMMS, MOVD and MOVQ now manually added to DEBUGTBL.INC for DEBUGX.COM (MMXSUPP) removing overhead from DEBUG.COM.</li>
+</ul>
+<p>Enhancements for DEBUG 1.30:</p>
+<ul>
+<li>minor size optimizations.</li>
+<li>added page frame display to XS command.</li>
+<li>change line_in buffer size to 130 bytes.</li>
+<li>reduce resident size of device driver build.</li>
+<li>use DOSKEY for input if loaded and InDOS not set.</li>
+<li>drop VDD support.</li>
+</ul>
+<p>Enhancements for DEBUG 1.30a:</p>
+<ul>
+<li>don't use DOSKEY if &lt; DOS 5.</li>
+<li>DEBUGX: don't issue INT 2Fh if &lt; DOS 3.</li>
+<li>added undocumented 286 LOADALL instruction.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.30b:</p>
+<ul>
+<li>don't allow set mode command (M) to set a value higher than the actual CPU.</li>
+<li>don't allow set mode command (MC) to set a FPU if there isn't one.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.31:</p>
+<ul>
+<li>fixed bug in 287/387 detection.</li>
+<li>added 186 detection.</li>
+<li>added undocumented 386 LOADALL instruction.</li>
+<li>properly display help text when InDOS is set.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.32:</p>
+<ul>
+<li>added page flipping support (/F).</li>
+<li>make RN and XS commands use standard output routine.</li>
+<li>fixed minor bug in XS command report of mappable pages.</li>
+<li>DEBUGX: restored obsolete instruction check.</li>
+<li>minor size optimizations.</li>
+<li>minor source code cleanup.</li>
+</ul>
+<p>Enhancements for DEBUG 1.32a:</p>
+<ul>
+<li>cleanup parsing of DM, I, O and RM commands.</li>
+<li>exit if DOS 1.</li>
+<li>merged MC command into M command.</li>
+<li>allow DX command to work on a 286.</li>
+<li>remove PAGEFLIP define so page flipping (/F) is always present.</li>
+<li>change mode command to use its own variables.</li>
+<li>disallow 32-bit registers, FS and GS on 16-bit processors.</li>
+<li>minor size optimizations.</li>
+</ul>
+<p>Enhancements for DEBUG 1.32b:</p>
+<ul>
+<li>ensure initial flags are always the same as MS-DOS DEBUG.</li>
+<li>move execblk to unused portion of PSP saving 22 bytes.</li>
+<li>minor source code cleanup.</li>
+<li>minor size optimizations.</li>
+</ul>
+<p><a href="DEBUGX.ZIP">Download DEBUG 1.32b</a> - source and binary (152KB)</p>
+<p style="color:red">NOTE: This is standalone software which is freely available for use but should not be included as part of a collection or with any other software and should not be redistributed. Previous versions of this software are obsolete and also should not be redistributed.</p>
+</body>

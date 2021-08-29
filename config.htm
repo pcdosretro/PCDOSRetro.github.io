@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>List of DOS CONFIG.SYS commands</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+.syntax {background:beige;width:80ch}
+.oldsyntax {background:lightgrey;width:80ch}
+</style>
+</head>
+<body>
+<h2>DOS CONFIG.SYS commands</h2>
+<div>
+<a href="#BREAK">BREAK</a>
+<a href="#BUFFERS">BUFFERS</a>
+</div>
+<div>
+<a href="#COMMENT">COMMENT</a>
+<a href="#COUNTRY">COUNTRY</a>
+</div>
+<div>
+<a href="#DEVICE">DEVICE</a>
+<a href="#DEVICEHIGH">DEVICEHIGH</a>
+<a href="#DOS">DOS</a>
+<a href="#DOSDATA">DOSDATA</a>
+<a href="#DRIVPARM">DRIVPARM</a>
+</div>
+<div>
+<a href="#FCBS">FCBS</a>
+<a href="#FILES">FILES</a>
+</div>
+<div>
+<a href="#INCLUDE">INCLUDE</a>
+<a href="#INSTALL">INSTALL</a>
+<a href="#INSTALLHIGH">INSTALLHIGH</a>
+</div>
+<div>
+<a href="#LASTDRIVE">LASTDRIVE</a>
+</div>
+<div>
+<a href="#MENUCOLOR">MENUCOLOR</a>
+<a href="#MENUDEFAULT">MENUDEFAULT</a>
+<a href="#MENUITEM">MENUITEM</a>
+<a href="#MULTITRACK">MULTITRACK</a>
+</div>
+<div>
+<a href="#NUMLOCK">NUMLOCK</a>
+</div>
+<div>
+<a href="#REM">REM</a>
+</div>
+<div>
+<a href="#SET">SET</a>
+<a href="#SHELL">SHELL</a>
+<a href="#STACKS">STACKS</a>
+<a href="#SUBMENU">SUBMENU</a>
+<a href="#SWITCHES">SWITCHES</a>
+</div>
+
+<h2 id="BREAK">BREAK</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>Sets or clears extended CTRL+C checking.</p>
+<pre class="syntax">
+BREAK=ON|OFF
+</pre>
+<dl>
+<dt>The default setting is BREAK OFF.
+</dl>
+
+<h2 id="BUFFERS">BUFFERS</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>Allocates disk buffers.</p>
+<pre class="syntax">
+BUFFERS=n[,m][/X]
+
+  n           Specifies the number of disk buffers from 1 to 99.
+  m           Specifies the number of readahead sector buffers from 0 to 8.
+  /X          Specifies that buffers are to be loaded in expanded memory (EMS).
+</pre>
+<dl>
+<dt>m is only available in DOS 4 and above.
+<dt>/X is only available in DOS 4.
+<dt>For DOS 2.0 to 3.1 the default setting is BUFFERS=2.
+<dt>For DOS 3.2 the default setting is BUFFERS=2 if only 360K floppy drives are detected and BUFFERS=3 otherwise.
+<dt>For DOS 3.3 and above the default setting depends on the amount of conventional memory:
+<dt>&nbsp;less than 128K: same as DOS 3.2
+<dt>&nbsp;128K to 255K:   BUFFERS=5
+<dt>&nbsp;256K to 511K:   BUFFERS=10
+<dt>&nbsp;512K to 640K:   BUFFERS=15
+</dl>
+
+<h2 id="COMMENT">COMMENT</h2>
+<p><b>DOS 4.0 and above</b></p>
+<p>Specifies a comment sequence.</p>
+<pre class="syntax">
+COMMENT [delimiter]
+
+  delimiter   Specifies a one or two byte comment sequence. Any CONFIG.SYS
+              lines starting with the sequence will be treated as comments.
+</pre>
+<dl>
+<dt>In DOS 6 and above CONFIG.SYS lines starting with ; are treated as comments.
+</dl>
+
+<h2 id="COUNTRY">COUNTRY</h2>
+<p><b>MS-DOS 2.01 and above; PC DOS 3.0 and above</b></p>
+<p>Enables international support.</p>
+<pre class="syntax">
+COUNTRY=xxx[,[yyy][,[drive:][path]filename]]
+
+   xxx        Specifies the country code.
+   yyy        Specifies the code page for the country.
+   filename   Specifies the location and name of the file containing
+              country information.
+</pre>
+<dl>
+<dt>yyy and filename are only available in DOS 3.3 and above.
+<dt>The default country information file is COUNTRY.SYS in the root directory of the boot drive.
+</dl>
+
+<h2 id="DEVICE">DEVICE</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>Loads a device driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]filename [parameters]
+
+  filename    Specifies the filename of the device driver to load.
+  parameters  Specifies the parameters to pass to the device driver.
+</pre>
+
+<h2 id="DEVICEHIGH">DEVICEHIGH</h2>
+<p><b>DOS 5.0 and above</b></p>
+<p>Loads a device driver into upper memory.</p>
+<pre class="syntax">
+DEVICEHIGH=[drive:][path]filename [parameters]
+DEVICEHIGH=[/L:region1[,minsize1][;region2[,minsize2]...] [/S]]
+           [drive:][path]filename [parameters]
+
+  /L:region1[,minsize1][;region2[,minsize2]]...
+              Specifies the region(s) of memory into which to load
+              the program.  Region1 specifies the number of the first
+              memory region; minsize1 specifies the minimum size, if
+              any, for region1.  Region2 and minsize2 specify the
+              number and minimum size of the second region, if any.
+              You can specify as many regions as you want.
+  /S          Shrinks a UMB to its minimum size while the program
+              is loading.
+  filename    Specifies the filename of the device driver to load.
+  parameters  Specifies the parameters to pass to the device driver.
+</pre>
+<dl>
+<dt>/L and /S are only available in DOS 6 and above.
+</dl>
+
+<h2 id="DOS">DOS</h2>
+<p><b>DOS 5.0 and above</b></p>
+<p>Specifies where to load DOS.</p>
+<pre class="syntax">
+DOS=HIGH|LOW[,UMB|,NOUMB]
+
+  HIGH        Load DOS into the high memory area (HMA) if available.
+  LOW         Load DOS into conventional memory.
+  UMB         Allocate upper memory blocks (UMBs) so programs can load there.
+  NOUMB       Do not allocate upper memory blocks.
+</pre>
+<dl>
+<dt>If DOS=HIGH is used then DOS will load disk buffers into the high memory area if sufficient memory is available.
+<dt>Use of the high memory area or upper memory blocks requires an XMS extended memory manager such as HIMEM.SYS.
+</dl>
+
+<h2 id="DOSDATA">DOSDATA</h2>
+<p><b>PC DOS 7.0</b></p>
+<p>Loads DOS tables into upper memory.</p>
+<pre class="syntax">
+DOSDATA=UMB|NOUMB
+
+  UMB         Load DOS data tables (FILES, FCBS, BUFFERS, LASTDRIVE, STACKS)
+              into upper memory.
+  NOUMB       Do not load DOS data tables into upper memory.
+</pre>
+
+<h2 id="DRIVPARM">DRIVPARM</h2>
+<p><b>DOS 3.2 and above</b></p>
+<p>Specifies internal drive parameters.</p>
+<pre class="syntax">
+DRIVPARM=/D:number [/C] [/F:factor] [/H:heads] [/I] [/N]
+         [/S:sectors] [/T:tracks]
+
+  /D:number   Specifies the physical drive number.
+  /C          Specifies that the drive has changeline support.
+  /F:factor   Specifies the drive form factor:
+                0  160K/180K or 320K/360K
+                1  1.2M
+                2  720K (3.5-inch disk)
+                5  Hard disk
+                6  Tape
+                7  1.44M (3.5-inch disk)
+                8  Read/write optical disk
+                9  2.88M (3.5-inch disk)
+  /H:heads    Specifies the maximum number of heads.
+  /I          Specifies an electronically compatible 3.5-inch
+              floppy disk drive.
+  /N          Specifies a nonremovable block device.
+  /S:sectors  Specifies the number of sectors per track.
+  /T:tracks   Specifies the number of tracks.
+</pre>
+<dl>
+<dt>/I is only available in DOS 5 and above.
+</dl>
+
+<h2 id="FCBS">FCBS</h2>
+<p><b>DOS 3.0 and above</b></p>
+<p>Allocates FCB system file tables.</p>
+<pre class="syntax">
+FCBS=n[,m]
+
+  n           Specifies the number of FCB system file tables from 1 to 255.
+  m           Specifies the FCB keep count from 0 to 255.
+</pre>
+<dl>
+<dt>The default setting is FCBS=4,0.
+</dl>
+
+<h2 id="FILES">FILES</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>Allocates system file tables.</p>
+<pre class="syntax">
+FILES=n
+
+  n           Specifies the number of system file tables from 8 to 255.
+</pre>
+<dl>
+<dt>The default setting is FILES=8.
+</dl>
+
+<h2 id="INCLUDE">INCLUDE</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Includes a configuration block.</p>
+<pre class="syntax">
+INCLUDE=blockname
+
+   blockname  Specifies the name of the configuration block to include.
+</pre>
+
+<h2 id="INSTALL">INSTALL</h2>
+<p><b>DOS 4.0 and above</b></p>
+<p>Loads a resident program.</p>
+<pre class="syntax">
+INSTALL=[drive:][path]filename [parameters]
+
+  filename    Specifies the filename of the program to load.
+  parameters  Specifies the parameters to pass to the program.
+</pre>
+
+<h2 id="INSTALLHIGH">INSTALLHIGH</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Loads a resident program into upper memory.</p>
+<pre class="syntax">
+INSTALLHIGH=[drive:][path]filename [parameters]
+
+  filename    Specifies the filename of the program to load.
+  parameters  Specifies the parameters to pass to the program.
+</pre>
+
+<h2 id="LASTDRIVE">LASTDRIVE</h2>
+<p><b>DOS 3.0 and above</b></p>
+<p>Allocates drive tables.</p>
+<pre class="syntax">
+LASTDRIVE=x
+
+  x           Specifies the last drive letter allocated from A to Z.
+</pre>
+<dl>
+<dt>The default setting is one more than the last drive detected.
+<dt>The drive tables are known as current directory structures.
+</dl>
+
+<h2 id="MENUCOLOR">MENUCOLOR</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Specifies the startup menu color.</p>
+<pre class="syntax">
+MENUCOLOR=x[,y]
+
+  x           Specifies the foreground color of the menu text from 0 to 15.
+  y           Specifies the background color of the menu text from 0 to 15.
+</pre>
+
+<h2 id="MENUDEFAULT">MENUDEFAULT</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Specifies the default startup menu item.</p>
+<pre class="syntax">
+MENUDEFAULT=blockname[,timeout]
+
+  blockname   Specifies the default menu item by its associated
+              configuration block.
+  timeout     Specifies the length in seconds that DOS must wait before
+              starting your computer with the default configuration.
+              If you do not specify a timeout value, DOS does not
+              continue until you press Enter.
+</pre>
+
+<h2 id="MENUITEM">MENUITEM</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Specifies a startup menu item.</p>
+<pre class="syntax">
+MENUITEM=blockname[,menu_text]
+
+  blockname   Specifies the name of the associated configuration block.
+              If the menu item is selected from the startup menu, DOS
+              carries out the commands in the associated configuration
+              block, as well as any commands at the beginning of
+              CONFIG.SYS and any commands in the configuration blocks
+              with the [COMMON] command header.
+  menu_text   Specifies the text you want DOS to display for the menu
+              item. If you do not specify any menu text, DOS displays
+              the block name as the menu item.
+</pre>
+
+<h2 id="MULTITRACK">MULTITRACK</h2>
+<p><b>DOS 4.0 and above</b></p>
+<p>Specifies whether multitrack disk operations are used or not.</p>
+<pre class="syntax">
+MULTITRACK=ON|OFF
+</pre>
+<dl>
+<dt>The default setting is MULTITRACK ON.
+</dl>
+
+<h2 id="NUMLOCK">NUMLOCK</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Sets or clears Num Lock.</p>
+<pre class="syntax">
+NUMLOCK=ON|OFF
+</pre>
+
+<h2 id="REM">REM</h2>
+<p><b>DOS 4.0 and above</b></p>
+<p>Inserts comments.</p>
+<pre class="syntax">
+REM comment
+
+  comment     Specifies a comment.
+</pre>
+<dl>
+<dt>In DOS 6 and above CONFIG.SYS lines starting with ; are treated as comments.
+</dl>
+
+<h2 id="SET">SET</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Sets DOS environment variables.</p>
+<pre class="syntax">
+SET variable=string
+
+  variable    Specifies the environment-variable name.
+  string      Specifies a series of characters to assign to the variable.
+</pre>
+
+<h2 id="SHELL">SHELL</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>Loads a command shell.</p>
+<pre class="syntax">
+SHELL=[drive:][path]filename [parameters]
+
+  filename    Specifies the filename of the command shell to load.
+  parameters  Specifies the parameters to pass to the command shell.
+</pre>
+<dl>
+<dt>The default command shell is COMMAND.COM in the root directory of the boot drive.
+</dl>
+
+<h2 id="STACKS">STACKS</h2>
+<p><b>DOS 3.2 and above</b></p>
+<p>Allocates hardware interrupt stacks.</p>
+<pre class="syntax">
+STACKS=n[,m]
+
+  n           Specifies the number of hardware stacks from 8 to 64 or 0.
+  m           Specifies the size of each hardware stack from 32 to 512 or 0.
+</pre>
+<dl>
+<dt>This was called STACK in DOS 3.2 and renamed to STACKS for DOS 3.3 and above.
+<dt>DOS 3.2 did not allow STACK=0,0 to be specified.
+<dt>The default setting is STACKS=0,0 for PC and XT systems, STACKS=9,128 for all others.
+</dl>
+
+<h2 id="SUBMENU">SUBMENU</h2>
+<p><b>DOS 6.0 and above</b></p>
+<p>Specifies a startup submenu item.</p>
+<pre class="syntax">
+SUBMENU=blockname[,menu_text]
+
+  blockname   Specifies the name of the associated submenu block.
+  menu_text   Specifies the text you want DOS to display for the submenu
+              item. If you do not specify any menu text, DOS displays
+              the block name as the submenu item.
+</pre>
+
+<h2 id="SWITCHES">SWITCHES</h2>
+<p><b>DOS 4.0 and above</b></p>
+<p>Specifies special DOS options.</p>
+<pre class="syntax">
+SWITCHES=[/K][/N][/F][/T][/W]
+
+  /K          Forces an enhanced keyboard to behave like a conventional
+              keyboard.
+  /N          Prevents you from using the F5 or F8 key to bypass startup
+              commands.
+  /F          Skips the delay after displaying the "Starting DOS..."
+              message during startup.
+  /T          Indicates the BIOS time rollover byte is a flag instead
+              of a counter.
+  /W          Specifies that the WINA20.386 file has been moved to a
+              directory other than the root directory.
+</pre>
+<dl>
+<dt>/T and /W are only available in DOS 5 and above.
+<dt>/N and /F are only available in DOS 6 and above.
+</dl>
+
+<hr>
+<h2>Removed DOS CONFIG.SYS commands</h2>
+
+<h2>AVAILDEV</h2>
+<p><b>DOS 2.x only</b></p>
+<p>Specifies whether device names may be used without the \DEV\ prefix.</p>
+<pre class="oldsyntax">
+AVAILDEV=TRUE|FALSE
+
+  TRUE        \DEV\ is not required for device names.
+  FALSE       \DEV\ is required for device names.
+</pre>
+<dl>
+<dt>The default value is TRUE.
+<dt>In DOS 3.0 and above this is always true.
+</dl>
+
+<h2>CPSW</h2>
+<p><b>DOS 4.0x only</b></p>
+<p>Specifies whether code page switching is enabled or not.</p>
+<pre class="oldsyntax">
+CPSW=ON|OFF
+</pre>
+<dl>
+<dt>This was for proposed code page switching support but the functionality was 
+never publicly implemented.
+</dl>
+
+<h2>IFS</h2>
+<p><b>DOS 4.0x only</b></p>
+<p>Loads an installable file system (IFS) driver.</p>
+<pre class="oldsyntax">
+IFS=[drive:][path]filename [parameters]
+
+  filename    Specifies the filename of the IFS driver to load.
+  parameters  Specifies the parameters to pass to the IFS driver.
+</pre>
+<dl>
+<dt>In DOS 5.0 and above IFS driver support was removed.
+</dl>
+
+<h2>STRING</h2>
+<p><b>DOS 3.0 only</b></p>
+<p>Specifies the size of the string substitution buffer for network names.</p>
+<pre class="oldsyntax">
+STRING=n
+</pre>
+<dl>
+<dt>In DOS 3.1 and above the string substitution buffer was moved out of the DOS 
+data area.
+</dl>
+
+<h2>SWITCHAR</h2>
+<p><b>DOS 2.x only</b></p>
+<p>Specifies the default switch character.</p>
+<pre class="oldsyntax">
+SWITCHAR=char
+</pre>
+<dl>
+<dt>The default value is / (slash).
+<dt>In DOS 3.0 and above this is always /.
+</dl>
+
+<hr>
+<h2>DOS 6.0 and above interactive startup notes</h2>
+<dl>
+<dt><b>[MENU]</b><dd>Specifies that a startup menu is used. The commands INCLUDE, MENUCOLOR, MENUDEFAULT, MENUITEM and SUBMENU must be within a [MENU] block and only those commands and REM may be used within a [MENU] block.
+<dt><b>[COMMON]</b><dd>Defines a block of commands which are always executed.
+<dt><b>[blockname]</b><dd>Defines a named menu block.
+<dt><b>CONFIG environment variable</b><dd>Set to the selected blockname for use in AUTOEXEC.BAT.
+<dt>command<b>?=</b>parameters<dd>Specifies that the user should be asked whether to execute the command or not. All commands may use ?= except COMMENT, INCLUDE, MENUCOLOR, MENUDEFAULT, MENUITEM, REM and SUBMENU.
+<dt><b>F5</b><dd>Pressing F5 at startup causes CONFIG.SYS and AUTOEXEC.BAT to be skipped. The /D switch is passed to COMMAND.COM to skip AUTOEXEC.BAT.
+<dt><b>F8</b><dd>Pressing F8 at startup causes CONFIG.SYS and AUTOEXEC.BAT to be interactively executed with prompting. The /Y switch is passed to COMMAND.COM to interactively step through AUTOEXEC.BAT. At the prompt pressing Y will execute the command, N will skip the command, ESC will execute the command and end further prompting, F5 will skip the command and end further processing.
+</dl>
+
+</body>

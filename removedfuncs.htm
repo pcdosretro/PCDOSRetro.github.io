@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>List of removed DOS INT 21h functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h2>List of removed DOS INT 21h functions</h2>
+<table style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px" cellspacing="1" cellpadding="2" border="1">
+<tbody>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+<th style="width:4em">DOS versions</th>
+<th>Implementation notes</th>
+<th>Implementation in later DOS versions</th>
+</tr>
+<tr>
+<td>3303h</td>
+<td>Get code page switching (CPSW) state</td>
+<td>4.0</td>
+<td>Reserved but not implemented (executes IRET)
+</td>
+<td>Ignored</td>
+</tr>
+<tr>
+<td>3304h</td>
+<td>Set code page switching (CPSW) state</td>
+<td>4.0</td>
+<td>Reserved but not implemented (executes IRET); DOS 4 CONFIG.SYS <b>CPSW</b> uses this function</td>
+<td>Ignored</td>
+</tr>
+<tr>
+<td>3701h</td>
+<td>Set switch character</td>
+<td>2.0 - 4.0</td>
+<td>DOS 2.x CONFIG.SYS <b>SWITCHAR</b> uses this function</td>
+<td>Ignored - switch character is always /</td>
+</tr>
+<tr>
+<td>3702h</td>
+<td>Get availdev flag</td>
+<td>2.0 - 2.1</td>
+<td></td>
+<td>Returns FF (true)</td>
+</tr>
+<tr>
+<td>3703h</td>
+<td>Set availdev flag</td>
+<td>2.0 - 2.1</td>
+<td>DOS 2.x CONFIG.SYS <b>AVAILDEV</b> uses this function
+</td>
+<td>Ignored</td>
+</tr>
+<tr>
+<td>5702h</td>
+<td>Get extended attributes</td>
+<td>4.0</td>
+<td>Stub function for local files, executes INT 2Fh function 112Dh for remote files</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>5703h</td>
+<td>Get extended attributes name list</td>
+<td>4.0</td>
+<td>Stub function for local files, executes INT 2Fh function 112Dh for remote files</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>5704h</td>
+<td>Set extended attributes</td>
+<td>4.0</td>
+<td>Stub function for local files, executes INT 2Fh function 112Dh for remote files</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>5D0Bh</td>
+<td>Get DOS swappable data area list</td>
+<td>4.0</td>
+<td>Similar to function 5D06h</td>
+<td>Error</td>
+</tr>
+<tr>
+<td>5F06h</td>
+<td>Get IFSFUNC entry</td>
+<td>4.0</td>
+<td>Similar to function 5F05h, executes INT 2Fh function 111Eh; DOS 4 <b>FILESYS</b> command uses this function</td>
+<td>Depends on redirector</td>
+</tr>
+<tr>
+<td>61h</td>
+<td><a href="int21func61.htm">Path parse</a></td>
+<td>3.0</td>
+<td></td>
+<td>Does nothing</td>
+</tr>
+<tr>
+<td>6Bh</td>
+<td>IFS IOCTL</td>
+<td>4.0</td>
+<td>Executes INT 2Fh function 112Fh</td>
+<td>Does nothing</td>
+</tr>
+</tbody>
+</table>
+</body>

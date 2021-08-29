@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>BOOTLDR - simple MBR boot loader which allows booting from any valid partition</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<p><b style="font-size:large">BOOTLDR - simple MBR boot loader which allows booting from any valid partition</b></p>
+<p><b>Syntax:</b></p>
+<pre>
+BOOTLDR [INSTALL|SAVE]
+
+INSTALL will install the boot loader code onto the MBR.
+SAVE will save the contents of the boot sector to the file BOOT.BIN.
+If no parameter is specified then the partition table is displayed.
+</pre>
+<p>Once installed when the computer is booted, the valid partitions will be listed. For example:</p>
+<pre>
+  F1 DOS
+* F2 NTFS
+</pre>
+<p>Pressing the appropriate function key (F1-F4) will boot the specified partition. Pressing Enter or waiting 5 seconds will boot the active partition (indicated by an asterisk). Pressing A will attempt to boot from the first floppy drive.</p>
+<dl>
+<dt><b>Recognized partition types:</b>
+<dt>01 DOS (FAT12)
+<dt>04 DOS (FAT16)
+<dt>06 DOS (FAT16, &gt;32MB)
+<dt>07 NTFS
+<dt>0B FAT32
+<dt>0C FAT32 (LBA)
+<dt>0E VFAT (FAT16, LBA)
+<dt>83 LINUX
+</dl>
+<p>Unrecognized partitions types are listed as ? but may still be booted. Extended partitions (types 05 and 0F) are skipped as these are not bootable by convention.</p>
+<p><b>Technical notes:</b></p>
+<ul>
+<li>When BOOTLDR is installed, only the first 440 bytes of the MBR are altered. The remaining bytes including the 4-byte NT disk signature at 1B8h are unchanged.</li>
+<li>BOOTLDR uses EDD INT 13h function 42h to read the selected partition boot sector if available, otherwise standard INT 13h function 02h is used.</li>
+<li>When a partition is selected the MBR is rewritten with that partition marked as the active partition.</li>
+<li>BOOTLDR will check for a valid partition ID (55h AAh) at the end of the sector before transferring control to the partition boot code which is loaded at 0:7C00h.</li>
+</ul>
+
+<p><a href="BOOTLDR.ZIP">Download BOOTLDR - (2KB)</a></p>
+</body>

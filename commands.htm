@@ -1,0 +1,2003 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>List of DOS commands</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+.syntax {background:beige;width:80ch}
+</style>
+</head>
+<body>
+<h2>DOS commands</h2>
+<div>
+<a href="#ACALC">ACALC</a>
+<a href="#APPEND">APPEND</a>
+<a href="#ASSIGN">ASSIGN</a>
+<a href="#ATTRIB">ATTRIB</a>
+</div>
+<div>
+<a href="#BACKUP">BACKUP</a>
+<a href="#BASIC_BASICA">BASIC / BASICA</a>
+<a href="#BREAK">BREAK</a>
+</div>
+<div>
+<a href="#CALL">CALL</a>
+<a href="#CHCP">CHCP</a>
+<a href="#CHDIR_CD">CHDIR / CD</a>
+<a href="#CHKDSK">CHKDSK</a>
+<a href="#CHOICE">CHOICE</a>
+<a href="#CLS">CLS</a>
+<a href="#COMMAND">COMMAND</a>
+<a href="#COMP">COMP</a>
+<a href="#COPY">COPY</a>
+<a href="#CTTY">CTTY</a>
+</div>
+<div>
+<a href="#DATAMON">DATAMON</a>
+<a href="#DATE">DATE</a>
+<a href="#DEBUG">DEBUG</a>
+<a href="#DEFRAG">DEFRAG</a>
+<a href="#DEL_ERASE">DEL / ERASE</a>
+<a href="#DELTREE">DELTREE</a>
+<a href="#DIR">DIR</a>
+<a href="#DISKCOMP">DISKCOMP</a>
+<a href="#DISKCOPY">DISKCOPY</a>
+<a href="#DOSKEY">DOSKEY</a>
+<a href="#DRVLOCK">DRVLOCK</a>
+<a href="#DYNALOAD">DYNALOAD</a>
+</div>
+<div>
+<a href="#E">E</a>
+<a href="#ECHO">ECHO</a>
+<a href="#EDIT">EDIT</a>
+<a href="#EDLIN">EDLIN</a>
+<a href="#EJECT">EJECT</a>
+<a href="#EMM386">EMM386</a>
+<a href="#EXE2BIN">EXE2BIN</a>
+<a href="#EXIT">EXIT</a>
+</div>
+<div>
+<a href="#FASTOPEN">FASTOPEN</a>
+<a href="#FC">FC</a>
+<a href="#FDISK">FDISK</a>
+<a href="#FIND">FIND</a>
+<a href="#FOR">FOR</a>
+<a href="#FORMAT">FORMAT</a>
+</div>
+<div>
+<a href="#GOTO">GOTO</a>
+<a href="#GRAFTABL">GRAFTABL</a>
+<a href="#GRAPHICS">GRAPHICS</a>
+<a href="#GWBASIC">GWBASIC</a>
+</div>
+<div>
+<a href="#HELP">HELP</a>
+</div>
+<div>
+<a href="#IF">IF</a>
+<a href="#INTERLNK">INTERLNK</a>
+<a href="#INTERSVR">INTERSVR</a>
+</div>
+<div>
+<a href="#JOIN">JOIN</a>
+</div>
+<div>
+<a href="#KEYB">KEYB</a>
+<a href="#KEYBXX">KEYBxx</a>
+</div>
+<div>
+<a href="#LABEL">LABEL</a>
+<a href="#LOADFIX">LOADFIX</a>
+<a href="#LOADHIGH_LH">LOADHIGH / LH</a>
+</div>
+<div>
+<a href="#MEM">MEM</a>
+<a href="#MIRROR">MIRROR</a>
+<a href="#MKDIR_MD">MKDIR / MD</a>
+<a href="#MODE">MODE</a>
+<a href="#MORE">MORE</a>
+<a href="#MOUSE">MOUSE</a>
+<a href="#MOVE">MOVE</a>
+<a href="#MSCDEX">MSCDEX</a>
+<a href="#MSD">MSD</a>
+</div>
+<div>
+<a href="#NLSFUNC">NLSFUNC</a>
+</div>
+<div>
+<a href="#PATH">PATH</a>
+<a href="#PAUSE">PAUSE</a>
+<a href="#POWER">POWER</a>
+<a href="#PRINT">PRINT</a>
+<a href="#PROMPT">PROMPT</a>
+</div>
+<div>
+<a href="#QBASIC">QBASIC</a>
+<a href="#QCONFIG">QCONFIG</a>
+</div>
+<div>
+<a href="#RECOVER">RECOVER</a>
+<a href="#REM">REM</a>
+<a href="#RENAME_REN">RENAME / REN</a>
+<a href="#REPLACE">REPLACE</a>
+<a href="#RESTORE">RESTORE</a>
+<a href="#REXX">REXX</a>
+<a href="#REXXDUMP">REXXDUMP</a>
+<a href="#RMDIR_RD">RMDIR / RD</a>
+</div>
+<div>
+<a href="#SCANDISK">SCANDISK</a>
+<a href="#SET">SET</a>
+<a href="#SETVER">SETVER</a>
+<a href="#SHARE">SHARE</a>
+<a href="#SHIFT">SHIFT</a>
+<a href="#SMARTDRV">SMARTDRV</a>
+<a href="#SORT">SORT</a>
+<a href="#SUBST">SUBST</a>
+<a href="#SYS">SYS</a>
+</div>
+<div>
+<a href="#TIME">TIME</a>
+<a href="#TREE">TREE</a>
+<a href="#TRUENAME">TRUENAME</a>
+<a href="#TYPE">TYPE</a>
+</div>
+<div>
+<a href="#UNDELETE">UNDELETE</a>
+<a href="#UNFORMAT">UNFORMAT</a>
+</div>
+<div>
+<a href="#VER">VER</a>
+<a href="#VERIFY">VERIFY</a>
+<a href="#VOL">VOL</a>
+</div>
+<div>
+<a href="#XCOPY">XCOPY</a>
+</div>
+
+<h2 id="ACALC">ACALC</h2>
+<p><b>External - PC DOS 7.0</b></p>
+<p>Calculates the value of a mathematical expression.</p>
+<pre class="syntax">
+ACALC [/T[:]format] expression
+
+  /T           Specifies the output format type
+  format         D=Decimal (default)   B=Binary   O=Octal   X=heXadecimal
+                 A=All (decimal, binary, octal, and hexadecimal)
+  expression   Specifies a valid numeric expression.
+
+Numbers prefixed with 'b', 'o', and 'x' are assumed to be binary, octal,
+and hexadecimal respectively.  Decimal numbers are not prefixed.
+
+Arithmetic Operators:              Bitwise Operators:
+  ()  Separators                     &amp;   Bitwise AND
+  *   Multiplication                 :   Bitwise OR
+  /   Division                       ^   Bitwise XOR
+  %   Modulo (remainder of x/y)      {   Left Shift
+  +   Addition                       }   Right Shift
+  -   Subtraction
+
+General Math Functions:
+  ABS(x)     Absolute Value of x
+  EXP(x)     Exponential of x
+  FACT(x)    Factorial of x (a positive number less than 21)
+  LOG(x)     Natural Logarithm of x (a positive number)
+  LOG10(x)   Logarithm of x (a positive number) to the Base 10
+  MAX(x;y)   Larger of the two values x and y
+  MIN(x;y)   Smaller of the two values x and y
+  PI()       Value of Pi (3.14159265359)
+  POW(x;y)   x raised to the power of y
+  SQRT(x)    Square Root of x (a positive number)
+
+Trigonometric Math Functions:
+  COS(x)     Cosine of the Angle x in Radians
+  SIN(x)     Sine of the Angle x in Radians
+  TAN(x)     Tangent of the Angle x in Radians
+</pre>
+
+<h2 id="APPEND">APPEND</h2>
+<p><b>External - MS-DOS 3.2 and above; PC DOS 3.3 and above</b></p>
+<p>Allows programs to open data files in specified directories as if they were in the current directory.</p>
+<pre class="syntax">
+APPEND [[drive:]path[;...]] [/X[:ON | :OFF]] [/PATH:ON | /PATH:OFF] [/E]
+APPEND ;
+
+  [drive:]path Specifies a drive and directory to append.
+  /X:ON        Applies appended directories to file searches and
+               application execution.
+  /X:OFF       Applies appended directories only to requests to open files.
+               /X:OFF is the default setting.
+  /PATH:ON     Applies appended directories to file requests that already
+               specify a path.  /PATH:ON is the default setting.
+  /PATH:OFF    Turns off the effect of /PATH:ON.
+  /E           Stores a copy of the appended directory list in an environment
+               variable named APPEND.  /E may be used only the first time
+               you use APPEND after starting your system.
+
+Type APPEND ; to clear the appended directory list.
+Type APPEND without parameters to display the appended directory list.
+</pre>
+<dl>
+<dt>/E and /X are only available in DOS 3.3 and above.
+<dt>/PATH is only available in DOS 4 and above.
+</dl>
+
+<h2 id="ASSIGN">ASSIGN</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Redirects requests for disk operations on one drive to a different drive.</p>
+<pre class="syntax">
+ASSIGN [x[:]=y[:][...]]
+ASSIGN /STATUS
+
+  x        Specifies the drive letter to reassign.
+  y        Specifies the drive that x: will be assigned to.
+  /STATUS  Displays current drive assignments.
+
+Type ASSIGN without parameters to reset all drive letters to original
+assignments.
+</pre>
+<dl>
+<dt>/STATUS is only available in DOS 4 and above.
+</dl>
+
+<h2 id="ATTRIB">ATTRIB</h2>
+<p><b>External - DOS 3.0 and above</b></p>
+<p>Displays or changes file attributes.</p>
+<pre class="syntax">
+ATTRIB [+R | -R] [+A | -A] [+S | -S] [+H | -H] [[drive:][path]filename] [/S]
+
+  +   Sets an attribute.
+  -   Clears an attribute.
+  R   Read-only file attribute.
+  A   Archive file attribute.
+  S   System file attribute.
+  H   Hidden file attribute.
+  /S  Processes files in all directories in the specified path.
+</pre>
+<dl>
+<dt>A is only available in DOS 3.2 and above.
+<dt>/S is only available in DOS 3.3 and above.
+<dt>S and H are only available in DOS 5 and above.
+</dl>
+
+<h2 id="BACKUP">BACKUP</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Backs up one or more files from one disk to another.</p>
+<pre class="syntax">
+BACKUP source destination-drive: [/S] [/M] [/A] [/F[:size]]
+  [/D:date[/T:time]] [/L[:[drive:][path]logfile]]
+
+  source             Specifies the file(s), drive, or directory to back up.
+  destination-drive: Specifies the drive to save backup copies onto.
+  /S                 Backs up contents of subdirectories.
+  /M                 Backs up only files that have changed since the last
+                     backup.
+  /A                 Adds backup files to an existing backup disk.
+  /F:[size]          Specifies the size of the disk to be formatted.
+  /D:date            Backs up only files changed on or after the specified
+                     date.
+  /T:time            Backs up only files changed at or after the specified
+                     time.
+  /L[:[drive:][path]logfile]
+                     Creates a log file and entry to record the backup
+                     operation.
+</pre>
+<dl>
+<dt>/F, /T and /L are only available in DOS 3.3 and above.
+</dl>
+
+<h2 id="BASIC_BASICA">BASIC / BASICA</h2>
+<p><b>External - PC DOS 1.0 to PC DOS 5.0</b></p>
+<p>An implementation of the BASIC programming language for PCs.</p>
+<pre class="syntax">
+BASIC [filename] [/F:n] [/S:n] [/C:n] [/M:n[,m]] [/D]
+BASICA [filename] [/F:n] [/S:n] [/C:n] [/M:n[,m]] [/D]
+
+  /F:n         Specifies the number of files that BASIC may open at once.
+               The default is 3.
+  /S:n         Specifies the maximum file record length up to 32767.
+               The default is 128.
+  /C:n         Sets the COM port receive buffer size. /C:0 disables COM port
+               support. The default is 256.
+  /M:n[,m]     Sets the highest memory location and maximum block size used
+               by BASIC.
+  /D           Allows ATN, COS, EXP, LOG, SIN, SQR, and TAN to return
+               double-precision results.
+</pre>
+<dl>
+<dt>/D and [,m] are only available in PC DOS 2.0 and above.
+<dt>IBM computers had Cassette BASIC in ROM; BASIC (Disk BASIC) and BASICA (Advanced BASIC) were extensions to the ROM-based Cassette BASIC.
+<dt>MS-DOS versions use GWBASIC instead.
+</dl>
+
+<h2 id="BREAK">BREAK</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Sets or clears extended CTRL+C checking.</p>
+<pre class="syntax">
+BREAK [ON | OFF]
+
+Type BREAK without a parameter to display the current BREAK setting.
+</pre>
+
+<h2 id="CALL">CALL</h2>
+<p><b>Internal - DOS 3.3 and above</b></p>
+<p>Calls one batch program from another.</p>
+<pre class="syntax">
+CALL [drive:][path]filename [batch-parameters]
+
+  batch-parameters   Specifies any command-line information required by the
+                     batch program.
+</pre>
+
+<h2 id="CHCP">CHCP</h2>
+<p><b>Internal - DOS 3.3 and above</b></p>
+<p>Displays or sets the active code page number.</p>
+<pre class="syntax">
+CHCP [nnn]
+
+  nnn   Specifies a code page number.
+
+Type CHCP without a parameter to display the active code page number.
+</pre>
+
+<h2 id="CHDIR_CD">CHDIR / CD</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays the name of or changes the current directory.</p>
+<pre class="syntax">
+CHDIR [drive:][path]
+CHDIR[..]
+CD [drive:][path]
+CD[..]
+
+  ..   Specifies that you want to change to the parent directory.
+
+Type CD drive: to display the current directory in the specified drive.
+Type CD without parameters to display the current drive and directory.
+</pre>
+
+<h2 id="CHKDSK">CHKDSK</h2>
+<p><b>External - DOS 1.0 and above</b></p>
+<p>Checks a disk and displays a status report.</p>
+<pre class="syntax">
+CHKDSK [drive:][[path]filename] [/F] [/V]
+
+  [drive:][path]  Specifies the drive and directory to check.
+  filename        Specifies the file(s) to check for fragmentation.
+  /F              Fixes errors on the disk.
+  /V              Displays the full path and name of every file on the disk.
+
+Type CHKDSK without parameters to check the current disk.
+</pre>
+<dl>
+<dt>filename, /F and /V are only available in DOS 2 and above.
+<dt>In DOS 6.2 and above numbers are displayed with separators. In PC DOS 6.3 and above the separators may be removed with the NO_SEP environment variable.
+</dl>
+
+<h2 id="CHOICE">CHOICE</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Waits for you to choose one of a set of choices.</p>
+<pre class="syntax">
+CHOICE [/C[:]choices] [/N] [/S] [/T[:]c,nn] [text]
+
+  /C[:]choices    Specifies allowable keys. Default is YN.
+  /N              Does not display choices and ? at end of prompt string.
+  /S              Treats choice keys as case sensitive.
+  /T[:]c,nn       Defaults choice to c after &lt;nn&gt; seconds.
+  text            Prompts string to display.
+
+ERRORLEVEL is set to offset of key you press in choices.
+</pre>
+
+<h2 id="CLS">CLS</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Clears the screen.</p>
+<pre class="syntax">
+CLS
+</pre>
+
+<h2 id="COMMAND">COMMAND</h2>
+<p><b>External - DOS 1.0 and above</b></p>
+<p>Starts a new copy of the DOS Command Interpreter.</p>
+<pre class="syntax">
+COMMAND [[drive:]path] [device] [/E:nnnnn] [/P [/MSG]]
+        [/H] [/O] [/Y [/C command | /K command]]
+
+  [drive:]path    Specifies the directory containing COMMAND.COM file.
+  device          Specifies the device to use for command input and output.
+  /E:nnnnn        Sets the initial environment size to nnnnn bytes.
+  /P              Makes the new Command Interpreter permanent (can't exit).
+  /MSG            Stores all error messages in memory (requires /P).
+  /H              Loads the Command Interpreter into a UMB if available.
+  /O              Disables overwrite prompt on COPY,XCOPY,and MOVE commands.
+  /Y              Steps through the batch program specified by /C or /K.
+  /C command      Executes the specified command and returns.
+  /K command      Executes the specified command and continues running.
+
+The /P and /MSG switches may be used only when COMMAND is started by using
+the SHELL command in the CONFIG.SYS file.
+</pre>
+<dl>
+<dt>path, device, /P and /C are only available in DOS 2 and above.
+<dt>/E is only available in DOS 3.2 and above.
+<dt>/MSG is only available in DOS 4 and above.
+<dt>/O, /Y and /K are only available in DOS 6 and above.
+<dt>/H is only available in PC DOS 7.
+<dt>The undocumented /D switch does not run AUTOEXEC.BAT or prompt for date and time when /P is used and is available in DOS 2 and above.
+<dt>The undocumented /F switch fails all critical error requests and is available in DOS 3.1 and above.
+</dl>
+
+<h2 id="COMP">COMP</h2>
+<p><b>External - PC DOS 1.0 to PC DOS 6.3; MS-DOS 3.3 and above</b></p>
+<p>Compares the contents of two files or sets of files.</p>
+<pre class="syntax">
+COMP [data1] [data2] [/D] [/A] [/L] [/N=number] [/C]
+
+  data1     Specifies location and name(s) of first file(s) to compare.
+  data2     Specifies location and name(s) of second files to compare.
+  /D        Displays differences in decimal format. This is the default
+            setting.
+  /A        Displays differences in ASCII characters.
+  /L        Displays line numbers for differences.
+  /N=number Compares only the first specified number of lines in each file.
+  /C        Disregards case of ASCII letters when comparing files.
+
+To compare sets of files, use wildcards in data1 and data2 parameters.
+</pre>
+<dl>
+<dt>/D, /A, /L, /N and /C are only available in DOS 5 and above.
+</dl>
+
+<h2 id="COPY">COPY</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Copies one or more files to another location.</p>
+<pre class="syntax">
+COPY [/A | /B] source [/A | /B] [+ source [/A | /B] [+ ...]] [destination
+  [/A | /B]] [/V] [/Y | /-Y]
+
+  source       Specifies the file or files to be copied.
+  /A           Indicates an ASCII text file.
+  /B           Indicates a binary file.
+  destination  Specifies the directory and/or filename for the new file(s).
+  /V           Verifies that new files are written correctly.
+  /Y           Suppresses prompting to confirm you want to overwrite an
+               existing destination file.
+  /-Y          Causes prompting to confirm you want to overwrite an
+               existing destination file.
+
+The switch /Y may be preset in the COPYCMD environment variable.
+To append files, specify a single file for destination, but multiple files
+for source (using wildcards or file1+file2+file3 format).
+</pre>
+<dl>
+<dt>/A, /B, /V and + (concatenation) are only available in DOS 1.1 and above.
+<dt>/Y, /-Y and use of the COPYCMD environment variable are only available in DOS 6.2 and above.
+</dl>
+
+<h2 id="CTTY">CTTY</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Changes the terminal device used to control your system.</p>
+<pre class="syntax">
+CTTY device
+
+  device   The terminal device you want to use, such as COM1.
+</pre>
+
+<h2 id="DATAMON">DATAMON</h2>
+<p><b>External - PC DOS 6.1 and above</b></p>
+<p>Data monitor.</p>
+<pre class="syntax">
+DATAMON [parameters...]
+
+General Parameters:
+  /LOAD          - Load resident using options from .INI file
+  /LOW           - Don't load into UMB's if available
+  /UNLOAD or /U  - Remove Data Monitor from memory
+  /STATUS or /S  - Get current state of Data Monitor
+  /?             - Display this command-line help
+
+Enable / Disable Parameters:
+  /SENTRY+       - Enable use of Delete Sentry
+  /SENTRY-       - Disable use of Delete Sentry
+
+  /TRACKER+      - Enable use of Delete Tracker
+  /TRACKER-      - Disable use of Delete Tracker
+</pre>
+<dl>
+<dt>DATAMON is licensed from Central Point Software PC Tools.
+</dl>
+
+<h2 id="DATE">DATE</h2>
+<p><b>External - DOS 1.0<br>Internal - DOS 1.1 and above</b></p>
+<p>Displays or sets the date.</p>
+<pre class="syntax">
+DATE [date]
+
+Type DATE without parameters to display the current date setting and
+a prompt for a new one.  Press ENTER to keep the same date.
+</pre>
+<dl>
+<dt>[date] is only available in DOS 1.1 and above.
+</dl>
+
+<h2 id="DEBUG">DEBUG</h2>
+<p><b>External - DOS 1.0 and above</b></p>
+<p>Runs Debug, a program testing and editing tool.</p>
+<pre class="syntax">
+DEBUG [[drive:][path]filename [testfile-parameters]]
+
+  [drive:][path]filename  Specifies the file you want to test.
+  testfile-parameters     Specifies command-line information required by
+                          the file you want to test.
+
+After Debug starts, type ? to display a list of debugging commands.
+</pre>
+<pre class="syntax">
+assemble     A [address]
+compare      C range address
+dump         D [range]
+enter        E address [list]
+fill         F range list
+go           G [=address] [addresses]
+hex          H value1 value2
+input        I port
+load         L [address] [drive] [firstsector] [number]
+move         M range address
+name         N [pathname] [arglist]
+output       O port byte
+proceed      P [=address] [number]
+quit         Q
+register     R [register]
+search       S range list
+trace        T [=address] [value]
+unassemble   U [range]
+write        W [address] [drive] [firstsector] [number]
+allocate expanded memory        XA [#pages]
+deallocate expanded memory      XD [handle]
+map expanded memory pages       XM [Lpage] [Ppage] [handle]
+display expanded memory status  XS
+</pre>
+<dl>
+<dt>A is only available in DOS 2 and above.
+<dt>P is only available in DOS 3 and above.
+<dt>XA, XD, XM and XS are only available in DOS 4 and above.
+</dl>
+
+<h2 id="DEFRAG">DEFRAG</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Reorganizes files on disks to optimize performance.</p>
+<pre class="syntax">
+DEFRAG [drive:] [/F] [/Sorder] [/B] [/SKIPHIGH] [/LCD | /BW | /G0] [/H]
+DEFRAG [drive:] [/U] [/B] [/SKIPHIGH] [/LCD | /BW | /G0]
+
+  [drive:]   Drive letter of disk to be optimized.
+  /F         Fully optimizes specified disk.
+  /U         Unfragments files, leaving space between files.
+  /S         Sort files by specified order.
+  order      N  By Name (alphabetic)            E  By extension (alphabetic)
+             D  By date &amp; time (earliest first) S  By size (smallest first)
+             -  Suffix to reverse order
+  /B         Restarts your computer after optimization.
+  /SKIPHIGH  Prevents Defrag from using extended or upper memory.
+  /LCD       Runs Defrag using an LCD color scheme.
+  /BW        Runs Defrag using a black and white color scheme.
+  /G0        Disable the graphic mouse and graphic character set.
+  /H         Moves hidden files.
+</pre>
+<dl>
+<dt>DEFRAG is a licensed version Norton Utilities Speed Disk.
+</dl>
+
+<h2 id="DEL_ERASE">DEL / ERASE</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Deletes one or more files.</p>
+<pre class="syntax">
+DEL [drive:][path]filename [/P]
+ERASE [drive:][path]filename [/P]
+
+  [drive:][path]filename  Specifies the file(s) to delete.  Specify multiple
+                          files by using wildcards.
+  /P                      Prompts for confirmation before deleting each file.
+</pre>
+<dl>
+<dt>DEL is only available in DOS 1.1 and above.
+<dt>/P is only available in DOS 4 and above.
+</dl>
+
+<h2 id="DELTREE">DELTREE</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Deletes a directory and all the subdirectories and files within it.</p>
+<pre class="syntax">
+To Delete one or more directories:
+DELTREE [/Y] [drive:]path [[drive:]path[...]]
+
+  /Y              Suppresses prompting to confirm whether you want to
+                  delete the subdirectory.
+  [drive:]path    Specifies the name of the directory you want to delete.
+
+Note: Use DELTREE with caution. Every file and subdirectory within the
+specified directory will be deleted.
+</pre>
+
+<h2 id="DIR">DIR</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Displays a list of files and subdirectories in a directory.</p>
+<pre class="syntax">
+DIR [drive:][path][filename] [/P] [/W] [/A[[:]attribs]] [/O[[:]sortord]]
+    [/S] [/B] [/L]
+
+  [drive:][path][filename]   Specifies drive, directory, and files to list.
+  /P      Pauses after each full screen of information.
+  /W      Uses wide list format.
+  /A      Displays files with specified attributes.
+  attribs   D  Directories   R  Read-only files         H  Hidden files
+            S  System files  A  Files ready to archive  -  Prefix meaning "not"
+  /O      Lists by files in sorted order.
+  sortord   N  By name (alphabetic)       S  By size (smallest first)
+            E  By extension (alphabetic)  D  By date &amp; time (earliest first)
+            G  Group directories first    -  Prefix to reverse order
+  /S      Displays files in specified directory and all subdirectories.
+  /B      Uses bare format (no heading information or summary).
+  /L      Uses lowercase.
+
+Switches may be preset in the DIRCMD environment variable.  Override
+preset switches by prefixing any switch with - (hyphen)--for example, /-W.
+To remove the commas from the DIR output, use the NO_SEP environment variable.
+</pre>
+<dl>
+<dt>/P and /W are only available in DOS 1.1 and above.
+<dt>/A, /O, /S, /B, /L and use of the DIRCMD environment variable are only available in DOS 5 and above.
+<dt>In DOS 6.2 and above numbers are displayed with separators. In PC DOS 6.3 and above the separators may be removed with the NO_SEP environment variable.
+</dl>
+
+<h2 id="DISKCOMP">DISKCOMP</h2>
+<p><b>External - PC DOS 1.0 and above; MS-DOS 3.2 and above</b></p>
+<p>Compares the contents of two floppy disks.</p>
+<pre class="syntax">
+DISKCOMP [drive1: [drive2:]] [/1] [/8]
+
+  /1   Compares the first side of the disks.
+  /8   Compares only the first eight sectors of each track.
+</pre>
+<dl>
+<dt>/1 is only available in DOS 1.1 and above.
+<dt>/8 is only available in DOS 2 and above.
+</dl>
+
+<h2 id="DISKCOPY">DISKCOPY</h2>
+<p><b>External - PC DOS 1.0 and above; MS-DOS 2.0 and above</b></p>
+<p>Copies the contents of one floppy disk to another.</p>
+<pre class="syntax">
+DISKCOPY [drive1: [drive2:]] [/1] [/V] [/M]
+
+  /1   Copies only the first side of the disk.
+  /V   Verifies that the information is copied correctly.
+  /M   Force multi-pass copy using memory only.
+
+The two floppy disks must be the same type.
+You may specify the same drive for drive1 and drive2.
+</pre>
+<dl>
+<dt>/1 is only available in DOS 1.1 and above.
+<dt>/V is only available in DOS 5 and above.
+<dt>/M is only available in DOS 6.2 and above.
+</dl>
+
+<h2 id="DOSKEY">DOSKEY</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Edits command lines, recalls DOS commands, and creates macros.</p>
+<pre class="syntax">
+DOSKEY [/REINSTALL] [/BUFSIZE=size] [/MACROS] [/HISTORY]
+  [/INSERT | /OVERSTRIKE] [macroname=[text]]
+
+  /REINSTALL    Installs a new copy of Doskey.
+  /BUFSIZE=size Sets size of command history buffer.
+  /MACROS       Displays all Doskey macros.
+  /HISTORY      Displays all commands stored in memory.
+  /INSERT       Specifies that new text you type is inserted in old text.
+  /OVERSTRIKE   Specifies that new text overwrites old text.
+  macroname     Specifies a name for a macro you create.
+  text          Specifies commands you want to record.
+
+UP and DOWN ARROWS recall commands; ESC clears command line; F7 displays
+command history; ALT+F7 clears command history; F8 searches command
+history; F9 selects a command by number; ALT+F10 clears macro definitions.
+
+The following are some special codes in Doskey macro definitions:
+$T     Command separator.  Allows multiple commands in a macro.
+$1-$9  Batch parameters.  Equivalent to %1-%9 in batch programs.
+$*     Symbol replaced by everything following macro name on command line.
+</pre>
+
+<h2 id="DRVLOCK">DRVLOCK</h2>
+<p><b>External - PC DOS 5.02 and above</b></p>
+<p>Locks the drive or socket so that media cannot be removed.</p>
+<pre class="syntax">
+DRVLOCK [drive: | socket:] [/ON | /OFF]
+
+  /ON     Sets the lock on.
+  /OFF    Sets the lock off.
+</pre>
+<dl>
+<dt>DRVLOCK is only included with PC DOS versions.
+</dl>
+
+<h2 id="DYNALOAD">DYNALOAD</h2>
+<p><b>External - PC DOS 7.0</b></p>
+<p>Load a device driver after system startup.</p>
+<pre class="syntax">
+DYNALOAD filename [parameters]
+
+  filename    Specifies the name of the device driver to load.
+  parameters  Specifies any parameters for the device driver.
+</pre>
+
+<h2 id="E">E</h2>
+<p><b>External - PC DOS 6.1 and above</b></p>
+<p>Starts PC DOS Editor, which creates and changes ASCII files.</p>
+<pre class="syntax">
+E [/Q] [/B] [/S] [/D] [/I] [/C] [/A] [/DM] [/80 |/132] [d:][path][filespec]
+  [=filespec] ['command']
+
+  /Q        Turns off display of "Loading .." message.
+  /B        Displays files in browse (read-only) mode.
+  /S        Uses EMS (or hardfile if no EMS is available) to edit files
+            too large for conventional memory.
+  /D        Forces file to be loaded from disk.
+  /I        Edits STACKER.INI file.
+  /C        Edits CONFIG.SYS file.
+  /A        Edits AUTOEXEC.BAT file.
+  /DM       Disables Mouse.
+  /80       Enables 80 column, 16 color text video (CGA/EGA/MCGA/VGA/SVGA/XGA).
+  /132      Enables 132 column, 16 color text video (XGA).
+ [d:][path][filespec]  Specifies drive, directory, and file to edit.
+  =         Is shorthand for "same path as last specified" at the DOS
+            prompt, or "same as current file's" at the editor commandline.
+            For example, E \PAS\LANG\FOO.PAS =FOO.BAK will load the two
+            files FOO.PAS and FOO.BAK, both from the directory \PAS\LANG.
+ 'command'  Specifies a startup command.  For example, E \FOO.PAS 'ALL /IF'
+            will load the file FOO.PAS and then execute the ALL command
+            on this file.
+
+Switches may be preset in the E environment variable.
+</pre>
+<dl>
+<dt>E is only included with PC DOS versions and replaces the MS-DOS Editor.
+</dl>
+
+<h2 id="ECHO">ECHO</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays messages, or turns command-echoing on or off.</p>
+<pre class="syntax">
+ECHO [ON | OFF]
+ECHO [message]
+
+Type ECHO without parameters to display the current echo setting.
+</pre>
+
+<h2 id="EDIT">EDIT</h2>
+<p><b>External - MS-DOS 5.0 and above</b></p>
+<p>Starts the MS-DOS Editor, which creates and changes ASCII files.</p>
+<pre class="syntax">
+EDIT [[drive:][path]filename] [/B] [/G] [/H] [/NOHI]
+
+  [drive:][path]filename  Specifies the ASCII file to edit.
+  /B          Allows use of a monochrome monitor with a color graphics card.
+  /G          Provides the fastest update of a CGA screen.
+  /H          Displays the maximum number of lines possible for your hardware.
+  /NOHI       Allows the use of a monitor without high-intensity support.
+</pre>
+<dl>
+<dt>PC DOS 6.1 and later use the E Editor.
+</dl>
+
+<h2 id="EDLIN">EDLIN</h2>
+<p><b>External - DOS 1.0 to DOS 6.3</b></p>
+<p>Line-oriented text editor.</p>
+<pre class="syntax">
+EDLIN [drive:][path]filename [/B]
+
+  /B   Ignores end-of-file (CTRL+Z) characters.
+</pre>
+<pre class="syntax">
+Edit line                   line#
+Append                      [#lines]A
+Copy                        [startline],[endline],toline[,times]C
+Delete                      [startline][,endline]D
+End (save file)             E
+Insert                      [line]I
+List                        [startline][,endline]L
+Move                        [startline],[endline],tolineM
+Page                        [startline][,endline]P
+Quit (throw away changes)   Q
+Replace                     [startline][,endline][?]R[oldtext][CTRL+Znewtext]
+Search                      [startline][,endline][?]Stext
+Transfer                    [toline]T[drive:][path]filename
+Write                       [#lines]W
+</pre>
+<dl>
+<dt>C, M, P, T and /B are only available in DOS 2 and above.
+</dl>
+
+<h2 id="EJECT">EJECT</h2>
+<p><b>External - PC DOS 5.02 and above</b></p>
+<p>Ejects the media from a drive.</p>
+<pre class="syntax">
+EJECT [drive:]
+</pre>
+<dl>
+<dt>EJECT is only included with PC DOS versions.
+</dl>
+
+<h2 id="EMM386">EMM386</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Turns on or off EMM386 expanded memory support.</p>
+<pre class="syntax">
+EMM386 [ON | OFF | AUTO] [W=ON | W=OFF]
+
+  ON | OFF | AUTO      Activates or suspends EMM386.EXE device driver,
+                       or places it in auto mode.
+  W=ON | OFF           Turns on or off Weitek coprocessor support.
+</pre>
+<dl>
+<dt>EMM386.EXE must be loaded as a device driver in CONFIG.SYS in order to use this command.
+<dt>EMM386 was originally developed by Compaq as CEMM (Compaq Expanded Memory Manager) and was distributed separately before being included with DOS.
+</dl>
+
+<h2 id="EXE2BIN">EXE2BIN</h2>
+<p><b>External - DOS 1.1 to DOS 6.3</b></p>
+<p>Converts .EXE (executable) files to binary format.</p>
+<pre class="syntax">
+EXE2BIN [drive1:][path1]input-file [[drive2:][path2]output-file]
+
+  input-file   Specifies the .EXE file to be converted.
+  output-file  Specifies the binary file to be created.
+</pre>
+
+<h2 id="EXIT">EXIT</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Quits the COMMAND.COM program (command interpreter).</p>
+<pre class="syntax">
+EXIT
+</pre>
+
+<h2 id="FASTOPEN">FASTOPEN</h2>
+<p><b>External - DOS 3.3 to DOS 6.3</b></p>
+<p>Decreases the amount of time needed to open frequently used files and directories.</p>
+<pre class="syntax">
+FASTOPEN drive:[[=]n] [drive:[[=]n][ ...]] [/X]
+
+  drive:  Specifies the hard disk drive you want Fastopen to work with.
+  n       Specifies the maximum number of file locations Fastopen retains
+          in its filename cache.
+  /X      Creates the filename cache in expanded memory.
+</pre>
+<dl>
+<dt>/X is only available in DOS 4 and above.
+</dl>
+
+<h2 id="FC">FC</h2>
+<p><b>External - MS-DOS 2.01 and above; PC DOS 5.0 and above</b></p>
+<p>Compares two files or sets of files and displays the differences between them.</p>
+<pre class="syntax">
+FC [/A] [/C] [/L] [/LBn] [/N] [/T] [/W] [/nnnn] [drive1:][path1]filename1
+  [drive2:][path2]filename2
+FC /B [drive1:][path1]filename1 [drive2:][path2]filename2
+
+  /A     Displays only first and last lines for each set of differences.
+  /B     Performs a binary comparison.
+  /C     Disregards the case of letters.
+  /L     Compares files as ASCII text.
+  /LBn   Sets the maximum consecutive mismatches to the specified number of
+         lines.
+  /N     Displays the line numbers on an ASCII comparison.
+  /T     Does not expand tabs to spaces.
+  /W     Compresses white space (tabs and spaces) for comparison.
+  /nnnn  Specifies the number of consecutive lines that must match after a
+         mismatch.
+</pre>
+<dl>
+<dt>/A, /L, /LB, /N and /T are only available in DOS 3.2 and above.
+</dl>
+
+<h2 id="FDISK">FDISK</h2>
+<p><b>External - PC DOS 2.0 and above; MS-DOS 3.2 and above</b></p>
+<p>Configures a hard disk for use with DOS.</p>
+<pre class="syntax">
+FDISK [/STATUS]
+
+    /STATUS     Displays the status of the fixed disk drive
+</pre>
+<dl>
+<dt>/STATUS is only available in DOS 5 and above.
+<dt>The undocumented /MBR switch writes the default DOS master boot record and is available in DOS 5 and above.
+</dl>
+
+<h2 id="FIND">FIND</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Searches for a text string in a file or files.</p>
+<pre class="syntax">
+FIND [/V] [/C] [/N] [/I] [/S] "string" [[drive:][path]filename[ ...]]
+
+  /V        Displays all lines NOT containing the specified string.
+  /C        Displays only the count of lines containing the string.
+  /N        Displays line numbers with the displayed lines.
+  /I        Ignores the case of characters when searching for the string.
+  /S        Search subdirectories also.
+  "string"  Specifies the text string to find.
+  [drive:][path]filename
+            Specifies a file or files to search.
+
+If a pathname is not specified, FIND searches the text typed at the prompt
+or piped from another command.
+</pre>
+<dl>
+<dt>/I is only available in DOS 5 and above.
+<dt>/S is only available in PC DOS 7.
+<dt>Also PC DOS 7 allows the use of wildcards in filenames while prior versions do not.
+</dl>
+
+<h2 id="FOR">FOR</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Runs a specified command for each file in a set of files.</p>
+<pre class="syntax">
+FOR %variable IN (set) DO command [command-parameters]
+
+  %variable  Specifies a replaceable parameter.
+  (set)      Specifies a set of one or more files.  Wildcards may be used.
+  command    Specifies the command to carry out for each file.
+  command-parameters
+             Specifies parameters or switches for the specified command.
+
+To use the FOR command in a batch program, specify %%variable instead of
+%variable.
+</pre>
+
+<h2 id="FORMAT">FORMAT</h2>
+<p><b>External - DOS 1.0 and above</b></p>
+<p>Formats a disk for use with DOS.</p>
+<pre class="syntax">
+FORMAT drive: [/V[:label]] [/Q] [/U] [/F:size] [/B | /S] [/C]
+FORMAT drive: [/V[:label]] [/Q] [/U] [/T:tracks /N:sectors] [/B | /S] [/C]
+FORMAT drive: [/V[:label]] [/Q] [/U] [/1] [/4] [/B | /S] [/C]
+FORMAT drive: [/Q] [/U] [/1] [/4] [/8] [/B | /S] [/C]
+
+  /V[:label]  Specifies the volume label.
+  /Q          Performs a quick format.
+  /U          Performs an unconditional format.
+  /F:size     Specifies the size of the floppy disk to format (such
+              as 160, 180, 320, 360, 720, 1.2, 1.44, 2.88).
+  /B          Allocates space on the formatted disk for system files.
+  /S          Copies system files to the formatted disk.
+  /T:tracks   Specifies the number of tracks per disk side.
+  /N:sectors  Specifies the number of sectors per track.
+  /1          Formats a single side of a floppy disk.
+  /4          Formats a 5.25-inch 360K floppy disk in a high-density drive.
+  /8          Formats eight sectors per track.
+  /C          Revert to less conservative handling of bad blocks.
+</pre>
+<dl>
+<dt>/1 is only available in DOS 1.1 and above.
+<dt>/V, /B and /8 are only available in DOS 2 and above.
+<dt>/4 is only available in DOS 3 and above.
+<dt>/T and /N are only available in DOS 3.2 and above.
+<dt>/F and [:label] are only available in DOS 4 and above.
+<dt>/Q and /U are only available in DOS 5 and above.
+<dt>/C is only available in DOS 6 and above.
+<dt>In DOS 6.2 and above numbers are displayed with separators. In PC DOS 6.3 and above the separators may be removed with the NO_SEP environment variable.
+</dl>
+
+<h2 id="GOTO">GOTO</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Directs DOS to a labelled line in a batch program.</p>
+<pre class="syntax">
+GOTO label
+
+  label   Specifies a text string used in the batch program as a label.
+
+You type a label on a line by itself, beginning with a colon.
+</pre>
+
+<h2 id="GRAFTABL">GRAFTABL</h2>
+<p><b>External - DOS 3.0 to DOS 6.3</b></p>
+<p>Enables DOS to display an extended character set in graphics mode.</p>
+<pre class="syntax">
+GRAFTABL [xxx]
+GRAFTABL /STATUS
+
+  xxx      Specifies a code page number.
+  /STATUS  Displays the current code page selected for use with GRAFTABL.
+</pre>
+<dl>
+<dt>xxx and /STATUS are only available in DOS 3.3 and above.
+</dl>
+
+<h2 id="GRAPHICS">GRAPHICS</h2>
+<p><b>External - PC DOS 2.0 to PC DOS 6.3; MS-DOS 3.2 and above</b></p>
+<p>Loads a program that can print graphics.</p>
+<pre class="syntax">
+GRAPHICS [type] [[drive:][path]filename] [/R] [/B] [/LCD]
+  [/PRINTBOX:STD | /PRINTBOX:LCD]
+
+  type         Specifies a printer type.
+  [drive:][path]filename
+               Specifies the file containing information on supported printers.
+  /R           Prints white on black as seen on the screen.
+  /B           Prints the background in color for COLOR4 and COLOR8 printers.
+  /LCD         Prints using LCD aspect ratio.
+  /PRINTBOX:STD | /PRINTBOX:LCD
+               Specifies the print-box size, either STD or LCD.
+</pre>
+<dl>
+<dt>/R and /B are only available in DOS 3 and above.
+<dt>/LCD is only available in DOS 3.2 and above.
+<dt>/PRINTBOX is only available in DOS 4 and above.
+<dt>This command uses the file GRAPHICS.PRO which contains information about the supported printer types.
+</dl>
+
+<h2 id="GWBASIC">GWBASIC</h2>
+<p><b>External - MS-DOS 1.1 to MS-DOS 4.0</b></p>
+<p>An implementation of the BASIC programming language for PCs.</p>
+<pre class="syntax">
+GWBASIC [filename] [/F:n] [/I] [/S:n] [/C:n] [/M:[n][,m]] [/D]
+
+  /F:n         Specifies the number of files that GW-BASIC may open at once.
+               The default is 3.
+  /I           Statically allocate memory required for file operations.
+  /S:n         Specifies the maximum file record length up to 32767.
+               The default is 128.
+  /C:n         Sets the COM port receive buffer size. /C:0 disables COM port
+               support. The default is 256.
+  /M:[n][,m]   Sets the highest memory location and maximum block size used
+               by GW-BASIC.
+  /D           Allows ATN, COS, EXP, LOG, SIN, SQR, and TAN to return
+               double-precision results.
+</pre>
+<dl>
+<dt>Microsoft released GW-BASIC for IBM compatible PCs which did not have ROM BASIC. GW-BASIC was a complete BASIC interpreter which was compatible with IBM BASICA. Some OEM releases had BASIC.COM and BASICA.COM as loaders for GWBASIC.EXE. MS-DOS 5.0 and higher included QBasic instead of GW-BASIC.
+</dl>
+
+<h2 id="HELP">HELP</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Displays command help.</p>
+<pre class="syntax">
+HELP [topic]
+</pre>
+<dl>
+<dt>In DOS 5 and MS-DOS 6.x HELP uses QBASIC.EXE and QuickHelp files for its help system.
+<dt>In PC DOS 6.x HELP is a standalone program which executes commands with the /? switch.
+<dt>In PC DOS 7 HELP uses VIEW.EXE and Information Presentation Facility files for its help system.
+</dl>
+
+<h2 id="IF">IF</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Performs conditional processing in batch programs.</p>
+<pre class="syntax">
+IF [NOT] ERRORLEVEL number command
+IF [NOT] string1==string2 command
+IF [NOT] EXIST filename command
+
+  NOT               Specifies that DOS should carry out the command only
+                    if the condition is false.
+  ERRORLEVEL number Specifies a true condition if the last program run returned
+                    an exit code equal to or greater than the number specified.
+  command           Specifies the command to carry out if the condition is
+                    met.
+  string1==string2  Specifies a true condition if the specified text strings
+                    match.
+  EXIST filename    Specifies a true condition if the specified filename
+                    exists.
+</pre>
+
+<h2 id="INTERLNK">INTERLNK</h2>
+<p><b>External - DOS 5.02 and above</b></p>
+<p>Displays status of INTERLNK-INTERSVR redirected drives.</p>
+<pre class="syntax">
+INTERLNK [client=[server]]
+
+    client         Specifies a client drive to redirect to a server drive.
+                   Cancels redirection if no server drive is specified.
+    server         Specifies a server drive to redirect to a client drive.
+
+    Type INTERLNK with no parameters to show INTERLNK status.
+</pre>
+<dl>
+<dt>INTERLNK.EXE must be loaded as a device driver in CONFIG.SYS in order to use this command.
+</dl>
+
+<h2 id="INTERSVR">INTERSVR</h2>
+<p><b>External - DOS 5.02 and above</b></p>
+<p>Provides serial or parallel file transfer and printing capabilities via redirected drives.</p>
+<pre class="syntax">
+INTERSVR [drive:[...]] [/X=drive:[...]] [/LPT[:][n | address]]
+    [/COM[:][n | address]] [/BAUD:rate] [/V] [/B]
+
+    drive:        Specifies the drive(s) to redirect
+                  (by default, all drives are redirected).
+    /X=drive:     Specifies the drive(s) to exclude.
+    /LPT[n]       Specifies a port to scan. (/LPT scans all LPT ports).
+    /LPT[address] Specifies a port address to scan.
+    /COM[n]       Specifies a port to scan. (/COM scans all COM ports).
+    /COM[address] Specifies a port address to scan.
+    /BAUD:rate    Set a maximum serial baud rate.
+    /B            Displays the INTERLNK server screen in black and white.
+    /V            Prevents conflicts with a computer's timer.  Specify this
+                  switch if you have a serial connection between computers and
+                  one of them stops running when you use INTERLNK.
+
+INTERSVR /RCOPY
+
+Copies INTERLNK files from one computer to another, provided that the
+computers' serial ports are connected with a 7-wire null-modem cable.
+</pre>
+
+<h2 id="JOIN">JOIN</h2>
+<p><b>External - DOS 3.1 and above</b></p>
+<p>Joins a disk drive to a directory on another drive.</p>
+<pre class="syntax">
+JOIN [drive1: [drive2:]path]
+JOIN drive1: /D
+
+  drive1:        Specifies a disk drive that will appear as a directory on
+                 drive2.
+  drive2:        Specifies a drive to which you want to join drive1.
+  path           Specifies the directory to which you want to join drive1. It
+                 must be empty and cannot be the root directory.
+  /D             Cancels any previous JOIN commands for the specified drive.
+
+Type JOIN without parameters to list currently joined drives.
+</pre>
+
+<h2 id="KEYB">KEYB</h2>
+<p><b>External - DOS 3.3 and above</b></p>
+<p>Configures a keyboard for a specific language.</p>
+<pre class="syntax">
+KEYB [xx[,[yyy][,[drive:][path]filename]]] [/E] [/ID:nnn]
+
+  xx                      Specifies a two-letter keyboard code.
+  yyy                     Specifies the code page for the character set.
+  [drive:][path]filename  Specifies the keyboard definition file.
+  /E                      Specifies that an enhanced keyboard is installed.
+  /ID:nnn                 Specifies the keyboard in use.
+</pre>
+<dl>
+<dt>/ID is only available in DOS 4 and above.
+<dt>/E is only available in DOS 5 and above.
+<dt>KEYB replaces the commands KEYBFR, KEYBGR, KEYBIT, KEYBSP and KEYBUK from DOS 3.0 to 3.2.
+</dl>
+
+<h2 id="KEYBXX">KEYBxx</h2>
+<p><b>External - PC DOS 3.0 to PC DOS 3.2; MS-DOS 3.2</b></p>
+<p>Configures a keyboard for a specific language.</p>
+<pre class="syntax">
+KEYBFR
+KEYBGR
+KEYBIT
+KEYBSP
+KEYBUK
+</pre>
+<dl>
+<dt>KEYB replaces these commands in DOS 3.3 and above.
+</dl>
+
+<h2 id="LABEL">LABEL</h2>
+<p><b>External - PC DOS 3.0 and above; MS-DOS 3.1 and above</b></p>
+<p>Creates, changes, or deletes the volume label of a disk.</p>
+<pre class="syntax">
+LABEL [drive:][label]
+</pre>
+
+<h2 id="LOADFIX">LOADFIX</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Loads a program above the first 64K of memory, and runs the program.</p>
+<pre class="syntax">
+LOADFIX [drive:][path]filename
+
+Use LOADFIX to load a program if you have received the message
+"Packed file corrupt" when trying to load it in low memory.
+</pre>
+
+<h2 id="LOADHIGH_LH">LOADHIGH / LH</h2>
+<p><b>Internal - DOS 5.0 and above</b></p>
+<p>Loads a program into the upper memory area.</p>
+<pre class="syntax">
+LOADHIGH [drive:][path]filename [parameters]
+LOADHIGH [/L:region1[,minsize1][;region2[,minsize2]...] [/S]]
+         [drive:][path]filename [parameters]
+
+  /L:region1[,minsize1][;region2[,minsize2]]...
+              Specifies the region(s) of memory into which to load
+              the program.  Region1 specifies the number of the first
+              memory region; minsize1 specifies the minimum size, if
+              any, for region1.  Region2 and minsize2 specify the
+              number and minimum size of the second region, if any.
+              You can specify as many regions as you want.
+  /S          Shrinks a UMB to its minimum size while the program
+              is loading.
+  [drive:][path]filename
+              Specifies the location and name of the program.
+  parameters  Specifies any command-line information required by
+              the program.
+</pre>
+<dl>
+<dt>/L and /S are only available in DOS 6 and above.
+</dl>
+
+<h2 id="MEM">MEM</h2>
+<p><b>External - DOS 4.0 and above</b></p>
+<p>Displays the amount of used and free memory in your system.</p>
+<pre class="syntax">
+MEM [/CLASSIFY | /DEBUG | /FREE | /MODULE modulename] [/PAGE]
+
+  /CLASSIFY or /C  Classifies programs by memory usage. Lists the size of
+                   programs, provides a summary of memory in use, and lists
+                   the largest memory block available.
+  /DEBUG or /D     Displays status of all modules in memory, internal drivers,
+                   and other information.
+  /FREE or /F      Displays information about the amount of free memory left
+                   in both conventional and upper memory.
+  /MODULE or /M    Displays a detailed listing of a module's memory use.
+                   This option must be followed by the name of a module,
+                   optionally separated from /M by a colon.
+  /PAGE or /P      Pauses after each full screen of information.
+</pre>
+<dl>
+<dt>/CLASSIFY is only available in DOS 5 and above.
+<dt>/FREE, /MODULE and /PAGE are only available in DOS 6 and above.
+<dt>In DOS 6.2 and above numbers are displayed with separators. In PC DOS 6.3 and above the separators may be removed with the NO_SEP environment variable.
+</dl>
+
+<h2 id="MIRROR">MIRROR</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Records information about one or more disks.</p>
+<pre class="syntax">
+MIRROR [drive:[ ...]] [/1] [/Tdrive[-entries][ ...]]
+MIRROR [/U]
+MIRROR [/PARTN]
+
+  drive:       Specifies the drive for which you want to save information.
+  /1           Saves only the latest disk information (does not back up
+               previous information).
+  /Tdrive      Loads the deletion-tracking program for the specified drive.
+  -entries     Specifies maximum number of entries in the deletion-tracking
+               file.
+  /U           Unloads the deletion-tracking program.
+  /PARTN       Saves hard disk partition information to a floppy diskette.
+</pre>
+<dl>
+<dt>MIRROR is licensed from Central Point Software PC Tools.
+<dt>PC DOS 6.1 and above replace MIRROR with the somewhat similar DATAMON utility.
+</dl>
+
+<h2 id="MKDIR_MD">MKDIR / MD</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Creates a directory.</p>
+<pre class="syntax">
+MKDIR [drive:]path
+MD [drive:]path
+</pre>
+
+<h2 id="MODE">MODE</h2>
+<p><b>External - PC DOS 1.0 and above; MS-DOS 3.2 and above</b></p>
+<p>Configures system devices.</p>
+<pre class="syntax">
+<b>Enhanced syntax:</b>
+Printer port:      MODE LPTn[:] [COLS=c] [LINES=l] [RETRY=r]
+Serial port:       MODE COMm[:] [BAUD=b] [PARITY=p] [DATA=d] [STOP=s] [RETRY=r]
+Device Status:     MODE [device] [/STATUS]
+Redirect printing: MODE LPTn[:]=COMm[:]
+Prepare code page: MODE device CP PREPARE=((yyy[...]) [drive:][path]filename)
+Select code page:  MODE device CP SELECT=yyy
+Refresh code page: MODE device CP REFRESH
+Code page status:  MODE device CP [/STATUS]
+Display mode:      MODE [display-adapter][,n]
+                   MODE CON[:] [COLS=c] [LINES=n]
+Typematic rate:    MODE CON[:] [RATE=r DELAY=d]
+
+<b>Legacy syntax:</b>
+Printer port:      MODE LPTn[:][cols][,[lines][,retry]]
+Serial port:       MODE COMn[:]baud[,parity[,databits[,stopbits[,retry]]]]
+Redirect printing: MODE LPTn[:]=COMn[:]
+Display mode:      MODE [display][,shift]
+
+<b>Printer port parameters:</b>
+cols      Specifies the characters per line (80 or 132).
+lines     Specifies the lines per inch (6 or 8).
+retry     Specifies the retry action:
+          e Return an error from a status check of a busy port.
+          b Return busy from a status check of a busy port.
+          p Continue retrying until printer accepts output.
+          r Return ready from a status check of a busy port.
+          n Take no retry action (default).
+
+<b>Serial port parameters:</b>
+baud      Specifies the baud rate (110,150,300,600,1200,2400,4800,9600,19200).
+parity    Specifies the parity:
+          n none
+          o odd
+          e even (default)
+          m mark
+          s space
+databits  Specifies the number of data bits (5, 6, 7 or 8).
+stopbits  Specifies the number of stop bits (1, 1.5 or 2).
+retry     Specifies the retry action:
+          e Return an error from a status check of a busy port.
+          b Return busy from a status check of a busy port.
+          p Continue retrying until printer accepts output.
+          r Return ready from a status check of a busy port.
+          n Take no retry action (default).
+
+<b>Device status parameters:</b>
+device    Specifies the device (CON, COMn, LPTn, PRN).
+
+<b>Display mode parameters:</b>
+display   Specifies the display type (40, 80, BW40, BW80, C040, C080, or MONO).
+shift     Specifies whether to shift a CGA screen left or right (L or R).
+cols      Specifies the number of columns (40 or 80).
+lines     Specifies the number of lines (25, 43 or 50).
+
+<b>Typematic rate parameters:</b>
+rate      Specifies the typematic rate (1-32).
+delay     Specifies the typematic delay:
+          1=0.25 second, 2=0.50 second, 3=0.75 second, 4=1 second
+
+<b>Code page parameters:</b>
+yyy       Specifies the code page.
+filename  Specifies the code page information filename.
+</pre>
+<dl>
+<dt>Serial port and redirect printing are only available in DOS 1.1 and above.
+<dt>Code page support is only available in DOS 3.3 and above.
+<dt>Device status, display mode columns/lines, typematic rate and the enhanced syntax parameters are only available in DOS 4 and above.
+</dl>
+
+<h2 id="MORE">MORE</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Displays output one screen at a time.</p>
+<pre class="syntax">
+MORE &lt; [drive:][path]filename
+command-name | MORE
+
+  [drive:][path]filename  Specifies a file to display one screen at a time.
+  command-name            Specifies a command whose output will be displayed.
+</pre>
+
+<h2 id="MOUSE">MOUSE</h2>
+<p><b>External - DOS 5.02 and above</b></p>
+<p>Provides mouse pointer device support.</p>
+<pre class="syntax">
+MOUSE [mouse type] [interrupt] [sensitivity]
+      [accelerate] [cursor] [hardware cursor] OFF
+
+mouse type       /Cn (serial), /Z (PS2), /In (inPort), /B (bus)
+                  (n specifies a port and can be either 1 or 2)
+interrupt        /Rn (n specifies interrupt rate 0-4)
+sensitivity      /Hn (horizontal), /Vn (vertical), /Sn (horiz/vert)
+                  (n specifies range of 0-100)
+accelerate       /Pn (n specifies acceleration profile number)
+cursor           /Nn (cursor display delay), /M (force default cursor)
+                  (n specifies redraw rate 0-255)
+hardware cursor  /Y (use hardware cursor feature)
+OFF              Removes the mouse driver from memory.
+</pre>
+<dl>
+<dt>MOUSE is Microsoft Mouse driver version 8.20.
+</dl>
+
+<h2 id="MOVE">MOVE</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Moves files and renames files and directories.</p>
+<pre class="syntax">
+To move one or more files:
+MOVE [/Y | /-Y] [drive:][path]filename1[,...] destination
+To rename a directory:
+MOVE [drive:][path]dirname1 dirname2
+
+  /Y        Suppresses prompting to confirm overwriting of the destination.
+  /-Y       Causes prompting to confirm overwriting of the destination.
+            The switch /Y may be present in the COPYCMD environment variable.
+            This may be overridden with /-Y on the command line.
+
+  [drive:][path]filename1 Specifies the location and name of the file
+                          or files you want to move.
+  destination             Specifies the new location of the file. Destination
+                          can consist of a drive letter and colon, a directory
+                          name, or a combination. If you are moving only one
+                          file, you can also include a filename if you want
+                          to rename the file when you move it.
+  [drive:][path]dirname1  Specifies the directory you want to rename.
+  dirname2                Specifies the new name of the directory.
+</pre>
+<dl>
+<dt>/Y, /-Y and use of the COPYCMD environment variable are only available in DOS 6.2 and above.
+</dl>
+
+<h2 id="MSCDEX">MSCDEX</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Loads the CD-ROM support utility.</p>
+<pre class="syntax">
+MSCDEX /D:driver ... [/E] [/K] [/L:letter] [/M:buffers] [/S] [/V]
+
+  /D:driver   Specifies name of CD-ROM driver
+  /E          Load buffers in expanded memory (EMS)
+  /K          Load Kanji support
+  /L:letter   Specifies first drive letter to use
+  /M:buffers  Specifies number of sector buffers
+  /S          Load server environment support
+  /V          Display verbose memory usage statistics
+</pre>
+<dl>
+<dt>A CD-ROM device driver specifying the same /D:driver parameter must be loaded before running MSCDEX.
+<dt>MSCDEX.EXE was distributed separately before being included with DOS.
+</dl>
+
+<h2 id="MSD">MSD</h2>
+<p><b>External - MS-DOS 6.0 and above</b></p>
+<p>Provides detailed technical information about your computer.</p>
+<pre class="syntax">
+MSD [/I] [/F[drive:][path]filename] [/P[drive:][path]filename]
+    [/S[drive:][path][filename]]
+
+MSD [/B][/I]
+
+  /B                         Runs MSD using a black and white color scheme.
+  /I                         Bypasses initial hardware detection.
+  /F[drive:][path]filename   Requests input and writes an MSD report to the
+                             specified file.
+  /P[drive:][path]filename   Writes an MSD report to the specified file
+                             without first requesting input.
+  /S[drive:][path][filename] Writes a summary MSD report to the specified
+                             file. If no filename is specified, output is to
+                             the screen.
+</pre>
+<dl>
+<dt>MSD is only included with MS-DOS versions.
+</dl>
+
+<h2 id="NLSFUNC">NLSFUNC</h2>
+<p><b>External - DOS 3.3 and above</b></p>
+<p>Loads country-specific information.</p>
+<pre class="syntax">
+NLSFUNC [[drive:][path]filename]
+
+  [drive:][path]filename   Specifies the file containing country-specific
+                           information.
+</pre>
+
+<h2 id="PATH">PATH</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays or sets a search path for executable files.</p>
+<pre class="syntax">
+PATH [[drive:]path[;...]]
+PATH ;
+
+Type PATH ; to clear all search-path settings and direct DOS to search
+only in the current directory.
+Type PATH without parameters to display the current path.
+</pre>
+
+<h2 id="PAUSE">PAUSE</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Suspends processing of a batch program and displays the message "Press any key to continue...."</p>
+<pre class="syntax">
+PAUSE
+</pre>
+
+<h2 id="POWER">POWER</h2>
+<p><b>External - DOS 5.02 and above</b></p>
+<p>Reduces power used by your computer.</p>
+<pre class="syntax">
+POWER [ADV[:MAX | REG | MIN] | STD | OFF]
+
+  ADV[:MAX | REG | MIN] -- Reduces power by monitoring applications
+      and hardware devices. MAX provides the most power conservation,
+      REG provides average power conservation, and MIN provides the
+      least conservation.
+  STD -- Reduces power by monitoring hardware devices.
+  OFF -- Turns off power management.
+</pre>
+<dl>
+<dt>POWER.EXE must be loaded as a device driver in CONFIG.SYS in order to use this command.
+</dl>
+
+<h2 id="PRINT">PRINT</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Prints a text file while you are using other DOS commands.</p>
+<pre class="syntax">
+PRINT [/D:device] [/B:size] [/U:ticks1] [/M:ticks2] [/S:ticks3]
+      [/Q:qsize] [/T] [[drive:][path]filename[ ...]] [/C] [/P]
+
+  /D:device   Specifies a print device.
+  /B:size     Sets the internal buffer size, in bytes.
+  /U:ticks1   Waits the specified maximum number of clock ticks for the printer
+              to be available.
+  /M:ticks2   Specifies the maximum number of clock ticks it takes to print a
+              character.
+  /S:ticks3   Allocates the scheduler the specified number of clock ticks for
+              background printing.
+  /Q:qsize    Specifies the maximum number of files allowed in the print queue.
+  /T          Removes all files from the print queue.
+  /C          Cancels printing of the preceding filename and subsequent
+              filenames.
+  /P          Adds the preceding filename and subsequent filenames to the print
+              queue.
+
+Type PRINT without parameters to display the contents of the print queue.
+</pre>
+<dl>
+<dt>/D, /B, /U, /M, /S and /Q are only available in DOS 3 and above.
+</dl>
+
+<h2 id="PROMPT">PROMPT</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Changes the DOS command prompt.</p>
+<pre class="syntax">
+PROMPT [text]
+
+  text    Specifies a new command prompt.
+
+Prompt can be made up of normal characters and the following special codes:
+
+  $Q   = (equal sign)
+  $$   $ (dollar sign)
+  $T   Current time
+  $D   Current date
+  $P   Current drive and path
+  $V   DOS version number
+  $N   Current drive
+  $G   &gt; (greater-than sign)
+  $L   &lt; (less-than sign)
+  $B   | (pipe)
+  $H   Backspace (erases previous character)
+  $E   Escape code (ASCII code 27)
+  $_   Carriage return and linefeed
+
+Type PROMPT without parameters to reset the prompt to the default setting.
+</pre>
+
+<h2 id="QBASIC">QBASIC</h2>
+<p><b>External - MS-DOS 5.0 and above</b></p>
+<p>Starts the MS-DOS QBasic programming environment.</p>
+<pre class="syntax">
+QBASIC [/B] [/EDITOR] [/G] [/H] [/MBF] [/NOHI] [[/RUN] [drive:][path]filename]
+
+  /B          Allows use of a monochrome monitor with a color graphics card.
+  /EDITOR     Starts the MS-DOS Editor.
+  /G          Provides the fastest update of a CGA screen.
+  /H          Displays the maximum number of lines possible for your hardware.
+  /MBF        Converts the built-in functions MKS$, MKD$, CVS, and CVD to
+              MKSMBF$, MKDMBF$, CVSMBF, and CVDMBF, respectively.
+  /NOHI       Allows the use of a monitor without high-intensity support.
+  /RUN        Runs the specified Basic program before displaying it.
+  [[drive:][path]filename] Specifies the program file to load or run.
+</pre>
+<dl>
+<dt>QBASIC replaces GW-BASIC from earlier versions of MS-DOS.
+</dl>
+
+<h2 id="QCONFIG">QCONFIG</h2>
+<p><b>External - PC DOS 6.1 and above</b></p>
+<p>Displays detailed technical information about your computer.</p>
+<pre class="syntax">
+QCONFIG [/?][/A][/C][/D][/E][/I][/O[file]][/P][/Q] [key="text"]
+
+   /?      Displays this help information.
+   /A      Displays all Micro Channel adapters supported by QCONFIG.
+   /C      Displays additional detail on async ports.
+   /D      Displays a detailed listing of hardware.
+   /E      Displays current environment.
+   /I      Displays CONFIG.SYS &amp; AUTOEXEC.BAT.
+   /O      Redirects output to file QCONFIG.OUT.
+   /Ofile  Redirects output to file (anyname).
+   /P      Pauses the output between screens.
+   /Q      Does not display redirect message.
+key="text" Defines key with text to appear in output (must be last option).
+</pre>
+<dl>
+<dt>QCONFIG is only included with PC DOS versions and replaces the Microsoft MSD utility.
+</dl>
+
+<h2 id="RECOVER">RECOVER</h2>
+<p><b>External - DOS 2.0 to DOS 5.0</b></p>
+<p>Recovers readable information from a bad or defective disk.</p>
+<pre class="syntax">
+RECOVER [drive:][path]filename
+RECOVER drive:
+</pre>
+
+<h2 id="REM">REM</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Records comments (remarks) in a batch file or CONFIG.SYS.</p>
+<pre class="syntax">
+REM [comment]
+</pre>
+
+<h2 id="RENAME_REN">RENAME / REN</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Renames a file or files.</p>
+<pre class="syntax">
+RENAME [drive:][path]filename1 filename2
+REN [drive:][path]filename1 filename2
+
+Note that you cannot specify a new drive or path for your destination file.
+
+Use MOVE to move files from one directory to another, or to rename a directory.
+</pre>
+<dl>
+<dt>REN is only available in DOS 1.1 and above.
+</dl>
+
+<h2 id="REPLACE">REPLACE</h2>
+<p><b>External - DOS 3.2 and above</b></p>
+<p>Replaces files.</p>
+<pre class="syntax">
+REPLACE [drive1:][path1]filename [drive2:][path2] [/A] [/P] [/R] [/W]
+REPLACE [drive1:][path1]filename [drive2:][path2] [/P] [/R] [/S] [/W] [/U]
+
+  [drive1:][path1]filename Specifies the source file or files.
+  [drive2:][path2]         Specifies the directory where files are to be
+                           replaced.
+  /A                       Adds new files to destination directory. Cannot
+                           use with /S or /U switches.
+  /P                       Prompts for confirmation before replacing a file or
+                           adding a source file.
+  /R                       Replaces read-only files as well as unprotected
+                           files.
+  /S                       Replaces files in all subdirectories of the
+                           destination directory. Cannot use with the /A
+                           switch.
+  /W                       Waits for you to insert a disk before beginning.
+  /U                       Replaces (updates) only files that are older than
+                           source files. Cannot use with the /A switch.
+</pre>
+<dl>
+<dt>/U is only available in DOS 4 and above.
+</dl>
+
+<h2 id="RESTORE">RESTORE</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Restores files that were backed up by using the BACKUP command.</p>
+<pre class="syntax">
+RESTORE drive1: drive2:[path[filename]] [/S] [/P] [/B:date] [/A:date] [/E:time]
+  [/L:time] [/M] [/N] [/D]
+
+  drive1:  Specifies the drive on which the backup files are stored.
+  drive2:[path[filename]]
+           Specifies the file(s) to restore.
+  /S       Restores files in all subdirectories in the path.
+  /P       Prompts before restoring read-only files or files changed since
+           the last backup (if appropriate attributes are set).
+  /B       Restores only files last changed on or before the specified date.
+  /A       Restores only files changed on or after the specified date.
+  /E       Restores only files last changed at or earlier than the specified
+           time.
+  /L       Restores only files changed at or later than the specified time.
+  /M       Restores only files changed since the last backup.
+  /N       Restores only files that no longer exist on the destination disk.
+  /D       Displays files on the backup disk that match specifications.
+</pre>
+<dl>
+<dt>/B, /A, /E, /L, /M and /N are only available in DOS 3.3 and above.
+<dt>/D is only available in DOS 5 and above.
+</dl>
+
+<h2 id="REXX">REXX</h2>
+<p><b>External - PC DOS 7.0</b></p>
+<p>Execute a REXX program.</p>
+<pre class="syntax">
+REXX filename [parameters]
+
+  filename    Specifies the name of the REXX program to execute.
+  parameters  Specifies any parameters for the REXX program.
+</pre>
+
+<h2 id="REXXDUMP">REXXDUMP</h2>
+<p><b>External - PC DOS 7.0</b></p>
+<p>Dump the variables of an active REXX procedure.</p>
+<pre class="syntax">
+REXXDUMP
+</pre>
+
+<h2 id="RMDIR_RD">RMDIR / RD</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Removes (deletes) a directory.</p>
+<pre class="syntax">
+RMDIR [drive:]path
+RD [drive:]path
+</pre>
+
+<h2 id="SCANDISK">SCANDISK</h2>
+<p><b>External - MS-DOS 6.2 and above</b></p>
+<p>Runs the ScanDisk disk-repair program.</p>
+<pre class="syntax">
+To check and repair a drive, use the following syntax:
+   SCANDISK [drive: | /ALL] [/CHECKONLY | /AUTOFIX [/NOSAVE]] [/SURFACE]
+To check and repair an unmounted DriveSpace compressed volume file, use:
+   SCANDISK drive:\DRVSPACE.nnn [/CHECKONLY | /AUTOFIX[/NOSAVE]]
+To examine a file for fragmentation, use the following syntax:
+   SCANDISK /FRAGMENT [drive:][path]filename
+To undo repairs you made previously, use the following syntax:
+   SCANDISK /UNDO [drive:]
+For [drive:], specify the drive containing your Undo disk.
+
+/ALL         Checks and repairs all local drives.
+/AUTOFIX     Fixes damage without prompting.
+/CHECKONLY   Checks a drive, but does not repair any damage.
+/CUSTOM      Configures and runs ScanDisk according to SCANDISK.INI settings.
+/NOSAVE      With /AUTOFIX, deletes lost clusters rather than saving as files.
+/NOSUMMARY   With /CHECKONLY or /AUTOFIX, prevents ScanDisk from stopping at
+                    summary screens.
+/SURFACE     Performs a surface scan after other checks.
+/MONO        Configures ScanDisk for use with a monochrome display.
+
+To check and repair the current drive, type SCANDISK without parameters.
+</pre>
+<dl>
+<dt>SCANDISK is only included with MS-DOS versions.
+</dl>
+
+<h2 id="SET">SET</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays, sets, or removes DOS environment variables.</p>
+<pre class="syntax">
+SET [variable=[string]]
+
+  variable  Specifies the environment-variable name.
+  string    Specifies a series of characters to assign to the variable.
+
+Type SET without parameters to display the current environment variables.
+</pre>
+
+<h2 id="SETVER">SETVER</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Sets the version number that DOS reports to a program.</p>
+<pre class="syntax">
+Display current version table:  SETVER [drive:path]
+Add entry:                      SETVER [drive:path] filename n.nn
+Delete entry:                   SETVER [drive:path] filename /DELETE [/QUIET]
+
+  [drive:path]    Specifies location of the SETVER.EXE file.
+  filename        Specifies the filename of the program.
+  n.nn            Specifies the DOS version to be reported to the program.
+  /DELETE or /D   Deletes the version-table entry for the specified program.
+  /QUIET          Hides the message typically displayed during deletion of
+                  version-table entry.
+</pre>
+<dl>
+<dt>SETVER.EXE must be loaded as a device driver in CONFIG.SYS in order to use this command.
+</dl>
+
+<h2 id="SHARE">SHARE</h2>
+<p><b>External - DOS 3.0 and above</b></p>
+<p>Installs file-sharing and locking capabilities on your hard disk.</p>
+<pre class="syntax">
+SHARE [/F:space] [/L:locks] [/NOHMA]
+
+  /F:space   Allocates file space (in bytes) for file-sharing information.
+  /L:locks   Sets the number of files that can be locked at one time.
+  /NOHMA     Don't load code into the HMA.
+</pre>
+<dl>
+<dt>/NOHMA is only available in PC DOS 7.
+</dl>
+
+<h2 id="SHIFT">SHIFT</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Changes the position of replaceable parameters in a batch file.</p>
+<pre class="syntax">
+SHIFT
+</pre>
+
+<h2 id="SMARTDRV">SMARTDRV</h2>
+<p><b>External - DOS 6.0 and above</b></p>
+<p>Installs and configures the SMARTDrive disk-caching utility.</p>
+<pre class="syntax">
+SMARTDRV [/X] [[drive[+|-]]...] [/U] [/C | /R] [/L] [/V | /Q | /S]
+         [InitCacheSize [WinCacheSize]] [/E:ElementSize] [/B:BufferSize]
+
+/X              Disables write-behind caching for all drives.
+drive           Sets caching options on specific drive(s). The specified
+                drive(s) will have write-caching disabled unless you add +.
++               Enables write-behind caching for the specified drive.
+-               Disables all caching for the specified drive.
+/U              Do not load CD-ROM caching module.
+/C              Writes all information currently in write-cache to hard disk.
+/R              Clears the cache and restarts SMARTDrive.
+/L              Prevents SMARTDrive from loading itself into upper memory.
+/V              Displays SMARTDrive status messages when loading.
+/Q              Does not display status information.
+/S              Displays additional information about SMARTDrive's status.
+InitCacheSize   Specifies XMS memory (KB) for the cache.
+WinCacheSize    Specifies XMS memory (KB) for the cache with Windows.
+/E:ElementSize  Specifies how many bytes of information to move at one time.
+/B:BufferSize   Specifies the size of the read-ahead buffer.
+</pre>
+<dl>
+<dt>SMARTDRV was a device driver SMARTDRV.SYS in DOS 4 and 5.
+</dl>
+
+<h2 id="SORT">SORT</h2>
+<p><b>External - DOS 2.0 and above</b></p>
+<p>Sorts input and writes results to the screen, a file, or another device.</p>
+<pre class="syntax">
+SORT [/R] [/+n] &lt; [drive1:][path1]filename1 [&gt; [drive2:][path2]filename2]
+[command |] SORT [/R] [/+n] [&gt; [drive2:][path2]filename2]
+
+  /R                         Reverses the sort order; that is, sorts Z to A,
+                             then 9 to 0.
+  /+n                        Sorts the file according to characters in
+                             column n.
+  [drive1:][path1]filename1  Specifies a file to be sorted.
+  [drive2:][path2]filename2  Specifies a file where the sorted input is to be
+                             stored.
+  command                    Specifies a command whose output is to be sorted.
+</pre>
+
+<h2 id="SUBST">SUBST</h2>
+<p><b>External - DOS 3.1 and above</b></p>
+<p>Associates a path with a drive letter.</p>
+<pre class="syntax">
+SUBST [drive1: [drive2:]path]
+SUBST drive1: /D
+
+  drive1:        Specifies a virtual drive to which you want to assign a path.
+  [drive2:]path  Specifies a physical drive and path you want to assign to
+                 a virtual drive.
+  /D             Deletes a substituted (virtual) drive.
+
+Type SUBST with no parameters to display a list of current virtual drives.
+</pre>
+
+<h2 id="SYS">SYS</h2>
+<p><b>External - DOS 1.0 and above</b></p>
+<p>Copies DOS system files and command interpreter to a disk you specify.</p>
+<pre class="syntax">
+SYS [drive1:][path] drive2:
+
+  [drive1:][path] Specifies the location of the system files.
+  drive2:         Specifies the drive the files are to be copied to.
+</pre>
+<dl>
+<dt>[drive1:][path] is only available in DOS 4 and above.
+</dl>
+
+<h2 id="TIME">TIME</h2>
+<p><b>External - DOS 1.0<br>Internal - DOS 1.1 and above</b></p>
+<p>Displays or sets the system time.</p>
+<pre class="syntax">
+TIME [time]
+
+Type TIME with no parameters to display the current time setting and a prompt
+for a new one.  Press ENTER to keep the same time.
+</pre>
+<dl>
+<dt>[time] is only available in DOS 1.1 and above.
+</dl>
+
+<h2 id="TREE">TREE</h2>
+<p><b>External - PC DOS 2.0 and above; MS-DOS 3.2 and above</b></p>
+<p>Graphically displays the directory structure of a drive or path.</p>
+<pre class="syntax">
+TREE [drive:][path] [/F] [/A]
+
+  /F   Displays the names of the files in each directory.
+  /A   Uses ASCII instead of extended characters.
+</pre>
+<dl>
+<dt>/A is only available in DOS 4 and above.
+</dl>
+
+<h2 id="TRUENAME">TRUENAME</h2>
+<p><b>Internal - DOS 4.0 and above</b></p>
+<p>Returns a fully qualified filename.</p>
+<pre class="syntax">
+TRUENAME [drive:][path]filename
+</pre>
+
+<h2 id="TYPE">TYPE</h2>
+<p><b>Internal - DOS 1.0 and above</b></p>
+<p>Displays the contents of a text file.</p>
+<pre class="syntax">
+TYPE [drive:][path]filename
+</pre>
+
+<h2 id="UNDELETE">UNDELETE</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Restores files previously deleted with the DEL command.</p>
+<pre class="syntax">
+UNDELETE [[drive:][path]filename] [/DT | /DS | /DOS]
+UNDELETE [/LIST | /ALL | /PURGE[DRIVE] | /STATUS | /LOAD | /UNLOAD
+          /S[DRIVE] | /T[DRIVE]-entrys ]]
+
+  /LIST                Lists the deleted files available to be recovered.
+  /ALL                 Recovers files without prompting for confirmation.
+  /DOS                 Recovers files listed as deleted by MS-DOS.
+  /DT                  Recovers files protected by Delete Tracker.
+  /DS                  Recovers files protected by Delete Sentry.
+  /LOAD                Loads Undelete into memory for delete protection.
+  /UNLOAD              Unloads Undelete from memory.
+  /PURGE[drive]        Purges all files in the Delete Sentry directory.
+  /STATUS              Display the protection method in effect for each drive.
+  /S[drive]            Enables Delete Sentry method of protection.
+  /T[drive][-entrys]   Enables Delete Tracking method of protection.
+</pre>
+<dl>
+<dt>UNDELETE is licensed from Central Point Software PC Tools.
+</dl>
+
+<h2 id="UNFORMAT">UNFORMAT</h2>
+<p><b>External - DOS 5.0 and above</b></p>
+<p>Restores a disk erased by the FORMAT command.</p>
+<pre class="syntax">
+UNFORMAT drive: [/J]
+UNFORMAT drive: [/U] [/L] [/TEST] [/P]
+UNFORMAT /PARTN [/L]
+
+  drive:   Specifies the drive to unformat.
+  /J       Verifies that the mirror files agree with the system information
+           on the disk.
+  /U       Unformats without using MIRROR files.
+  /L       Lists all file and directory names found, or, when used with the
+           /PARTN switch, displays current partition tables.
+  /TEST    Displays information but does not write changes to disk.
+  /P       Sends output messages to printer connected to LPT1.
+  /PARTN   Restores disk partition tables.
+</pre>
+<dl>
+<dt>UNFORMAT is licensed from Central Point Software PC Tools.
+</dl>
+
+<h2 id="VER">VER</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays the DOS version.</p>
+<pre class="syntax">
+VER
+</pre>
+<dl>
+<dt>The undocumented /R switch displays the revision level and where DOS is loaded (low, HMA or ROM) in DOS 5 and above.
+</dl>
+
+<h2 id="VERIFY">VERIFY</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Tells DOS whether to verify that your files are written correctly to a disk.</p>
+<pre class="syntax">
+VERIFY [ON | OFF]
+
+Type VERIFY without a parameter to display the current VERIFY setting.
+</pre>
+
+<h2 id="VOL">VOL</h2>
+<p><b>Internal - DOS 2.0 and above</b></p>
+<p>Displays the disk volume label and serial number, if they exist.</p>
+<pre class="syntax">
+VOL [drive:]
+</pre>
+
+<h2 id="XCOPY">XCOPY</h2>
+<p><b>External - DOS 3.2 and above</b></p>
+<p>Copy entire directory trees.</p>
+<pre class="syntax">
+XCOPY [/Y|/-Y] source [destination] [/A|/M] [/D:date] [/P] [/S] [/E] [/V] [/W]
+  source       Specifies the file(s) to copy.
+  destination  Specifies the location and/or name of new files.
+  /A           Copies files with the archive attribute set,
+               doesn't change the attribute.
+  /M           Copies files with the archive attribute set,
+               turns off the archive attribute.
+  /D:date      Copies files changed on or after the specified date.
+  /P           Prompts you before creating each destination file.
+  /S           Copies directories and subdirectories except empty ones.
+  /E           Copies any subdirectories, even if empty.
+  /V           Verifies each new file.
+  /W           Prompts you to press a key before copying.
+  /Y           Suppresses prompting to confirm you want to overwrite an
+               existing destination file.
+  /-Y          Causes prompting to confirm you want to overwrite an
+               existing destination file.
+
+The switch /Y may be preset in the COPYCMD environment variable.
+This may be overridden with /-Y on the command line
+</pre>
+<dl>
+<dt>/Y, /-Y and use of the COPYCMD environment variable are only available in DOS 6.2 and above.
+</dl>
+
+</body>

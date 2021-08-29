@@ -1,0 +1,124 @@
+INT 20h
+This function jumps to the INT 21h dispatcher with AH=00h.
+
+INT 21h
+Maximum INT 21h function codes:
+1.0:      2Dh
+1.1:      2Eh
+2.0-2.1:  57h
+2.11:     58h
+3.0-3.1:  63h
+3.2:      64h
+3.3:      68h
+4.0+:     6Ch
+
+Functions 18h, 1Dh, 1Eh and 20h are unused in all versions of DOS as they correspond to CP/M functions which did not apply to DOS.
+Function 61h is used in DOS 3.0x only, it is unused in later versions.
+Function 6Bh is used in DOS 4.0x only, it is unused in later versions.
+
+The INT 21h dispatcher uses one of several internal stacks:
+DOS 1.0 has two 256-byte stacks (DSKSTACK and IOSTACK)
+DOS 1.1 has two 128-byte stacks (DSKSTACK and IOSTACK)
+DOS 2.x has three 160-byte stacks (AUXSTACK, DSKSTACK and IOSTACK)
+DOS 3.0+ has three 384-byte stacks (AUXSTACK, DSKSTACK and IOSTACK)
+
+The INT 21h dispatcher switches to one of its internal stacks based upon the function:
+AUXSTACK is used by functions 01h-0Ch during INT 24h error handling and function 59h
+DSKSTACK is used by most functions except 01h-0Ch
+IOSTACK is used by functions 01h-0Ch normally
+In DOS 2.x functions 50h and 51h use IOSTACK normally or AUXSTACK during INT 24h error handling
+In DOS 3.0 function 59h uses IOSTACK normally or AUXSTACK during INT 24h error handling
+In DOS 3.0+ functions 50h, 51h and 62h do not use an internal stack
+In DOS 3.05+ function 33h does not use an internal stack
+In DOS 3.1+ function 59h always uses AUXSTACK
+In DOS 3.2+ function 64h does not use an internal stack
+
+INT 22h
+This is the program termination address.
+During program loading the current value is saved at PSP:0Ah before the vector is updated.
+During program termination the previous value is restored from the PSP and DOS jumps to program termination address.
+
+INT 23h
+The DOS kernel issues INT 23h when Ctrl-C is detected.
+During program loading the current value is saved at PSP:0Eh.
+During program termination the previous value is restored from the PSP.
+
+INT 24h
+The DOS kernel issues INT 24h when a critical error is detected.
+During program loading the current value is saved at PSP:12h.
+During program termination the previous value is restored from the PSP.
+In DOS 1.0 the INT 24h value is not saved in the PSP. This may be used to distinguish DOS 1.0 from 1.1 since the value at PSP:12h will always be zero in DOS 1.0 and non-zero in DOS 1.1.
+
+INT 25h and INT 26h
+In DOS 1.x these functions are implemented in IBMBIO.COM.
+In DOS 2.0+ these functions are implemented in the DOS kernel and use DSKSTACK.
+In DOS 3.31+ these functions are enhanced to support >32MB partitions.
+These functions leave the flags on the stack, this is an artifact from DOS 1.x where these functions were in IBMBIO.COM and called directly from the DOS kernel via a far call.
+
+INT 27h
+In DOS 1.x this function is implemented in COMMAND.COM.
+In DOS 2.0+ this function is implemented in the DOS kernel, it converts the value in DX to paragraphs and jumps to the INT 21h dispatcher with AX=3100h.
+2.0-2.11:
+00DB:27E7 B80031        MOV     AX,3100
+00DB:27EA 83C20F        ADD     DX,+0F
+00DB:27ED B104          MOV     CL,04
+00DB:27EF D3EA          SHR     DX,CL
+00DB:27F1 E90BE4        JMP     0BFF
+
+3.0+:
+011F:5CE4 B80031        MOV     AX,3100
+011F:5CE7 83C20F        ADD     DX,+0F
+011F:5CEA D1DA          RCR     DX,1
+011F:5CEC B103          MOV     CL,03
+011F:5CEE D3EA          SHR     DX,CL
+011F:5CF0 E987B7        JMP     147A
+
+INT 28h
+INT 28h was added in DOS 2.0 to allow the resident print spooler (PRINT.COM) to gain control while DOS is idle.
+The DOS kernel issues INT 28h during the keyboard idle loop and once for every 4 (DOS 2.x and 3.x) or 64 (DOS 4+) characters output via INT 21h function 02h.
+INT 21h function 09h uses the function 02h code internally so strings printed via function 09h also contribute to the INT 28h character output count.
+
+INT 29h
+INT 29h was added in DOS 2.0 for fast console output. The DOS kernel issues INT 29h if the console driver has bit 4 set in the device attribute word.
+The default DOS console driver and ANSI.SYS handle INT 29h.
+
+INT 2Ah
+INT 2Ah was added in DOS 3.0 for networking and critical section support, it is handled by networking software.
+The DOS kernel issues the following calls:
+03h: check if drive is local or remote (3.1+)
+80h: enter critical section
+81h: exit critical section
+82h: exit all critical sections
+84h: keyboard idle loop
+
+INT 2Eh
+INT 2Eh was added in DOS 2.0 to allow a command to be processed as if it was entered from the command line and allows internal commands such as DIR to be executed from another program.
+This function is not re-entrant and should not be issued from a batch file.
+
+INT 2Fh
+In DOS 2.x this function was added as an API for the print spooler (PRINT.COM).
+In DOS 3.0+ it is redefined as the multiplex interrupt and used by many programs including PRINT.
+
+Functions hooked by IBMBIO.COM/IO.SYS:
+08h 00h-03h: DRIVER.SYS support (3.2+)
+13h: reset INT 13h vector (3.2+)
+16h 05h/06h: Windows 3.x support (5.0+)
+4Ah 01h/02h: HMA support (5.0+)
+
+Functions called by IBMBIO.COM/IO.SYS:
+1684h: Windows 3.x support (DOSMGR set focus) (5.0+)
+43xxh: XMS support (5.0+)
+4A00h: single floppy drive swap callout (5.0+)
+4A06h: RPL support (5.0+)
+
+Functions hooked by IBMDOS.COM/MSDOS.SYS:
+10h 00h: indicate SHARE not installed
+11h 00h: indicate redirector not installed
+12h 00h-2Fh: DOS internal functions (used by redirectors)
+14h 00h: indicate NLSFUNC not installed (3.3+)
+16h 03h/05h/06h/07h: Windows 3.x support (5.0+)
+46h 01h/02h: Windows 3.x support (5.0+)
+
+Functions called by IBMDOS.COM/MSDOS.SYS:
+11xxh: redirector
+14xxh: NLSFUNC (3.3+)

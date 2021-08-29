@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>Modified VIDE-CDD.SYS supporting native IDE mode</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<p><b style="font-size:large">Modified VIDE-CDD.SYS supporting native IDE mode</b></p>
+
+<p>VIDE-CDD.SYS is a universal IDE CD-ROM/DVD-ROM driver for DOS which only uses 5KB. Unfortunately it does not work on systems which use native IDE mode instead of legacy IDE mode (primary IDE ports 1F0h-1F7h and secondary IDE ports 170h-177h). Here is a patched version of VIDE-CDD.SYS v2.14 which supports native IDE mode by obtaining the correct I/O port address range from PCI configuration space. Functionality is unchanged in the case of legacy IDE mode. The patch only affects the initialization code so the resident size is unchanged. This patched version reports itself as Version 2.14a. Note AHCI is not supported as that is a different interface.</p>
+
+<p><b>Syntax:</b></p>
+<pre style="background:lightcyan;width:80ch">
+DEVICE=[drive:][path]VIDE-CDD.SYS /D:devicename
+or
+DEVICEHIGH=[drive:][path]VIDE-CDD.SYS /D:devicename
+
+devicename is usually MSCD001 and the same devicename must be used with MSCDEX.
+</pre>
+
+<p><a href="VIDE-CDD.ZIP">Download VIDE-CDD.SYS v2.14a</a> (6KB)</p>
+</body>

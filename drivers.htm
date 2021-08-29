@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>List of DOS device drivers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+.syntax {background:beige;width:80ch}
+</style>
+</head>
+<body>
+<h2>DOS device drivers</h2>
+<div><a href="#ANSI">ANSI.SYS</a></div>
+<div><a href="#CMOSCLK">CMOSCLK.SYS</a></div>
+<div><a href="#DISPLAY">DISPLAY.SYS</a></div>
+<div><a href="#DRIVER">DRIVER.SYS</a></div>
+<div><a href="#EMM386">EMM386.EXE</a></div>
+<div><a href="#HIMEM">HIMEM.SYS</a></div>
+<div><a href="#INTERLNK">INTERLNK.EXE</a></div>
+<div><a href="#POWER">POWER.EXE</a></div>
+<div><a href="#PRINTER">PRINTER.SYS</a></div>
+<div><a href="#RAMDRIVE">RAMDRIVE.SYS</a></div>
+<div><a href="#SETVER">SETVER.EXE</a></div>
+<div><a href="#VDISK">VDISK.SYS</a></div>
+
+<h2 id="ANSI">ANSI.SYS</h2>
+<p><b>DOS 2.0 and above</b></p>
+<p>ANSI console driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]ANSI.SYS [/X] [/K] [/R] [/S]
+
+  /X          Remaps extended keys independently on 101-key keyboards.
+  /K          Ignores extended keys on 101-key keyboards.
+  /R          Adjust line scrolling to improve readability with screen readers.
+  /S          Initializes the screen size byte (40h:84h) in the BIOS data area
+              for applications which expect this to be non-zero.
+</pre>
+<dl>
+<dt>/X and /K are only available in DOS 4 and above.
+<dt>/S is only available in DOS 5 and above.
+<dt>/R is only available in DOS 6 and above.
+</dl>
+
+<h2 id="CMOSCLK">CMOSCLK.SYS</h2>
+<p><b>PC DOS 5.02 and above</b></p>
+<p>CMOS clock driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]CMOSCLK.SYS
+</pre>
+<dl>
+<dt>Installing CMOSCLK.SYS will cause DOS to always access the CMOS real-time clock instead of the system timer for date/time requests.
+</dl>
+
+<h2 id="DISPLAY">DISPLAY.SYS</h2>
+<p><b>DOS 3.3 and above</b></p>
+<p>Code page support driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]DISPLAY.SYS CON[:]=(type[,[hwcp][,(n,m)]])
+
+  type        Specifies the display adapter type. This must be EGA.
+  hwcp        Specifies the hardware code page.
+  n           Specifies the number of code pages to support in addition to the
+              primary code page from 0 to 6.
+  m           Specifies the number of subfonts to support for each code page.
+</pre>
+
+<h2 id="DRIVER">DRIVER.SYS</h2>
+<p><b>DOS 3.2 and above</b></p>
+<p>Logical disk driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]DRIVER.SYS /D:number [/C] [/F:factor] [/H:heads] [/N]
+  [/S:sectors] [/T:tracks]
+
+  /D:number   Specifies the physical drive number.
+  /C          Specifies that the drive has changeline support.
+  /F:factor   Specifies the drive form factor:
+                0  160K/180K or 320K/360K
+                1  1.2M
+                2  720K (3.5-inch disk)
+                7  1.44M (3.5-inch disk)
+                9  2.88M (3.5-inch disk)
+  /H:heads    Specifies the maximum number of heads.
+  /N          Specifies a nonremovable block device.
+  /S:sectors  Specifies the number of sectors per track.
+  /T:tracks   Specifies the number of tracks.
+</pre>
+
+<h2 id="EMM386">EMM386.EXE</h2>
+<p><b>DOS 5.0 and above</b></p>
+<p>EMS driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]EMM386.EXE [ON|OFF|AUTO] [memory] [MIN=size]
+  [W=ON|OFF] [Mx|FRAME=mmmm|/Pmmmm] [Pn=mmmm] [X=mmmm-nnnn] [I=mmmm-nnnn]
+  [RAM=mmmm-nnnn] [ROM=mmmm-nnnn] [WIN=mmmm-nnnn] [B=mmmm] [L=minxms]
+  [A=altregs] [H=handles|/Hhandles] [D=nnn] [ALTBOOT] [HIGHSCAN]
+  [NOEMS] [NOVCPI] [NOHI] [NOMOVEXBDA] [MOVEXBDAHI] [VERBOSE]
+
+  ON|OFF|AUTO    Activates or suspends EMM386.EXE device driver,
+                 or places it in auto mode.
+  memory         Specifies the maximum amount of extended memory to allocate
+                 for EMS use in kilobytes from 64 to 32768. The default is
+                 all available memory.
+  MIN=size       Specifies the minimum amount of extended memory to allocate
+                 for EMS use in kilobytes from 0 to available memory.
+                 The default is 256.
+  W=ON|OFF       Turns on or off Weitek coprocessor support.
+  FRAME=mmmm     Specifies the EMS page frame address.
+  Pn=mmmm        Specifies the segment address of a specific EMS page from
+                 0 to 255.
+  X=mmmm-nnnn    Specifies an address range to exclude from use as an EMS page
+                 or upper memory blocks.
+  I=mmmm-nnnn    Specifies an address range to include for use as an EMS page
+                 or upper memory blocks.
+  RAM=mmmm-nnnn  Specifies an address range to use as upper memory blocks.
+  ROM=mmmm-nnnn  Specifies an address range that is used as shadow RAM.
+  WIN=mmmm-nnnn  Specifies an address range to reserve for Windows 3.x.
+  B=mmmm         Specifies the lowest segment address available for EMS banking
+                 in the range 1000h to 4000h.
+  L=minxms       Specifies to amount to extended memory to leave available.
+                 The default is 0.
+  A=altregs      Specifies the number of fast alternate register sets to
+                 allocate from 0 to 254.
+  H=handles      Specifies the number of expanded memory handles from 2 to 255.
+                 The default is 64.
+  D=nnn          Specifies the amount of memory to reserve for buffered DMA.
+                 in kilobytes from 16 to 256. The default is 16.
+  ALTBOOT        Specifies that an alternate boot handler be used when
+                 Ctrl-Alt-Del is pressed. This switch should only be used
+                 in the event of unusual behavior when rebooting with
+                 EMM386 installed.
+  HIGHSCAN       Specifies that an additional scan is used to search for
+                 available upper memory blocks. This switch may cause
+                 areas to be misidentifed as available upper memory on some
+                 systems.
+  NOEMS          Disables EMS support.
+  NOVCPI         Disables VCPI support.
+  NOHI           Disables loading of EMM386 high even if upper memory is
+                 available.
+  NOMOVEXBDA     Disables relocation of the XBDA to conventional memory.
+  MOVEXBDAHI     Loads the XBDA into upper memory if available.
+  VERBOSE        Display status and error messages.
+</pre>
+<dl>
+<dt>EMM386 was originally developed by Compaq as CEMM (Compaq Expanded Memory Manager) and was distributed separately before being included with DOS.
+<dt>ALTBOOT, HIGHSCAN, NOHI, NOVCPI and VERBOSE are only available in DOS 6 and above.
+<dt>MOVEXBDAHI is only available in PC DOS 7.
+</dl>
+
+<h2 id="HIMEM">HIMEM.SYS</h2>
+<p><b>DOS 5.0 and above</b></p>
+<p>XMS driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]HIMEM.SYS [/A20CONTROL:ON|OFF] [/CPUCLOCK:ON|OFF] [/EISA]
+  [/FASTA20] [/HMAMIN=m] [/INT15=n] [/MACHINE:xxxx] [/NUMHANDLES=n]
+  [/SHADOWRAM:ON|OFF] [/VERBOSE]
+
+  /A20CONTROL    Specifies whether to take control of the A20 line if it was
+                 enabled when HIMEM is loaded. The default is ON.
+  /CPUCLOCK      Specifies whether to preserve the CPU clock rate on older
+                 systems. The default is OFF.
+  /EISA          Specifies that HIMEM should allocate memory beyond 16MB on
+                 EISA machines.
+  /FASTA20       Specifies that the port 92h fast A20 handler should be used
+                 if supported.
+  /HMAMIN=m      Specifies the minimum amount of memory in kilobytes required
+                 for an application to use the HMA.
+  /INT15=n       Specifies the amount of memory to reserve for INT 15h
+                 allocation in kilobytes.
+  /MACHINE:xxxx  Specifies the machine type to load a specific A20 handler for
+                 older systems. The value may be a name or a number:
+                   1  at                PC AT or compatible (default)
+                   2  ps2               PS/2
+                   3  ptlcascade        Phoenix Cascade BIOS
+                   4  hpvectra          HP Classic Vectra
+                   5  att6300plus       AT&amp;T 6300 Plus
+                   6  acer1100          Acer 1100
+                   7  toshiba           Toshiba 1600 and 1200XE
+                   8  wyse              Wyse 12.5 MHz 286
+                   9  tulip             Tulip SX
+                  10  zenith            Zenith ZBIO
+                  11  at1               PC AT (alternate delay 1)
+                  12  at2 / css         PC AT (alternate delay 2)
+                  13  at3 / philips     PC AT (alternate delay 3)
+                  14  fasthp            HP Vectra
+                  15  ibm7552           IBM 7552
+                  16  bullmicral        Bull Micral 60
+                  17  dell              DELL XBIOS
+  /NUMHANDLES=n  Specifies the number of extended memory handles from 1 to 128.
+                 The default is 32.
+  /SHADOWRAM     Specifies whether to disable shadow RAM on Compaq systems.
+  /VERBOSE       Display status and error messages.
+</pre>
+<dl>
+<dt>HIMEM.SYS was distributed separately before being included with DOS.
+<dt>DOS 5 HIMEM.SYS supports XMS 2.0, DOS 6 and above versions support XMS 3.0.
+<dt>/EISA and /VERBOSE are only available in DOS 6 and above.
+<dt>/FASTA20 is only available in PC DOS 7.
+</dl>
+
+<h2 id="INTERLNK">INTERLNK.EXE</h2>
+<p><b>DOS 5.02 and above</b></p>
+<p>Provides serial or parallel file transfer and printing capabilities via redirected drives.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]INTERLNK.EXE [/DRIVES:n] [/NOPRINTER] [/BAUD:rate]
+  [/COM[:][n|address]] [/LPT[:][n|address]] [/AUTO] [/NOSCAN] [/LOW] [/V]
+
+  /DRIVES:n      Specifies the maximum number of drives to redirect.
+                 The default is 3.
+  /NOPRINTER     Specifies that printers are not to be redirected.
+  /BAUD:rate     Set a maximum serial baud rate.
+  /COM[n]        Specifies a port to scan. (/COM scans all COM ports).
+  /COM[address]  Specifies a port address to scan.
+  /LPT[n]        Specifies a port to scan. (/LPT scans all LPT ports).
+  /LPT[address]  Specifies a port address to scan.
+  /AUTO          Does not load device driver if no connection is made
+                 at start up time.
+  /NOSCAN        Do not scan for connections when the system is restarted.
+  /LOW           Load INTERLNK.EXE into conventional memory even if
+                 upper memory is available.
+  /V             Prevents conflicts with a computer's timer. Specify this
+                 switch if you have a serial connection between computers and
+                 one of them stops running when you use INTERLNK.
+</pre>
+
+<h2 id="POWER">POWER.EXE</h2>
+<p><b>DOS 5.02 and above</b></p>
+<p>Reduces power used by your computer.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]POWER.EXE [ADV[:MAX|REG|MIN]|STD|OFF] [/LOW]
+
+  ADV[:MAX|REG|MIN] - Reduces power by monitoring applications
+      and hardware devices. MAX provides the most power conservation,
+      REG provides average power conservation, and MIN provides the
+      least conservation.
+  STD - Reduces power by monitoring hardware devices.
+  OFF - Turns off power management.
+  /LOW - Load POWER.EXE into conventional memory even if upper memory
+         is available.
+</pre>
+
+<h2 id="PRINTER">PRINTER.SYS</h2>
+<p><b>DOS 3.3 to DOS 6.3</b></p>
+<p>Code page support driver.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]PRINTER.SYS LPTx[:]=(type[,[hwcp][,n]])
+
+  type        Specifies the printer type. This must be 4201, 4208 or 5202.
+  hwcp        Specifies the hardware code page.
+  n           Specifies the number of code pages to support in addition to the
+              primary code page from 0 to 6.
+</pre>
+
+<h2 id="RAMDRIVE">RAMDRIVE.SYS</h2>
+<p><b>MS-DOS 3.2 and above; PC DOS 5.0 and above</b></p>
+<p>RAM drive.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]RAMDRIVE.SYS [disksize [sectorsize [direntries]]] [/E|/A]
+
+  disksize    Specifies the size of the RAM disk in kilobytes.
+              The default is 64.
+  sectorsize  Specifies the disk sector size. Valid values are 128, 256 or 512.
+              The default is 512.
+  direntries  Specifies the number of root directory entries from 2 to 1024.
+              The default is 64.
+  /E          Specifies the RAM disk is created in extended memory.
+  /A          Specifies the RAM disk is created in expanded memory.
+</pre>
+<dl>
+<dt>If /E or /A is not specified then the RAM disk is created in conventional memory.
+<dt>In DOS 3.2 to 4.0 RAMDRIVE.SYS directly accesses extended memory via INT 15h. In DOS 5 and above it uses XMS.
+</dl>
+
+<h2 id="SETVER">SETVER.EXE</h2>
+<p><b>DOS 5.0 and above</b></p>
+<p>Sets the version number that DOS reports to a program.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]SETVER.EXE
+</pre>
+
+<h2 id="VDISK">VDISK.SYS</h2>
+<p><b>PC DOS 3.0 to PC DOS 4.0</b></p>
+<p>RAM drive.</p>
+<pre class="syntax">
+DEVICE=[drive:][path]VDISK.SYS [disksize [sectorsize [direntries]]] [/E|/X]
+
+  disksize    Specifies the size of the RAM disk in kilobytes.
+              The default is 64.
+  sectorsize  Specifies the disk sector size. Valid values are 128, 256 or 512.
+              The default is 128.
+  direntries  Specifies the number of root directory entries from 2 to 512.
+              The default is 64.
+  /E          Specifies the RAM disk is created in extended memory.
+  /X          Specifies the RAM disk is created in expanded memory.
+</pre>
+<dl>
+<dt>/X is only available in PC DOS 4.
+<dt>VDISK.SYS directly accesses extended memory via INT 15h.
+<dt>RAMDRIVE.SYS replaces VDISK.SYS in PC DOS 5 and above.
+<dt>PC DOS 3.0 to 3.2 includes a source code listing (VDISK.LST).
+</dl>
+
+</body>
