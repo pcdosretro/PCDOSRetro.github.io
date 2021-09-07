@@ -87,8 +87,6 @@ PgDn 3                  51      51/00   51/00   51/33   51/33   76/00   76/00   
 Ins 0                   52      52/00   52/00   52/30   52/30     -     92/00   00/#    00/#
 Del .                   53      53/00   53/00   53/2E   53/2E     -     93/00     -       -
 SysReq (84-key only)    54        *       *       *       *       *       *       *       *
-PrtSc/SysReq (101-key)  **        *       *       *       *     72/00   72/00     *       *
-Pause/Break (101-key)   **        *       *       *       *     00/00   00/00     *       *
 F11 (101-key)           57        -     85/00     -     87/00     -     89/00     -     8B/00
 F12 (101-key)           58        -     86/00     -     88/00     -     8A/00     -     8C/00
 Home (101-key)          E0 47   47/00   47/E0   47/00   47/E0   77/00   77/E0     -     97/00
@@ -105,6 +103,8 @@ Delete (101-key)        E0 53   53/00   53/E0   53/00   53/E0     -     93/E0   
 Enter (101-key)         E0 1C   1C/0D   E0/0D   1C/0D   E0/0D   1C/0A   E0/0A     -     A6/00
 Right Ctrl (101-key)    E0 1D     *       *       *       *       *       *       *       *
 Right Alt (101-key)     E0 38     *       *       *       *       *       *       *       *
+PrtSc/SysReq (101-key)  **        *       *       *       *     72/00   72/00     *       *
+Pause/Break (101-key)   **        *       *       *       *     00/00   00/00     *       *
 Left \ | (102-key)      56      56/5C   56/5C   56/7C   56/7C     -       -       -       -
 Left Win (104-key)      E0 5B     -       -       -       -       -       -       -       -
 Right Win (104-key)     E0 5C     -       -       -       -       -       -       -       -
@@ -118,5 +118,7 @@ Menu (104-key)          E0 5D     -       -       -       -       -       -     
 PrtSc: E0 2A E0 37
 Ctrl or Shift PrtSc: E0 37
 Alt SysReq: 54
-Pause: E1 1D 45 E1 9D C5
-Ctrl Break: E0 46 E0 C6
+Pause: E1 1D 45 E1 9D C5 (no break code)
+Ctrl Break: E0 46 E0 C6 (no break code)
+
+Note: Scan codes 55,59,5A are not used on standard keyboards
