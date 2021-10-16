@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://pcdosretro.github.io/</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/commands.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/config.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/drivers.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosfunc.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosblks.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosint2f.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/envvar.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/devinfo.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosver.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosapinotes.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/doshist.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosmods.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/pcdos7patch.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/PC%20DOS%207%20Technical%20Update.pdf</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/pcdos-disks.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dosdispatcher.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/sysvars.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/removedfuncs.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/multitaskingmsdos4.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/pcdos2000diffs.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/enhdebug.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/vide-cdd.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/hltidle.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/bootldr.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/IBMPCBIOS.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/IBMBIOS.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/biosfunc.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/biosdata.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/scancodes.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/pcints.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/80x86.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/EMS32.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/EMS40.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/XMS20.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/XMS30.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/VCPI.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/VDS.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dpmispec.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/dpmispec1.pdf</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/VBE12.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/VBE20.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/VBE30.pdf</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/fatgen.pdf</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/MSCDEX21.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/omf.pdf</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/MBR.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/masmhist.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/mschist.txt</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/books.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pcdosretro.github.io/int21func61.htm</loc>
+  <lastmod>2021-10-09T15:29:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
