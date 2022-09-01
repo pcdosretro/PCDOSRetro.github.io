@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+<title>List of undocumented DOS functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<p>DOS has a number of undocumented functions and features. Many of the functions dealt with internal tables or networking but some were seemingly not documented simply to give Microsoft an unfair advantage by doing things which other developers were unaware of. Microsoft did document some of these functions in the MS-DOS 5.0 Programmer's Reference. Of course, since DOS was relatively small, all of the undocumented were eventually figured out.
+<table style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px" cellspacing="1" cellpadding="2" border="1">
+<tbody>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+<th>DOS versions</th>
+<th>Ever documented?</th>
+<th>Notes</th>
+</tr>
+<tr>
+<td>INT 21h func 1Fh</td>
+<td>Get disk parameter block for default drive</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>The DPB format changed slightly from DOS 3.x to DOS 4.0+</td>
+</tr>
+<tr>
+<td>INT 21h func 32h</td>
+<td>Get disk parameter block for specified drive</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>The DPB format changed slightly from DOS 3.x to DOS 4.0+</td>
+</tr>
+<tr>
+<td>INT 21h func 3302h</td>
+<td>Swap Ctrl-Break flag</td>
+<td>3.1+</td>
+<td>No</td>
+<td>Gets the current break flag and sets a new break flag in a single function call</td>
+</tr>
+<tr>
+<td>INT 21h func 34h</td>
+<td>Get InDOS flag pointer</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>In DOS 3.0+ the DOS critical error flag immediately precedes this byte</td>
+</tr>
+<tr>
+<td>INT 21h func 37h</td>
+<td>Get or set switch character</td>
+<td>2.0+</td>
+<td>Some OEM docs</td>
+<td>Largely deprecated since most programs did not use this function</td>
+</tr>
+<tr>
+<td>INT 21h func 4B01h</td>
+<td>Load program</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>Loads a program into memory without executing it and returns the program's SS:SP and CS:IP in the exec parameter block; the current PSP is set to that of loaded program</td>
+</tr>
+<tr>
+<td>INT 21h func 50h</td>
+<td>Set current PSP</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 51h</td>
+<td>Get current PSP</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>Documented function 62h is a duplicate of this function</td>
+</tr>
+<tr>
+<td>INT 21h func 52h</td>
+<td>Get DOS internal tables (<a href="sysvars.htm">SYSVARS</a>) pointer</td>
+<td>2.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 53h</td>
+<td>Create disk parameter block</td>
+<td>2.0+</td>
+<td>No</td>
+<td>This is used by DOS initialization code to create DPBs from BPBs for standard disk drives</td>
+</tr>
+<tr>
+<td>INT 21h func 55h</td>
+<td>Create program PSP</td>
+<td>2.0+</td>
+<td>No</td>
+<td>This function shares code with function 26h (Create PSP) but creates a child PSP</td>
+</tr>
+<tr>
+<td>INT 21h func 5Dh</td>
+<td>File sharing</td>
+<td>3.0+</td>
+<td>No</td>
+<td>Functions 5D00h-5D05h are used by SHARE.EXE; functions 5D07h-5D09h are used by networking for printers</td>
+</tr>
+<tr>
+<td>INT 21h func 5D0Ah</td>
+<td>Set extended error info</td>
+<td>3.1+</td>
+<td>Yes, DOS 5.0</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 5D0Bh</td>
+<td>Get DOS swappable data area list</td>
+<td>4.0 only</td>
+<td>No</td>
+<td>Similar to function 5D06h (Get DOS swappable data area pointer)</td>
+</tr>
+<tr>
+<td>INT 21h func 5E01h</td>
+<td>Set machine name</td>
+<td>3.0+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5E04h</td>
+<td>Set print mode</td>
+<td>3.1+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5E05h</td>
+<td>Get print mode</td>
+<td>3.1+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5F00h</td>
+<td>Get redirection mode</td>
+<td>3.1+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5F01h</td>
+<td>Set redirection mode</td>
+<td>3.1+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5F05h</td>
+<td>Get redirection list entry extended</td>
+<td>4.0+</td>
+<td>No</td>
+<td>Used by networking</td>
+</tr>
+<tr>
+<td>INT 21h func 5F06h</td>
+<td>Get IFS function entry</td>
+<td>4.0 only</td>
+<td>No</td>
+<td>Similar to function 5F05h, executes INT 2Fh function 111Eh; DOS 4 FILESYS command uses this function</td>
+</tr>
+<tr>
+<td>INT 21h func 5F07h</td>
+<td>Enable drive</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 5F08h</td>
+<td>Disable drive</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 60h</td>
+<td>Qualify filename</td>
+<td>3.0+</td>
+<td>No</td>
+<td>DOS 4.0+ TRUENAME command uses this</td>
+</tr>
+<tr>
+<td>INT 21h func 61h</td>
+<td>Path parse</td>
+<td>3.0 only</td>
+<td>No</td>
+<td>More info: <a href="int21func61.htm">Path parse</a></td>
+</tr>
+<tr>
+<td>INT 21h func 63h</td>
+<td>Get DBCS lead byte table pointer</td>
+<td>3.0+</td>
+<td>Some OEM docs</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 64h</td>
+<td>Set wait for external event flag</td>
+<td>3.2+</td>
+<td>No</td>
+<td>This was primarily meant for the PC Convertible</td>
+</tr>
+<tr>
+<td>INT 21h func 6523h</td>
+<td>Yes/no check</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 65A0h</td>
+<td>Uppercase filename character</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 65A1h</td>
+<td>Uppercase filename string</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 65A2h</td>
+<td>Uppercase filename ASCIIZ string</td>
+<td>4.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 21h func 69h</td>
+<td>Get or set media info</td>
+<td>4.0+</td>
+<td>No</td>
+<td>Gets or sets the volume label and serial number in the extended BPB in addition to returning the file system type</td>
+</tr>
+<tr>
+<td>INT 21h func 6Ah</td>
+<td>Commit file</td>
+<td>4.0+</td>
+<td>No</td>
+<td>Duplicate of documented function 68h</td>
+</tr>
+<tr>
+<td>INT 21h func 6Bh</td>
+<td>IFS IOCTL</td>
+<td>4.0 only</td>
+<td>No</td>
+<td>Executes INT 2Fh function 112Fh</td>
+</tr>
+<tr>
+<td>INT 28h</td>
+<td>Idle handler</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>INT 28h is issued during the DOS keyboard idle loop. INT 28h is also called once for every 64 characters output (every 4 characters output in DOS 2.x and 3.x) via INT 21h function 02h (note INT 21h function 09h uses the function 02h code). INT 28h was originally added so that PRINT could do background printing</td>
+</tr>
+<tr>
+<td>INT 29h</td>
+<td>Fast character output</td>
+<td>2.0+</td>
+<td>Yes, DOS 5.0</td>
+<td>Used by the builtin CON driver and ANSI.SYS for fast console output. Drivers which support this will have bit 4 set in their device attribute word</td>
+</tr>
+<tr>
+<td>INT 2Ah</td>
+<td>Network/critical section</td>
+<td>3.0+</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>INT 2Eh</td>
+<td>Execute command</td>
+<td>2.0+</td>
+<td>Partially, DOS 5.0</td>
+<td>The MS-DOS 5.0 Programmer's Reference lists this as "Reload Transient" but gives no further details</td>
+</tr>
+</tbody>
+</table>
+<p>Additional notes:</p>
+<ul>
+<li>INT 21 functions 11h and 12h (FCB find first file and FCB find next file) return the file's directory entry after the unopened FCB in the DTA
+<li>INT 21 function 4Eh (Find first file) returns attribute value 40h to indicate a device name. Device names will never be returned if wildcards are used.
+<li>Undocumented PSP fields:
+<ul>
+<li>16h-17h: Parent PSP segment (2.0+)
+<li>18h-2Bh: Default file table (20 bytes) (2.0+)
+<li>2Eh-31h: Stack pointer (SS:SP) after last DOS call (2.0+)
+<li>32h-33h: File table size (default 20) (3.0+)
+<li>34h-37h: File table pointer (default PSP:18h) (3.0+)
+<li>38h-3Bh: Pointer to next PSP (SHARE only) (3.0+)
+<li>40h-41h: DOS version for SETVER (4.0+)
+</ul>
+</ul>
+</body>
