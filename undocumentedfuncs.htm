@@ -166,14 +166,14 @@
 <td>Enable drive</td>
 <td>4.0+</td>
 <td>No</td>
-<td></td>
+<td>Sets the in use bit in the drive's CDS flags</td>
 </tr>
 <tr>
 <td>INT 21h func 5F08h</td>
 <td>Disable drive</td>
 <td>4.0+</td>
 <td>No</td>
-<td></td>
+<td>Clears the in use bit in the drive's CDS flags</td>
 </tr>
 <tr>
 <td>INT 21h func 60h</td>
@@ -264,7 +264,7 @@
 <td>Get or set media info</td>
 <td>4.0+</td>
 <td>No</td>
-<td>Gets or sets the volume label and serial number in the extended BPB in addition to returning the file system type</td>
+<td>Uses function 440Dh to get (IOCTL code 0866h) or set (IOCTL code 0846h) the media ID (volume label, serial number, and file system type) in the extended BPB</td>
 </tr>
 <tr>
 <td>INT 21h func 6Ah</td>
@@ -312,8 +312,9 @@
 </table>
 <p>Additional notes:</p>
 <ul>
-<li>INT 21 functions 11h and 12h (FCB find first file and FCB find next file) return the file's directory entry after the unopened FCB in the DTA
-<li>INT 21 function 4Eh (Find first file) returns attribute value 40h to indicate a device name. Device names will never be returned if wildcards are used.
+<li>INT 21h functions 11h and 12h (FCB find first file and FCB find next file) return the file's directory entry after the unopened FCB in the DTA, this was documented in DOS 5.0.
+<li>INT 21h function 4Eh (Find first file) returns attribute value 40h to indicate a device name. Device names will never be returned if wildcards are used.
+<li>INT 21h function 440Dh, IOCTL codes 0846h (Set media ID) and 0866h (Get media ID) were documented in DOS 5.0 but function 69h was not.
 <li>Undocumented PSP fields:
 <ul>
 <li>16h-17h: Parent PSP segment (2.0+)
@@ -324,5 +325,7 @@
 <li>38h-3Bh: Pointer to next PSP (SHARE only) (3.0+)
 <li>40h-41h: DOS version for SETVER (4.0+)
 </ul>
+<li>The disk parameter block (DPB) was undocumented prior to DOS 5.0. The DPB format changed slightly from DOS 3.x to DOS 4.0 due to the sectors per FAT field being increased from a byte to a word.
 </ul>
+<p>For more info see <a href="dosfunc.txt">DOS functions</a>, <a href="dosblks.txt">DOS internal tables</a> and <a href="sysvars.htm">SYSVARS</a>
 </body>
