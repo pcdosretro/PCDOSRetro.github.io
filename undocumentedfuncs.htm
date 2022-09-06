@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<p>DOS has a number of undocumented functions and features. Many of the functions dealt with internal tables or networking but some were seemingly not documented simply to give Microsoft an unfair advantage by doing things which other developers were unaware of. Microsoft did document some of these functions in the MS-DOS 5.0 Programmer's Reference. Of course, since DOS was relatively small, all of the undocumented were eventually figured out.
+<p>DOS has a number of undocumented functions and features. Many of the functions dealt with internal tables or networking but some were seemingly not documented simply to give Microsoft an unfair advantage by doing things which other developers were unaware of. Microsoft did document some of these functions in the MS-DOS 5.0 Programmer's Reference. Of course, since DOS was relatively small, all of the undocumented were eventually figured out.</p>
 <table style="border-collapse:collapse;border-color:rgb(136,136,136);border-width:1px" cellspacing="1" cellpadding="2" border="1">
 <tbody>
 <tr>
@@ -236,28 +236,28 @@
 <td>Uppercase filename character</td>
 <td>4.0+</td>
 <td>No</td>
-<td></td>
+<td>Not functional until PC DOS 7.0 due to a bug</td>
 </tr>
 <tr>
 <td>INT 21h func 65A1h</td>
 <td>Uppercase filename string</td>
 <td>4.0+</td>
 <td>No</td>
-<td></td>
+<td>Not functional until PC DOS 7.0 due to a bug</td>
 </tr>
 <tr>
 <td>INT 21h func 65A2h</td>
 <td>Uppercase filename ASCIIZ string</td>
 <td>4.0+</td>
 <td>No</td>
-<td></td>
+<td>Not functional until PC DOS 7.0 due to a bug</td>
 </tr>
 <tr>
 <td>INT 21h func 65A3h</td>
 <td>Yes/no check</td>
 <td>4.0+</td>
 <td>No</td>
-<td>Duplicate of function 6523h</td>
+<td>Not functional until PC DOS 7.0 due to a bug; exists because of code which checks for AL &gt;= 20h, then checks the high bit to determine which character table to use and masks off the high bit. Since the character table is irrelevant for the yes/no check, this is a duplicate of function 6523h</td>
 </tr>
 <tr>
 <td>INT 21h func 69h</td>
@@ -314,7 +314,7 @@
 <ul>
 <li>INT 21h functions 11h and 12h (FCB find first file and FCB find next file) return the file's directory entry after the unopened FCB in the DTA, this was documented in DOS 5.0.
 <li>INT 21h function 4Eh (Find first file) returns attribute value 40h to indicate a device name. Device names will never be returned if wildcards are used.
-<li>INT 21h function 440Dh, IOCTL codes 0846h (Set media ID) and 0866h (Get media ID) were documented in DOS 5.0 but function 69h was not.
+<li>INT 21h function 440Dh, IOCTL codes 0846h (Set media ID) and 0866h (Get media ID) were documented in DOS 5.0 but INT 21h function 69h was not.
 <li>Undocumented PSP fields:
 <ul>
 <li>16h-17h: Parent PSP segment (2.0+)
@@ -327,5 +327,5 @@
 </ul>
 <li>The disk parameter block (DPB) was undocumented prior to DOS 5.0. The DPB format changed slightly from DOS 3.x to DOS 4.0 due to the sectors per FAT field being increased from a byte to a word.
 </ul>
-<p>For more info see <a href="dosfunc.txt">DOS functions</a>, <a href="dosblks.txt">DOS internal tables</a> and <a href="sysvars.htm">SYSVARS</a>
+<p>For more info see <a href="dosfunc.txt">DOS functions</a>, <a href="dosblks.txt">DOS internal tables</a> and <a href="sysvars.htm">SYSVARS</a></p>
 </body>
