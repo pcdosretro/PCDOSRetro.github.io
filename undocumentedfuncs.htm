@@ -40,7 +40,7 @@
 <td>Get InDOS flag pointer</td>
 <td>2.0+</td>
 <td>Yes, DOS 5.0</td>
-<td>In DOS 3.0+ the DOS critical error flag immediately precedes this byte</td>
+<td>In DOS 3.0+ the DOS critical error flag immediately precedes this byte<br>Note: This function was also listed in the MS-DOS Encyclopedia</td>
 </tr>
 <tr>
 <td>INT 21h func 37h</td>
@@ -204,6 +204,20 @@
 <td>This was primarily meant for the PC Convertible</td>
 </tr>
 <tr>
+<td>INT 21h func 6503h</td>
+<td>Get country lowercase table</td>
+<td>3.3+</td>
+<td>No</td>
+<td>Reserved until DOS 6.2</td>
+</tr>
+<tr>
+<td>INT 21h func 6505h</td>
+<td>Get country filename character table</td>
+<td>3.3+</td>
+<td>Yes, DOS 5.0</td>
+<td></td>
+</tr>
+<tr>
 <td>INT 21h func 6520h</td>
 <td>Uppercase character</td>
 <td>4.0+</td>
@@ -326,6 +340,7 @@
 <li>40h-41h: DOS version for SETVER (4.0+)
 </ul>
 <li>The disk parameter block (DPB) was undocumented prior to DOS 5.0. The DPB format changed slightly from DOS 3.x to DOS 4.0 due to the sectors per FAT field being increased from a byte to a word.
+<li>The memory control block (MCB) header format was undocumented prior to DOS 5.0. While the MCB header format was documented in DOS 5.0, the method of finding the first MCB (the word at SYSVARS - 2) was not.
 </ul>
 <p>For more info see <a href="dosfunc.txt">DOS functions</a>, <a href="dosblks.txt">DOS internal tables</a> and <a href="sysvars.htm">SYSVARS</a></p>
 </body>
