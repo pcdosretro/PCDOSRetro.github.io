@@ -1,5 +1,5 @@
 Keyboard scan code/character code combinations returned in AH/AL by
-INT 16h functions 00h/01h (standard) and functions 01h/11h (extended)
+INT 16h functions 00h/01h (standard) and functions 10h/11h (extended)
 
 Key                     Scan       Normal           Shift           Ctrl             Alt
                         Code     Std     Ext     Std     Ext     Std     Ext     Std     Ext
