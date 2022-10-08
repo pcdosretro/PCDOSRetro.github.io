@@ -1,0 +1,369 @@
+--------------------------------------------------------------------------
+CONTENTS.DOC	        Microsoft Programmer's Library           July 1991
+                            Volume #2   Issue #2
+--------------------------------------------------------------------------
+
+Programmer's Library is a comprehensive collection of the most useful
+reference information available for programmers in Microsoft Windows,
+MS-DOS and Microsoft OS/2 environments.
+
+With Programmer's Library you can instantly get authoritative information
+about programming from books, manuals, and sample code in these categories:
+    -  Microsoft Windows application development
+    -  Microsoft OS/2 application development
+    -  MS-DOS application development
+    -  Networks  (Microsoft LAN Manager & Microsoft SQL Server)
+    -  Hardware  (Microsoft Mouse, CD-ROM Extensions, LIM, Intel CPU's)
+    -  Microsoft C Professional Development System
+    -  Microsoft Quick-C
+    -  Microsoft Macro Assembler and Microsoft QuickAssembler
+    -  Microsoft BASIC, Microsoft QuickBASIC, and Microsoft Visual BASIC
+    -  Microsoft Pascal and Microsoft QuickPascal
+    -  Microsoft FORTRAN
+    -  Microsoft Systems Journal
+
+
+----------------------------------------------------------------------------
+PROGRAMMER'S LIBRARY REFERENCES
+----------------------------------------------------------------------------
+
+* - Indicates new updated material since Programmer's Library, Volume 2
+     Issue #1
+
+Windows References
+    References from the Microsoft Windows Software Development
+        Kit, version 3.0:
+
+        Microsoft Windows Software Development Kit Guide to
+           Programming
+        Microsoft Windows Software Development Kit Installation &
+           Update Guide
+        Microsoft Windows Software Development Kit Programmer's
+           Reference, Volume 1
+        Microsoft Windows Software Development Kit Programmer's
+           Reference, Volume 2
+        Microsoft Windows Software Development Kit Tools
+        Microsoft Windows Articles
+           - Microsoft Product Support Top 20 Questions & Answers
+           - Object Linking & Embedding Specification
+           - Documentation on Windows Libraries for OS/2
+
+    References from the Microsoft Windows Device Driver Kit,
+        version 3.0:
+
+        Microsoft Windows Device Driver Kit Install & Update Guide
+        Microsoft Windows Device Driver Kit Adaptation Guide
+        Microsoft Windows Device Driver Kit Virtual Device
+           Adaptation Guide
+        Microsoft Windows Device Driver Kit Printer & Font Kit
+     Programming Windows, by Charles Petzold  (New Edition)
+     Selected Windows Sample Code
+    *Microsoft Product Support KnowledgeBase for Windows application
+       development issues
+
+    [Windows is a Registered Trademark of Microsoft Corporation].
+
+
+OS/2 References
+    References from the Microsoft OS/2 Presentation Manager Tool Kit,
+        version 1.2.1:
+
+        Microsoft OS/2 Getting Started
+        Microsoft OS/2 Learning Guide
+        Microsoft OS/2 User's Guide
+        Microsoft OS/2 Desktop Reference
+        Microsoft OS/2 Programmer's Reference, Volume 1
+        Microsoft OS/2 Programmer's Reference, Volume 2
+        Microsoft OS/2 Programmer's Reference, Volume 3
+        Microsoft OS/2 Programmer's Reference, Volume 4
+        Microsoft OS/2 Device Driver Reference
+    Inside OS/2, by Gordon Letwin
+    Programming the OS/2 Presentation Manager, by Charles Petzold
+    Advanced OS/2, by Ray Duncan
+    Selected OS/2 Sample Code
+   *Microsoft Product Support KnowledgeBase for OS/2 development
+       issues
+
+
+Network References
+    Microsoft LAN Manager, Version 2.0 References:
+
+        Microsoft LAN Manager Installation Guide
+        Microsoft LAN Manager User's Guide for OS/2
+        Microsoft LAN Manager User's Guide for MS-DOS
+        Microsoft LAN Manager Administrator's Guide
+        Microsoft LAN Manager Administrator's Reference
+        Microsoft LAN Manager Programmer's Reference
+        Microsoft LAN Manager Network Device Driver Guide
+
+    Microsoft SQL Server, Version 1.1 References
+
+        Microsoft SQL Server Installation Guide
+        Microsoft SQL Server Learning TRANSACT-SQL
+        Microsoft SQL Server Language Reference
+        Microsoft SQL Server Programmer's Reference
+        Microsoft SQL Server System Administrator's Guide
+
+
+MS-DOS References
+   *MS-DOS 5.0 Programmer's Reference
+    MS-DOS 4.0 Programmer's Reference
+    MS-DOS 3.3 Programmer's Reference
+    The MS-DOS Encyclopedia
+    Advanced MS-DOS Programming, by Ray Duncan
+    The New Peter Norton Programmer's Guide to the IBM PC & PS/2,
+       by Peter Norton and Richard Wilton
+    Selected MS-DOS Sample Code
+
+
+Microsoft Systems Journal
+    *Microsoft Systems Journal Volume #6 (Issues 2-3 Added)
+     Microsoft Systems Journal Volume #5   
+     Microsoft Systems Journal Volume #4
+     Microsoft Systems Journal Volume #3
+     Microsoft Systems Journal Volume #2
+     Microsoft Systems Journal Volume #1
+    *Microsoft Systems Journal Sample Code
+
+
+Hardware References
+    Microsoft Mouse Programmer's Reference
+    Microsoft CD-ROM Extensions
+    Programmer's Guide to IBM PC & PS/2 Video Systems
+    LIM 4.0 Expanded Memory Specification
+    Intel 386 Programmer's Reference
+    Intel 387 Programmer's Reference
+    Intel 286 Programmer's Reference
+    Intel 287 Programmer's Reference
+    Hardware Sample Code
+
+
+Microsoft C Language References
+    References from Microsoft C Professional Development System, ver. 6.0:
+        Microsoft C  Advanced Programming Techniques
+        Microsoft C  Installing & Using the P.D.S.
+        Microsoft C  Reference
+        Microsoft C  Run-Time Library Reference
+        Microsoft C: Developer's Toolkit Reference
+    Microsoft Professional Advisor - Library Reference
+   *Microsoft Source Profiler User's Guide
+    Microsoft CodeView & Utilities User's Guide
+    Microsoft Mixed-Language Programming Guide
+    Microsoft Editor User's Guide
+    Microsoft OnLine User's Guide
+    Proficient C, by Augie Hansen
+    Selected C Language Sample Code
+   *Microsoft Product Support KnowledgeBase for C-Language Issues
+
+
+Microsoft Quick-C Language References
+    References from Microsoft QuickC, version 2.5:
+        Microsoft QuickC  Tool Kit
+        Microsoft QuickC  C for Yourself
+        Microsoft QuickC  Up and Running
+        Microsoft QuickC  Update
+    Microsoft QuickC Programming, by The Waite Group
+    Selected QuickC Language Sample Code
+    *Microsoft Product Support KnowledgeBase for C-Language Issues
+
+
+
+Macro Assembler (MASM) References:
+    Microsoft Macro Assembler 6.0
+        Installing and Using Microsoft Macro Assembler 6.0
+        Microsoft Macro Assembler 6.0 Reference
+        Microsoft Macro Assembler 6.0 Programmer's Guide
+        Microsoft Macro Assembler 6.0 White Paper
+    Microsoft QuickAssembler 2.01 Programmer's Guide
+    Microsoft CodeView & Utilities User's Guide
+    Microsoft Mixed-Language Programming Guide
+    Microsoft Editor User's Guide
+    Microsoft OnLine User's Guide
+   *Selected Macro Assembler Sample Code
+   *Microsoft Product Support KnowledgeBase for MASM Language
+       issues
+
+
+BASIC Language References
+    Microsoft BASIC Professional Development System, version 7.1:
+       Microsoft BASIC Programming Guide
+       Microsoft BASIC Language Reference
+       Microsoft BASIC Getting Started
+   *Microsoft Visual BASIC, version 1.0:
+      *Microsoft Visual BASIC Programmer's Guide
+      *Microsoft Visual BASIC Language Reference
+      *Microsoft Visual BASIC Control Development Guide
+    Microsoft QuickBASIC, version 4.5:
+       Learning to Use Microsoft QuickBASIC
+       Microsoft QuickBASIC  Language Reference
+       Microsoft QuickBASIC  Programming in BASIC
+    Microsoft CodeView & Utilities User's Guide
+    Microsoft Mixed-Language Programming Guide
+    Microsoft Editor User's Guide
+    Microsoft OnLine User's Guide
+    Microsoft QuickBASIC Programmer's Toolbox, by John Clark Craig
+    Selected BASIC Sample Code
+   *Microsoft Product Support KnowledgeBase for BASIC-Language Issues
+
+
+Pascal Language References
+    Microsoft Pascal Compiler 4.0
+        Microsoft PASCAL Compiler 4.0 Update
+        User's Guide
+        Reference Manual
+    Microsoft QuickPASCAL by Example
+    Microsoft CodeView & Utilities User's Guide
+    Microsoft Mixed-Language Programming Guide
+    Microsoft Editor User's Guide
+    Microsoft OnLine User's Guide
+    Selected Pascal Sample Code
+   *Microsoft Product Support KnowledgeBase for Pascal Language
+       issues
+
+
+FORTRAN Language References
+    *Microsoft FORTRAN Optimizing Compiler 5.1
+       *Microsoft FORTRAN  Language Reference & Update
+       *Microsoft FORTRAN  Advanced Topics
+       *Microsoft FORTRAN  Environment & Tools
+       *Installing & Using Microsoft FORTRAN 5.1
+   *Microsoft Source Profiler User's Guide
+    Microsoft CodeView & Utilities User's Guide
+    Microsoft Mixed-Language Programming Guide
+    Microsoft Editor User's Guide
+    Microsoft OnLine User's Guide
+   *Selected FORTRAN Sample Code
+   *Microsoft Product Support KnowledgeBase for FORTRAN Language
+       issues
+
+
+--------------------------------------------------------------------------
+O T H E R     C O N T E N T S
+--------------------------------------------------------------------------
+Subdirectory       Contents
+------------       --------
+
+BOOKS & MSLIB      Software & Content used by Programmer's Library
+
+
+----------
+DRIVERS           Hardware and other drivers relevant to CD-ROM
+----------            operation
+
+-MOUSE625         Microsoft Mouse driver: version 6.25
+                   (For users experiencing problems with older
+                    mouse drivers when using Programmer's Library)
+                   Note: The "current" Mouse version is available
+                    with the newest version of the Microsoft mouse
+                    from your software retailer.
+
+-SCSI             Misc. SCSI support
+
+   -FUTRDOMN      Future Domain's OEM development kit for SCSI
+                      drive development.  This kit is included as
+                      a convenience for Programmer's Library users,
+                      and has not been tested by Microsoft in any way.
+
+
+
+----------
+QH               QuickHelp data bases (for users who want to
+----------            access help libraries from the CD-ROM disc
+                      and save hard disk space).
+
+-BASIC71         Microsoft BASIC version 7.1 (Professional De-
+                      velopment System)
+
+-C6              Microsoft C version 6.0 (Professional Development
+                      System)
+
+-OS2             OS/2 v1.2.1 Software Development Kit
+
+-FOR51           Microsoft FORTRAN 5.1
+
+-----------
+SAMPCODE        Sample Code Directories
+-----------     *****************************************************
+                NOTE:  Sample code is provided for your convenience.
+                  While most samples developed by (or in association
+                  with) Microsoft have been tested, no warranties are
+                  stated or implied regarding the performance,
+                  efficiencies or compilability of code under various
+                  development environments.  Sample programs are not
+                  supported by Microsoft Product Support.
+                *****************************************************
+
+-ADVMSDOS       Sample source code from Advanced MS-DOS Programming,
+                   by Ray Duncan
+
+-ADVOS2         Sample source code from Advanced OS/2 Programming,
+                   by Ray Duncan
+
+-ALDE_C         Sample source code from the Alde C CD-ROM disc
+                 **This code is SHAREWARE, and was not generated
+                    by Microsoft**
+
+-AUDIO          Source code used to play CD AUDIO from the
+                     CD-ROM drive using the CD-ROM Extensions
+
+-BASIC          Source code from Microsoft BASIC Professional
+                     Development System
+
+-C              Sample "C" source code from Microsoft
+                 MSC51   Microsoft-C v5.1 Optimizing Compiler
+                 MSC60   Microsoft-C v6.0 Prof. Development System
+                 OTHER   Misc. Sample Source code from Microsoft
+
+-DOS_ENCY       Sample source code from The MS-DOS Encyclopedia
+
+-FORTRAN        Sample source code from Microsoft FORTRAN Products
+                 FOR50   Microsoft FORTRAN version 5.0
+                 FOR51   Microsoft FORTRAN version 5.1
+
+-MASM           Sample source code from Microsoft Macro Assembler
+                   Products
+                 MASM6   Microsoft Macro Assembler v6.0
+                 MASM5   Microsoft Macro Assembler v5.1
+
+-MOUSE          Sample source code from the Microsoft Mouse
+                   Programmer's Reference
+
+-MSJ            Sample source code from Microsoft Systems Journal
+
+-OLE            Sample source code for Object Linking & Embedding
+
+-OS2SDK         Sample source code from the OS/2 Development Kits:
+                 OS2SDK10    OS/2 version 1.03
+                 OS2SDK11    OS/2 version 1.1
+                 OS2SDK12    OS/2 version 1.2
+
+-PASCAL          Sample source code from Microsoft Pascal Products
+
+-PROF_C          Sample source code from Proficient C,
+                   by Augie Hansen
+
+-PROFILER        Sample source code from the Microsoft Source
+                   Profiler
+
+-PROGWIN         Sample source code from Programming Windows,
+                   by Charles Petzold
+
+-PROG_PM         Sample source code from Programming the OS/2
+                   Presentation Manager, by Charles Petzold
+
+-QB              Sample source code from Microsoft QuickBASIC Products
+
+-QC              Sample source code from Microsoft QuickC Products
+                   QC20   QuickC version 2.0
+                   QC25   QuickC version 2.5
+
+-QC_PROG         Sample source code from Microsoft QuickC Programming,
+                   by the Waite Group
+
+-VIDEO           Sample source code from The Programmer's Guide to
+                   IBM PC & PS/2 Video Systems, by Richard Wilton
+
+-WIN_LRN         Sample source code from Microsoft Product Support
+                   illustrating Windows Programming techniques
+
+-WIN_SDK         Sample source code from the Windows 3.0 SDK
