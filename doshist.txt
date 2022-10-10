@@ -4,7 +4,7 @@ first version shipped by Seattle Computer Products (QDOS = Quick and Dirty Opera
 86-DOS 0.3 (December 1980)
 first version delivered to Microsoft
 
-86-DOS 1.0 (April 1981)
+86-DOS 1.00 (April 1981)
 first completed release
 
 86-DOS 1.10 (July 1981)
