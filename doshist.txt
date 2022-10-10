@@ -7,14 +7,15 @@ first version delivered to Microsoft
 86-DOS 1.0 (April 1981)
 first completed release
 
-86-DOS 1.14 (July 1981)
+86-DOS 1.10 (July 1981)
+first version to support EXE files
 bought by Microsoft from Seattle Computer Products on July 27, 1981 to become MS-DOS 1.0
 
 PC DOS 1.0 / MS-DOS 1.0 (August 1981)
 developed by Seattle Computer Products and Microsoft
 IBM developed COMP, DISKCOMP, DISKCOPY, MODE
 distributed on 1 160KB floppy disk
-initial release (equivalent to 86-DOS 1.14)
+initial release (based upon the revision history in the early DOS source code, it appears that PC DOS 1.0 is based upon 86-DOS 1.10)
 released with the IBM PC
 PC DOS system files are IBMBIO.COM and IBMDOS.COM, command shell is COMMAND.COM
 executable file formats are .COM and .EXE
@@ -42,8 +43,11 @@ INT 27h terminate and stay resident (implemented in COMMAND.COM)
 CP/M CALL 0 interface (executes INT 20h)
 CP/M CALL 5 interface supporting INT 21h functions 00h-24h
 
+86-DOS 1.14 (December 1981)
+last shipped version of 86-DOS; all subsequent versions are MS-DOS or PC DOS
+
 PC DOS 1.1 (May 1982)
-developed by Seattle Computer Products and Microsoft
+developed by Seattle Computer Products and Microsoft (based upon the unreleased MS-DOS 1.24)
 distributed on 1 160KB floppy disk
 double-sided 320KB floppy disk support added
 directory entries include the time last written in addition to the date
@@ -57,6 +61,7 @@ MS-DOS 1.25 (June 1982)
 developed by Seattle Computer Products and Microsoft
 first OEM version of MS-DOS (equivalent to PC DOS 1.1)
 MS-DOS system files are IO.SYS and MSDOS.SYS
+zero byte indicates end of directory to speed up searches
 new external command: GWBASIC (MS-DOS only substitute for BASICA)
 
 PC DOS 2.0 / MS-DOS 2.0 (March 1983)
@@ -76,7 +81,6 @@ BIOS parameter block (BPB) support added
 180KB single-sided and 360KB double-sided floppy disk support added
 hard disk support up to 10MB (FAT12: partition type 01h)
 file attributes volume label (08h), subdirectory (10h) and archive (20h) added
-zero byte indicates end of directory to speed up searches
 print spooler added
 CONFIG.SYS (AVAILDEV, BREAK, BUFFERS, DEVICE, FILES, SHELL, SWITCHAR)
 new internal commands: BREAK, CD, CHDIR, CLS, CTTY, ECHO, EXIT, FOR, GOTO, IF, MD, MKDIR, PATH, PROMPT, RD, RMDIR, SET, SHIFT, VER, VERIFY, VOL
